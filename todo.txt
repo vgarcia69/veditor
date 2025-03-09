@@ -1,0 +1,13 @@
+
+
+arrow a gerer
+
+
+
+gestion des TAB -> differencier CURSOR_X de FILEPOS_X
+bloquage curseur a faire, clean curseur
+vue X
+scroll, vertical/ horizontale V
+ligne level indic / tild
+raccourcis
+sauvegarde
