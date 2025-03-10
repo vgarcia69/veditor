@@ -15,7 +15,7 @@ void	quit_free_msg(char *str, int code, t_editor *e)
 	if (e->buf)
 	{
 		if (e->buf->head)
-			free_buffer(e->buf->head);
+			free_line(e->buf->head);
 		free(e->buf);
 	}
 	if (e->cursor)
@@ -28,4 +28,9 @@ void	quit_free_msg(char *str, int code, t_editor *e)
 		free(e->stat);
 	disable_raw_mode(&e->o_ter);
 	quit_error_msg(str, code);
+}
+
+void	print_err(char *str)
+{
+	printf_fd(STDERR_FILENO, str);
 }

@@ -11,3 +11,9 @@ scroll, vertical/ horizontale V
 ligne level indic / tild
 raccourcis
 sauvegarde
+
+dans key.c
+/*
+utiliser strinsert pour del_line pour join la line a celle d avant,
+next faire que \n creer un new line
+*/

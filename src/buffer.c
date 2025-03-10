@@ -1,4 +1,4 @@
-#include "../../editor.h"
+#include "../editor.h"
 
 static void	create_empty_buffer(t_editor *data);
 static void	add_tocat_in_buffer(t_editor *data, char *to_cat);
@@ -8,9 +8,11 @@ void	load_buffer(t_editor *data, int file)
 	char	*to_cat;
 	int		finished;
 
-	create_empty_buffer(data);
 	if (!data->f_name)
+	{
+		create_empty_buffer(data);
 		return ;
+	}
 	finished = 0;
 	while (!finished)
 	{
@@ -22,17 +24,17 @@ void	load_buffer(t_editor *data, int file)
 	}
 }
 
-void	realloc_buffer(t_editor *data, t_buffer *buf)
+void	realloc_line(t_editor *data, t_line *line)
 {
 	char	*new_string;
 
-	new_string = ft_calloc(sizeof(char), buf->line->capacity * 2);
+	new_string = ft_calloc(sizeof(char), line->capacity * 2);
 	if (!new_string)
 		quit_free_msg("Alloc", 1, data);
-	buf->line->capacity *= 2;
-	new_string = ft_strcpy(new_string, buf->line->str);
-	free(buf->line->str);
-	buf->line->str = new_string;
+	line->capacity *= 2;
+	new_string = ft_strcpy(new_string, line->str);
+	free(line->str);
+	line->str = new_string;
 }
 
 static void	create_empty_buffer(t_editor *data)
@@ -40,16 +42,16 @@ static void	create_empty_buffer(t_editor *data)
 	data->buf->head= new_line(NULL);
 	if (!data->buf->head)
 		quit_free_msg("Alloc", 1, data);
-	data->buf->line = data->buf->head;
 }
 
 static void	add_tocat_in_buffer(t_editor *data, char *to_cat)
 {
-	t_line	*line;
+	t_line	*head;
 
-	line = new_line(to_cat);
-	if (!line)
+	head = new_line(to_cat);
+	if (!head)
 		quit_free_msg("Alloc", 1, data);
-	addback_buffer(&data->buf->line, line);
+	addback_line(&data->buf->head, head);
+	++data->buf->nbr_line;
 	free(to_cat);
 }

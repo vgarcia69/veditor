@@ -26,9 +26,7 @@ typedef struct s_buffer
 {
 	int		nbr_line;
 	t_line	*head;
-	t_line	*line;
 }	t_buffer;
-
 
 typedef struct s_cursor
 {
@@ -62,15 +60,18 @@ typedef	struct s_data
 }	t_editor;
 
 /*---------------------------UTILS---------------------------*/
-void	draw_line(t_editor *e);
 int		tab_align_pos(int tab_stop, int current_x);
 int 	get_tabwidth(int xview, int tab_stop);
-int		get_x_from_xview(t_line *line, int cursor_xview, int tab_stop);
-int		get_xview_from_x(t_line *line, int cursor_x, int tab_stop);
+int		get_x_from_xview(t_line *line, int cursor_xview, int tab_stop, int s_col);
+int		get_xview_from_x(t_line *line, int cursor_x, int tab_stop, int s_col);
+t_line	*get_line(t_editor *e, int index);
+int		is_same_pos(t_cursor *p1, t_cursor *p2);
+void	highlight(t_editor *e, t_cursor *pp, t_cursor *ip);
 
 /*---------------------------ERROR---------------------------*/
 void	quit_free_msg(char *str, int code, t_editor *vim);
 void	quit_error_msg(char *str, int code);
+void	print_err(char *str);
 
 /*---------------------------INIT---------------------------*/
 void	init_editor(t_editor *data, char *file_name);
@@ -81,21 +82,23 @@ void enable_raw_mode(struct termios *orig_termios);
 int		open_file(char *file, t_editor *vim);
 
 /*---------------------------BUFFER---------------------------*/
-void		realloc_buffer(t_editor *data, t_buffer *buffer);
+void		realloc_line(t_editor *data, t_line *line);
 void		load_buffer(t_editor *data, int file);
-void		free_buffer(t_line *lst);
-void		addback_buffer(t_line **lst, t_line *new);
-int			check_capacity(t_line *buffer, char *to_cat);
+void		free_line(t_line *lst);
+void		addback_line(t_line **lst, t_line *new);
+int			check_capacity(t_line *line, char *to_cat);
 t_line		*new_line(char *str);
 
 /*---------------------------PROCESS---------------------------*/
 void	process_input(t_editor *e);
 void	command(t_editor *e, char *input);
-void	mouse(t_editor *e, char *input);
-void	insert(t_editor *e, char c);
+void	mouse(t_editor *e, char input[2]);
 void	arrow(t_editor *e, char c);
+/*KEY*/
+void	insert(t_editor *e, char c);
+void	delete(t_editor *e);
 
-/*-SHORTCUT-*/
+/*SHORTCUT*/
 void	select_all(t_editor *e);
 void	select_line(t_editor *e);
 void	duplicate_line(t_editor *e);
@@ -113,6 +116,6 @@ void	draw_window(t_editor *e);
 void	draw_cursor(t_cursor *c);
 void	draw_status(int height, char *stat, int mode);
 void	draw_command(int height, char *cmd);
-
+void	draw_line(t_editor *e, t_line *line);
 
 #endif

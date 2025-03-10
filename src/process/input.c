@@ -28,7 +28,7 @@ static void	sequence(t_editor *e, char *input)
 	if (input[0] == '[')
 	{
 		if (input[1] == 'M')
-			mouse(e, input);
+			mouse(e, &input[2]);
 		else if (input[1] >= 'A' && input[1] <= 'D')
 			arrow(e, input[1]);
 	}
@@ -56,6 +56,8 @@ static void	keypress(t_editor *e, char input)
 		duplicate_line(e);
 	else if (input == '\x06')
 		search(e);
+	else if (input == 127)
+		delete(e);
 	else
 		insert(e, input);
 }

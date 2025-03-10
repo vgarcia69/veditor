@@ -8,8 +8,6 @@ char	*ft_strinsert(char *str, char *to_insert, int i)
 
 	insert_len = ft_strlen(to_insert);	
 	str_len = ft_strlen(str);
-	if (str_len < i)
-		return(printf_fd(2, "OH EH ERROR LA\n"), NULL);
 	insert_len_cpy = insert_len;
 	while (str_len-- != i)
 		str[str_len + insert_len] = str[str_len];

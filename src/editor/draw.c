@@ -2,19 +2,17 @@
 
 void	draw_window(t_editor *e)
 {
-	int		j;
+	t_line	*line;
+	int		i;
 
-	e->buf->line = e->buf->head;
-	j = 0;
-	while (e->buf->line->next && e->win->starting_row)
-		e->buf->line = e->buf->line->next;
-	while (e->buf->line->next && j < e->win->height)
+	i = 0;
+	line = get_line(e, e->win->starting_row);
+	while (line && i < e->win->height)
 	{
-	  	printf_fd(STDOUT_FILENO, "\033[%d;1H", j++);
-		draw_line(e);
-		e->buf->line = e->buf->line->next;
+	  	printf_fd(STDOUT_FILENO, "\033[%d;1H", ++i);
+		draw_line(e, line);
+		line = line->next;
 	}
-	e->buf->line = e->buf->head;
 }
 
 void	draw_cursor(t_cursor *c)
@@ -34,6 +32,32 @@ void	draw_status(int height, char *stat, int mode)
 
 void	draw_command(int height, char *cmd)
 {
-	printf_fd(STDOUT_FILENO, "\033[%d;1H", height + 2);
+	printf_fd(STDOUT_FILENO, "\033[%d;1H", height + 3);
 	printf_fd(STDOUT_FILENO, "%s", cmd);
+}
+
+void	draw_line(t_editor *e, t_line *line)
+{
+	int		tab_i;
+	int		view_i;
+	char	*str;
+
+	str = line->str;
+	tab_i = 0;
+	view_i = 0;
+	if ((int)ft_strlen(str) < e->win->starting_col)
+		return ;
+	str += e->win->starting_col;
+	while (*str && view_i < e->win->width)
+	{
+		if (*str == '\t')
+		{
+			tab_i = get_tabwidth(view_i, e->tab_stop);
+			while (tab_i-- && view_i < e->win->width)
+				view_i += ft_writechar(' ', STDOUT_FILENO);
+		}
+		else
+			view_i += ft_writechar(*str, STDOUT_FILENO);
+		++str;
+	}
 }
