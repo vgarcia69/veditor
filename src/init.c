@@ -1,5 +1,6 @@
 #include "../editor.h"
 
+
 static void	init_alloc(t_editor *data);
 static void	init_window(t_window *win);
 static void	init_cursor(t_cursor *cursor);
@@ -22,6 +23,7 @@ void	init_editor(t_editor *data, char *file_name)
 	init_window(data->win);
 	init_cursor(data->cursor);
 	data->stat = ft_memset(data->stat, 32, data->win->width);
+	init_fds(data);
 	enable_raw_mode(&data->o_ter);
 }
 

@@ -2,13 +2,28 @@
 
 static void	sequence(t_editor *e, char *input);
 static void	keypress(t_editor *e, char input);
+static void	read_input(t_editor *e);
+static void	read_signal(t_editor *e);
 
 void	process_input(t_editor *e)
 {
-	char	input[32];
+	int				secure;	
+
+	secure = poll(e->fd, 2, -1);
+	if (secure == -1)
+		quit_free_msg("poll", 1, e);	
+	else if (e->fd[0].revents & POLLIN)
+		read_input(e);
+	else if (e->fd[1].revents & POLLIN)
+		read_signal(e);
+}
+
+static void	read_input(t_editor *e)
+{
+	char	input[16];
 	int		end;
 
-	end = read(STDIN_FILENO, &input, 32);
+	end = read(STDIN_FILENO, &input, 16);
 	if (end == -1)
 		quit_free_msg("Read function", 1, e);
 	input[end] = '\0';
@@ -21,6 +36,20 @@ void	process_input(t_editor *e)
 	}
 	else
 		command(e, input);
+}
+
+static void	read_signal(t_editor *e)
+{
+	int						secure;
+	struct signalfd_siginfo siginfo;
+
+	secure = read(e->fd[1].fd, &siginfo, sizeof(siginfo)); 
+	if (secure > 0)
+	{
+		if (siginfo.ssi_signo == SIGWINCH)
+			editor_refresh_win(e);
+	}
+	printf_fd(2, "signal !\n");
 }
 
 static void	sequence(t_editor *e, char *input)

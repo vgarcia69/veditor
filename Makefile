@@ -2,7 +2,7 @@ EDITORFILES=refresh_window.c draw.c
 PROCESSFILES=input.c arrow.c key.c mouse.c command.c
 SHORTCUTFILES=shortcut.c shortcut_2.c
 UTILSFILES=mouse_utils.c buffer_utils.c utils.c
-SRCFILES=main.c error.c file.c termios.c init.c buffer.c
+SRCFILES=main.c error.c file.c termios.c init.c buffer.c signals.c
 
 SHORTCUTDIR=shortcut
 OUTPUTDIR=output

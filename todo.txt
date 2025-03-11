@@ -1,8 +1,5 @@
 
 
-arrow a gerer
-
-
 
 gestion des TAB -> differencier CURSOR_X de FILEPOS_X
 bloquage curseur a faire, clean curseur
@@ -14,6 +11,7 @@ sauvegarde
 
 dans key.c
 /*
-utiliser strinsert pour del_line pour join la line a celle d avant,
 next faire que \n creer un new line
+corriger new_line / delete;
+protection souris mous pose
 */

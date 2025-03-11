@@ -5,5 +5,6 @@
 		"type_traits": "c",
 		"new": "c",
 		"typeinfo": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "disabled"
 }

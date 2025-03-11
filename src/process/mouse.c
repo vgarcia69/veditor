@@ -30,13 +30,14 @@ static void	press(t_cursor *pp, t_cursor *ip)
 	pp->yview = ip->yview;
 	pp->x = ip->x;
 	pp->y= ip->y;
+	free(ip);
 }
 
 static void	release(t_editor *e, t_cursor *pp, t_cursor *ip)
 {
 	if (!is_same_pos(pp, ip))
 	{
-		printf_fd(2, "[%d][%d] et [%d][%d]\n", pp->xview, pp->yview, ip->xview, ip->yview);
+		printf_fd(2, "[%d][%d] to [%d][%d]\n", pp->xview, pp->yview, ip->xview, ip->yview);
 		// copy_clip_board(e);
 	}
 	free(e->cursor);
@@ -45,7 +46,7 @@ static void	release(t_editor *e, t_cursor *pp, t_cursor *ip)
 
 void	highlight(t_editor *e, t_cursor *pp, t_cursor *ip)
 {
-	
+	free(ip);	
 }
 
 static void	set_cursor(t_cursor *ip, char *i, t_editor *e)
@@ -58,5 +59,6 @@ static void	set_cursor(t_cursor *ip, char *i, t_editor *e)
 	ip->yview = i[1] - offset;
 	ip->y = ip->yview + e->win->starting_row - 1;
 	line = get_line(e, ip->y);
+	printf_fd(2, "[%d]\n", ip->y);
 	ip->x = get_x_from_xview(line, ip->xview, e->tab_stop, e->win->starting_row) - 1;
 }

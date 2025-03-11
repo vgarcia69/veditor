@@ -7,8 +7,11 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
-#include <termios.h>
 #include <sys/ioctl.h>
+#include <termios.h>
+#include <signal.h>
+#include <poll.h>
+#include <sys/signalfd.h>
 
 # define NORMAL 0
 # define COMMAND 1
@@ -56,6 +59,7 @@ typedef	struct s_data
 	t_cursor		*cursor;
 	t_buffer		*buf;
 	t_window		*win;
+	struct pollfd	fd[2];
 	struct termios	o_ter;
 }	t_editor;
 
@@ -75,8 +79,9 @@ void	print_err(char *str);
 
 /*---------------------------INIT---------------------------*/
 void	init_editor(t_editor *data, char *file_name);
-void disable_raw_mode(struct termios *orig_termios);
-void enable_raw_mode(struct termios *orig_termios);
+void	disable_raw_mode(struct termios *orig_termios);
+void	enable_raw_mode(struct termios *orig_termios);
+void	init_fds(t_editor *e);
 
 /*---------------------------FILE---------------------------*/
 int		open_file(char *file, t_editor *vim);

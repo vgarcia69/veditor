@@ -5,22 +5,19 @@ t_line	*new_line(char *str)
 	t_line	*new_list;
 	int		str_len;
 
-	if (!str)
-		str_len = 128;
-	else
-		str_len = ft_strlen(str);
+	str_len = ft_strlen(str);
 	new_list = malloc(sizeof(t_line));
 	if (!new_list)
 		return (NULL);
-	new_list->str = ft_calloc(sizeof(char), str_len * 2);
+	new_list->str = ft_calloc(sizeof(char), str_len * 2 + 128);
 	if (!new_list->str)
 	{
 		free(new_list);
 		return (NULL);
 	}
 	new_list->str = ft_strcpy(new_list->str, str);
-	new_list->capacity = str_len * 2;
-	new_list->len = ft_strlen(new_list->str);
+	new_list->capacity = str_len * 2 + 128;
+	new_list->len = str_len;
 	new_list->next = NULL;
 	new_list->prev = NULL;
 	return (new_list);
