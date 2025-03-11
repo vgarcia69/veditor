@@ -1,345 +1,25 @@
-==7881== Memcheck, a memory error detector
-==7881== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==7881== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==7881== Command: ./editor Makefile
-==7881== 
-0, 0 | 0, 0
-1, 0 | 1, 0
-2, 0 | 2, 0
-3, 0 | 3, 0
-20, 15 | 9, 15
-21, 15 | 10, 15
-22, 15 | 11, 15
-23, 15 | 12, 15
-0, 52 | 0, 53
-1, 51 | 1, 53
-[1][54] to [9][54]
-12, 55 | 12, 59
-13, 55 | 13, 59
-14, 55 | 14, 59
-15, 55 | 15, 59
-16, 55 | 16, 59
-17, 55 | 17, 59
-18, 55 | 18, 59
-19, 55 | 19, 59
-20, 55 | 20, 59
-21, 55 | 21, 59
-22, 55 | 22, 59
-23, 55 | 23, 59
-24, 55 | 24, 59
-25, 55 | 25, 59
-13, 54 | 14, 58
-14, 54 | 15, 58
-15, 54 | 16, 58
-16, 54 | 17, 58
-17, 54 | 18, 58
-18, 54 | 19, 58
-19, 54 | 20, 58
-20, 54 | 21, 58
-21, 54 | 22, 58
-22, 54 | 23, 58
-23, 54 | 24, 58
-24, 54 | 25, 58
-25, 54 | 26, 58
-26, 54 | 27, 58
-27, 54 | 28, 58
-28, 54 | 29, 58
-29, 54 | 30, 58
-30, 54 | 31, 58
-31, 54 | 32, 58
-32, 54 | 33, 58
-33, 54 | 34, 58
-34, 54 | 35, 58
-35, 54 | 36, 58
-36, 54 | 37, 58
-37, 54 | 38, 58
-38, 54 | 39, 58
-39, 54 | 40, 58
-40, 54 | 41, 58
-41, 54 | 42, 58
-42, 54 | 43, 58
-43, 54 | 44, 58
-44, 54 | 45, 58
-45, 54 | 46, 58
-46, 53 | 47, 58
-n_line[]
-line[ean clean re aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]
-0, 54 | 0, 59
-n_line[]
-line[]
-0, 55 | 0, 60
-n_line[]
-line[]
-0, 56 | 0, 61
-0, 56 | 1, 61
-1, 56 | 2, 61
-2, 56 | 3, 61
-3, 56 | 4, 61
-4, 56 | 5, 61
-5, 56 | 6, 61
-6, 56 | 7, 61
-7, 56 | 8, 61
-8, 56 | 9, 61
-9, 56 | 10, 61
-10, 56 | 11, 61
-11, 56 | 12, 61
-12, 56 | 13, 61
-13, 56 | 14, 61
-14, 56 | 15, 61
-15, 56 | 16, 61
-16, 56 | 17, 61
-17, 56 | 18, 61
-18, 56 | 19, 61
-19, 56 | 20, 61
-20, 56 | 21, 61
-21, 56 | 22, 61
-22, 56 | 23, 61
-23, 56 | 24, 61
-24, 56 | 25, 61
-25, 56 | 26, 61
-26, 56 | 27, 61
-27, 56 | 28, 61
-28, 56 | 29, 61
-29, 56 | 30, 61
-30, 56 | 31, 61
-31, 56 | 32, 61
-32, 56 | 33, 61
-33, 56 | 34, 61
-34, 56 | 35, 61
-35, 56 | 36, 61
-36, 56 | 37, 61
-37, 56 | 38, 61
-38, 56 | 39, 61
-39, 56 | 40, 61
-40, 56 | 41, 61
-41, 56 | 42, 61
-42, 56 | 43, 61
-43, 56 | 44, 61
-44, 56 | 45, 61
-45, 56 | 46, 61
-46, 56 | 47, 61
-47, 56 | 48, 61
-48, 56 | 49, 61
-49, 56 | 50, 61
-50, 56 | 51, 61
-51, 56 | 52, 61
-52, 56 | 53, 61
-53, 56 | 54, 61
-54, 56 | 55, 61
-55, 56 | 56, 61
-56, 56 | 57, 61
-57, 56 | 58, 61
-58, 56 | 59, 61
-59, 56 | 60, 61
-60, 56 | 61, 61
-61, 56 | 62, 61
-62, 56 | 63, 61
-63, 56 | 64, 61
-64, 56 | 65, 61
-65, 56 | 66, 61
-66, 56 | 67, 61
-67, 56 | 68, 61
-68, 56 | 69, 61
-69, 56 | 70, 61
-70, 56 | 71, 61
-71, 56 | 72, 61
-72, 56 | 73, 61
-73, 56 | 74, 61
-74, 56 | 75, 61
-75, 56 | 76, 61
-76, 56 | 77, 61
-77, 56 | 78, 61
-78, 56 | 79, 61
-79, 56 | 80, 61
-80, 56 | 81, 61
-81, 56 | 82, 61
-n_line[]
-line[ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff]
-0, 57 | 0, 62
-n_line[]
-line[]
-0, 58 | 0, 63
-n_line[]
-line[]
-0, 59 | 0, 64
-n_line[]
-line[]
-0, 60 | 0, 65
-n_line[]
-line[]
-0, 61 | 0, 66
-n_line[]
-line[]
-0, 62 | 0, 67
-n_line[]
-line[]
-0, 63 | 0, 68
-n_line[]
-line[]
-0, 64 | 0, 69
-n_line[]
-line[]
-0, 65 | 0, 70
-0, 65 | 1, 70
-1, 65 | 2, 70
-2, 65 | 3, 70
-3, 65 | 4, 70
-n_line[]
-line[dddd]
-0, 66 | 0, 71
-n_line[]
-line[]
-0, 67 | 0, 72
-n_line[]
-line[]
-0, 68 | 0, 73
-n_line[]
-line[]
-0, 69 | 0, 74
-n_line[]
-line[]
-0, 70 | 0, 75
-n_line[]
-line[]
-0, 71 | 0, 76
-n_line[]
-line[]
-0, 72 | 0, 77
-n_line[]
-line[]
-0, 73 | 0, 78
-n_line[]
-line[]
-0, 74 | 0, 79
-n_line[]
-line[]
-0, 75 | 0, 80
-n_line[]
-line[]
-0, 76 | 0, 81
-n_line[]
-line[]
-0, 77 | 0, 82
-n_line[]
-line[]
-0, 78 | 0, 83
-n_line[]
-line[]
-0, 79 | 0, 84
-n_line[]
-line[]
-0, 80 | 0, 85
-n_line[]
-line[]
-0, 81 | 0, 86
-n_line[]
-line[]
-0, 82 | 0, 87
-n_line[]
-line[]
-0, 83 | 0, 88
-n_line[]
-line[]
-0, 84 | 0, 89
-n_line[]
-line[]
-0, 85 | 0, 90
-n_line[]
-line[]
-0, 86 | 0, 91
-n_line[]
-line[]
-0, 87 | 0, 92
-n_line[]
-line[]
-0, 88 | 0, 93
-n_line[]
-line[]
-0, 89 | 0, 94
-n_line[]
-line[]
-0, 90 | 0, 95
-n_line[]
-line[]
-0, 91 | 0, 96
-n_line[]
-line[]
-0, 92 | 0, 97
-n_line[]
-line[]
-0, 93 | 0, 98
-n_line[]
-line[]
-0, 94 | 0, 99
-n_line[]
-line[]
-0, 95 | 0, 100
-n_line[]
-line[]
-0, 96 | 0, 101
-n_line[]
-line[]
-0, 97 | 0, 102
-n_line[]
-line[]
-0, 98 | 0, 103
-n_line[]
-line[]
-0, 99 | 0, 104
-n_line[]
-line[]
-0, 100 | 0, 105
-n_line[]
-line[]
-0, 101 | 0, 106
-n_line[]
-line[]
-0, 102 | 0, 107
-n_line[]
-line[]
-0, 103 | 0, 108
-n_line[]
-line[]
-0, 104 | 0, 109
-n_line[]
-line[]
-0, 105 | 0, 110
-n_line[]
-line[]
-0, 106 | 0, 111
-n_line[]
-line[]
-0, 107 | 0, 112
-n_line[]
-line[]
-0, 108 | 0, 113
-n_line[]
-line[]
-0, 109 | 0, 114
-0, 109 | 1, 114
-1, 109 | 2, 114
-2, 109 | 3, 114
-3, 109 | 4, 114
+==19547== Memcheck, a memory error detector
+==19547== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==19547== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==19547== Command: ./editor Makefile
+==19547== 
+0, 5 | 0, 5
+0, 6 | 0, 6
+0, 7 | 0, 7
+0, 8 | 0, 8
+0, 6 | 1, 6
+1, 6 | 2, 6
+2, 6 | 3, 6
+3, 6 | 4, 6
+0, 7 | 0, 7
+0, 7 | 1, 7
 Error: byebye_t_editor *e
-==7881== 
-==7881== HEAP SUMMARY:
-==7881==     in use at exit: 320 bytes in 20 blocks
-==7881==   total heap usage: 31,106 allocs, 31,086 frees, 121,825 bytes allocated
-==7881== 
-==7881== 320 bytes in 20 blocks are definitely lost in loss record 1 of 1
-==7881==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==7881==    by 0x10A72F: mouse (mouse.c:13)
-==7881==    by 0x109FE7: sequence (input.c:60)
-==7881==    by 0x109EBB: read_input (input.c:33)
-==7881==    by 0x109E0D: process_input (input.c:16)
-==7881==    by 0x1093E3: main (main.c:14)
-==7881== 
-==7881== LEAK SUMMARY:
-==7881==    definitely lost: 320 bytes in 20 blocks
-==7881==    indirectly lost: 0 bytes in 0 blocks
-==7881==      possibly lost: 0 bytes in 0 blocks
-==7881==    still reachable: 0 bytes in 0 blocks
-==7881==         suppressed: 0 bytes in 0 blocks
-==7881== 
-==7881== For lists of detected and suppressed errors, rerun with: -s
-==7881== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==19547== 
+==19547== HEAP SUMMARY:
+==19547==     in use at exit: 0 bytes in 0 blocks
+==19547==   total heap usage: 1,359 allocs, 1,359 frees, 28,216 bytes allocated
+==19547== 
+==19547== All heap blocks were freed -- no leaks are possible
+==19547== 
+==19547== For lists of detected and suppressed errors, rerun with: -s
+==19547== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

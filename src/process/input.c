@@ -11,7 +11,7 @@ void	process_input(t_editor *e)
 
 	secure = poll(e->fd, 2, -1);
 	if (secure == -1)
-		quit_free_msg("poll", 1, e);	
+		quit_free_msg("Poll function", 1, e);	
 	else if (e->fd[0].revents & POLLIN)
 		read_input(e);
 	else if (e->fd[1].revents & POLLIN)
@@ -44,12 +44,8 @@ static void	read_signal(t_editor *e)
 	struct signalfd_siginfo siginfo;
 
 	secure = read(e->fd[1].fd, &siginfo, sizeof(siginfo)); 
-	if (secure > 0)
-	{
-		if (siginfo.ssi_signo == SIGWINCH)
-			editor_refresh_win(e);
-	}
-	printf_fd(2, "signal !\n");
+	if (secure == -1)
+		quit_free_msg("Read function", 1, e);
 }
 
 static void	sequence(t_editor *e, char *input)

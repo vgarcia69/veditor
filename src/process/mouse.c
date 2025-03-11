@@ -46,7 +46,7 @@ static void	release(t_editor *e, t_cursor *pp, t_cursor *ip)
 
 void	highlight(t_editor *e, t_cursor *pp, t_cursor *ip)
 {
-	free(ip);	
+	free(ip);
 }
 
 static void	set_cursor(t_cursor *ip, char *i, t_editor *e)
@@ -61,7 +61,5 @@ static void	set_cursor(t_cursor *ip, char *i, t_editor *e)
 		ip->yview = e->buf->nbr_line;
 	ip->y = ip->yview + e->win->starting_row - 1;
 	line = get_line(e, ip->y);
-	if (line->len < ip->xview)
-		ip->xview = line->len;
 	ip->x = get_x_from_xview(line, ip->xview, e->tab_stop, e->win->starting_row) - 1;
 }

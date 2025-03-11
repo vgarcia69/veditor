@@ -8,6 +8,7 @@ void	insert(t_editor *e, char c)
 {
 	t_line	*line;
 	char	to_cat[2];
+	int		cur_x;
 
 	printf_fd(2, "%d, %d | %d, %d\n", e->cursor->xview, e->cursor->yview, e->cursor->x, e->cursor->y);
 	line = get_line(e, e->cursor->y);
@@ -20,7 +21,10 @@ void	insert(t_editor *e, char c)
 	to_cat[1] = 0;
 	while (!check_capacity(line, to_cat))
 		realloc_line(e, line);
-	line->str = ft_strinsert(line->str, to_cat, e->cursor->x);
+	cur_x = e->cursor->x;
+	if (e->cursor->x >= e->cursor->xview)
+		cur_x = e->cursor->xview;
+	line->str = ft_strinsert(line->str, to_cat, cur_x);
 	++line->len;
 	++e->cursor->x;
 }
@@ -28,16 +32,20 @@ void	insert(t_editor *e, char c)
 void	delete(t_editor *e)
 {
 	t_line	*line;
+	int		cur_x;
 
 	line = get_line(e, e->cursor->y);
-	if (e->cursor->x == 0)
+	if (e->cursor->xview == 0)
 	{
 		del_line(line, e);
 		return ;
 	}
-	ft_memmove(&line->str[e->cursor->x - 1], \
-				&line->str[e->cursor->x], \
-				ft_strlen(&line->str[e->cursor->x]) + 1);
+	cur_x = e->cursor->x;
+	if (e->cursor->xview < e->cursor->x)
+		cur_x = e->cursor->xview;	
+	ft_memmove(&line->str[cur_x - 1], \
+				&line->str[cur_x], \
+				ft_strlen(&line->str[cur_x]) + 1);
 	--e->cursor->x;
 	--line->len;
 }
@@ -63,7 +71,6 @@ static void	insert_line(t_line *line, t_editor *e)
 	e->cursor->x = 0;
 	++e->cursor->y;
 	++e->buf->nbr_line;
-	printf_fd(2,"n_line[%s]\nline[%s]\n", n_line->str, line->str);
 }
 
 static void	del_line(t_line *line, t_editor *e)
@@ -76,8 +83,8 @@ static void	del_line(t_line *line, t_editor *e)
 	ft_memcpy(&line->prev->str[line->prev->len - 1], \
 				line->str, \
 				line->len + 1);
+	e->cursor->x = line->prev->len - 1;
 	line->prev->len += line->len;
-	e->cursor->x = line->prev->len;
 	free(line->str);
 	free(line);
 	--e->buf->nbr_line;
