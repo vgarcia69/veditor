@@ -3,7 +3,7 @@
 ][SHORTCUTFILES=shortcut.c shortcut_2.c
 ][UTILSFILES=mouse_utils.c buffer_utils.c utils.c
 ][SRCFILES=main.c error.c file.c termios.c init.c buffer.c 
-][][ddd][dd][][d
+][
 ][SHORTCUTDIR=shortcut
 ][OUTPUTDIR=output
 ][BUFFERDIR=buffer
@@ -17,6 +17,16 @@
 ][	$(addprefix $(SRCDIR)/$(PROCESSDIR)/$(SHORTCUTDIR)/, $(SHORTCUTFILES))\
 ][	$(addprefix $(SRCDIR)/$(UTILSDIR)/, $(UTILSFILES))\
 ][	$(addprefix $(SRCDIR)/$(EDITORDIR)/, $(EDITORFILES))
+][
+][
+][
+][
+][
+][ddddddddddddddddd
+JDIR=.obj
+][
+][
+][
 ][OBJDIR=.obj
 ][OBJ=$(addprefix $(OBJDIR)/, $(FILES:.c=.o))
 ][CC=cc

@@ -10,7 +10,7 @@ void	insert(t_editor *e, char c)
 	char	to_cat[2];
 	int		cur_x;
 
-	printf_fd(2, "%d, %d | %d, %d\n", e->cursor->xview, e->cursor->yview, e->cursor->x, e->cursor->y);
+	printf_fd(2, "c[%c] %d, %d | %d, %d\n", c, e->cursor->xview, e->cursor->yview, e->cursor->x, e->cursor->y);
 	line = get_line(e, e->cursor->y);
 	if (c == '\r' || c == '\n')
 	{
@@ -51,9 +51,10 @@ void	delete(t_editor *e)
 }
 
 /*
-gros bug d affichage ?
-si tu suppr et entre fonctions a revoir
-ou meme revoir yview ? dependant des efforts
+bug pas de \n dans certaines condition de insert_line
+ou peut etre que le \n est remplace par lettre
+car e->cursor->x bug qlq part
+des fois lancienne string apparait line 
 */
 static void	insert_line(t_line *line, t_editor *e)
 {
@@ -62,12 +63,14 @@ static void	insert_line(t_line *line, t_editor *e)
 	n_line = new_line(&line->str[e->cursor->x]);
 	if (!n_line)
 		quit_free_msg("Alloc", 1, e);
-	line->str[e->cursor->x] = '\r';
+	line->str[e->cursor->x] = '\n';
 	line->str[e->cursor->x + 1] = 0;
 	line->len = ft_strlen(line->str);
 	n_line->next = line->next;
 	n_line->prev = line;
 	line->next = n_line;
+	if (n_line->next)
+		n_line->next->prev = n_line;
 	e->cursor->x = 0;
 	++e->cursor->y;
 	++e->buf->nbr_line;

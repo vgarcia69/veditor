@@ -18,7 +18,7 @@ static void	width_arrows(char c, t_editor *e)
 
 	cursor = e->cursor;
 	line = get_line(e, cursor->y);
-	if (cursor->x > line->len)
+	if (cursor->x >= line->len)
 		cursor->x = line->len - 1;
 	if (c == 'C' && line->str[cursor->x + 1])
 		++cursor->x;

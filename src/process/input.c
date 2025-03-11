@@ -31,8 +31,8 @@ static void	read_input(t_editor *e)
 	{
 		if (input[0] == '\033')
 			sequence(e, input + 1);
-		else if (end == 1)
-			keypress(e, input[0]);
+		else
+    		keypress(e, input[0]);
 	}
 	else
 		command(e, input);
