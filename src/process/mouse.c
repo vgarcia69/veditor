@@ -57,8 +57,11 @@ static void	set_cursor(t_cursor *ip, char *i, t_editor *e)
 	offset = 32;
 	ip->xview = i[0] - offset;
 	ip->yview = i[1] - offset;
+	if (ip->yview > e->buf->nbr_line)
+		ip->yview = e->buf->nbr_line;
 	ip->y = ip->yview + e->win->starting_row - 1;
 	line = get_line(e, ip->y);
-	printf_fd(2, "[%d]\n", ip->y);
+	if (line->len < ip->xview)
+		ip->xview = line->len;
 	ip->x = get_x_from_xview(line, ip->xview, e->tab_stop, e->win->starting_row) - 1;
 }

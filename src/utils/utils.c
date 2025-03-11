@@ -53,11 +53,6 @@ t_line	*get_line(t_editor *e, int index)
 	int		i;
 
 	i = 0;
-	if (!e)
-	{
-		printf_fd(2,"Sqlut\n");
-		return (NULL);
-	}
 	line = e->buf->head;
 	while (i < index && line)
 	{

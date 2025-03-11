@@ -9,6 +9,7 @@ void	insert(t_editor *e, char c)
 	t_line	*line;
 	char	to_cat[2];
 
+	printf_fd(2, "%d, %d | %d, %d\n", e->cursor->xview, e->cursor->yview, e->cursor->x, e->cursor->y);
 	line = get_line(e, e->cursor->y);
 	if (c == '\r' || c == '\n')
 	{

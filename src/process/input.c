@@ -7,7 +7,7 @@ static void	read_signal(t_editor *e);
 
 void	process_input(t_editor *e)
 {
-	int				secure;	
+	int	secure;	
 
 	secure = poll(e->fd, 2, -1);
 	if (secure == -1)
@@ -31,7 +31,7 @@ static void	read_input(t_editor *e)
 	{
 		if (input[0] == '\033')
 			sequence(e, input + 1);
-		else
+		else if (end == 1)
 			keypress(e, input[0]);
 	}
 	else
