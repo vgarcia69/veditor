@@ -64,7 +64,7 @@ int	check_capacity(t_line *line, char *to_cat)
 
 	len_tocat = ft_strlen(to_cat);
 	len_bufferstring = ft_strlen(line->str);	
-	if (line->capacity <= len_bufferstring + len_tocat + 100)
+	if (line->capacity <= len_bufferstring + len_tocat)
 		return (0);
 	return (1);
 }

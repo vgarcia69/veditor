@@ -10,9 +10,6 @@ void	insert(t_editor *e, char c)
 	char	to_cat[2];
 	int		cur_x;
 
-	/////
-	printf_fd(2, "c[%c] %d, %d | %d, %d\n", c, e->cursor->xview, e->cursor->yview, e->cursor->x, e->cursor->y);
-	/////
 	line = get_line(e, e->cursor->y);
 	if (c == '\r' || c == '\n')
 	{
@@ -41,7 +38,6 @@ void	delete(t_editor *e)
 		return ;
 	}
 	cur_x = get_x_from_xview(line, e->cursor->xview, e->tabstop, e->win->start_col);
-	printf_fd(2, "c[%d] %d, %d | %d, %d\n", cur_x, e->cursor->xview, e->cursor->yview, e->cursor->x, e->cursor->y);
 	ft_memmove(&line->str[cur_x - 1], \
 				&line->str[cur_x], \
 				ft_strlen(&line->str[cur_x]) + 1);
@@ -58,7 +54,6 @@ static void	insert_line(t_line *line, t_editor *e)
 	n_line = new_line(&line->str[cur_x]);
 	if (!n_line)
 		quit_free_msg("Alloc", 1, e);
-	printf_fd(2, "cur_x[%d] [%s]\n", cur_x, &line->str[cur_x]);
 	line->str[cur_x] = '\n';
 	line->str[cur_x + 1] = 0;
 	line->len = ft_strlen(line->str);

@@ -28,14 +28,15 @@ static void	update_vars(t_editor *e, t_line *line)
 		e->win->height = ws.ws_row - 2;
 		e->win->width = ws.ws_col;
 	}
-	e->cursor->xview = get_xview_from_x(line, e->cursor->x, e->tabstop, e->win->start_col);
+	e->cursor->xview = get_xview_from_x(line, e->cursor->x, \
+				e->tabstop, e->win->start_col);
 	e->cursor->yview = e->cursor->y - e->win->starting_row;
 }
 
 static void	update_scroll(t_editor *e, t_line *line)
 {
-	if (e->cursor->yview + 4 > e->win->height - 1 \
-		&& e->cursor->yview + 4 + e->win->starting_row <= e->buf->nbr_line - 1)	
+	if (e->cursor->yview + 6 > e->win->height \
+		&& e->cursor->yview + 6 + e->win->starting_row <= e->buf->nbr_line)	
 	{
 		++e->win->starting_row;
 	}

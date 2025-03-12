@@ -3,14 +3,15 @@
 static void	create_empty_buffer(t_editor *data);
 static void	add_tocat_in_buffer(t_editor *data, char *to_cat);
 
-void	load_buffer(t_editor *data, int file)
+void	load_buffer(t_editor *e, int file)
 {
 	char	*to_cat;
 	int		finished;
 
-	if (!data->f_name)
+	if (!e->f_name)
 	{
-		create_empty_buffer(data);
+		create_empty_buffer(e);
+		e->buf->nbr_line = 1;
 		return ;
 	}
 	finished = 0;
@@ -20,7 +21,7 @@ void	load_buffer(t_editor *data, int file)
 		if (!to_cat)
 			finished = 1;
 		else
-			add_tocat_in_buffer(data, to_cat);
+			add_tocat_in_buffer(e, to_cat);
 	}
 }
 

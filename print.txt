@@ -1,49 +1,42 @@
-[
-][aa
-][a
-][a
-][aa
-][S=input.c arrow.c key.c mouse.c command.ca
-][SHORTCUTFILES=shortcut.c shortcut_2.c
-][UTILSFILES=mouse_utaaaaaaails.c buffer_utils.c utils.c shortcut_utils.c
-][SRCFILES=main.c eraror.c file.c termios.c init.c buffer.c 
-][a
-][SHORTCUTDIR=shoratcut
-][OUTPUTDIR=outpuat
-][aa
-][aaaaaaaaaaaaaaaaaaaaaaaaaa
-][a
-][a
-][aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+[EDITORFILES=refresh_window.c draw.c
 ][aaa
-][aaaaaa
-][aBUFFaaaaERDIR=bufferaa
-][WINDOWDIR=windowaaaaaa
-][UTILSDIR=utilsaa
+][
+][a
+][a
+][PROCESSFILES=input.c arrow.c key.c mouse.c command.c
+][SHORTCUTFILES=shortcut.c shortcut_2.c
+][UTILSFILES=mouse_utils.c buffer_utils.c utils.c shortcut_utils.c
+][SRCFILES=main.c error.c file.c termios.c init.c buffer.c 
+][
+][SHORTCUTDIR=shortcut
+][OUTPUTDIR=output
+][BUFFERDIR=buffer
+][WINDOWDIR=window
+][UTILSDIR=utils
 ][PROCESSDIR=process
 ][EDITORDIR=editor
 ][SRCDIR=src
 ][FILES=$(addprefix $(SRCDIR)/, $(SRCFILES))\
-][aaa	aaaa$(addprefix $(SRCDIR)/$(PROCESSaaDIR)/, $(PROCESSFILES))\aa
-][	$(addprefix $(SRCDIR)/$(PROCEaaSSDIR)/$(SHORTCUTDIR)/, $(SHORTCUTFILES))\
-][a	$(addprefix $(SRCDIR)/$(UTILSDIR)/, $(UTILSFILES))\
-][aaa	$(adadprefix $(SaRCDIR)/$(EDITORDIR)/, $(EDITORFILES))
-][OBJDIR=.obja
-][OBJ=$(addprefix $(OBJDIR)/, $(FILESaa:.c=.o))
+][	$(addprefix $(SRCDIR)/$(PROCESSDIR)/, $(PROCESSFILES))\
+][	$(addprefix $(SRCDIR)/$(PROCESSDIR)/$(SHORTCUTDIR)/, $(SHORTCUTFILES))\
+][	$(addprefix $(SRCDIR)/$(UTILSDIR)/, $(UTILSFILES))\
+][	$(addprefix $(SRCDIR)/$(EDITORDIR)/, $(EDITORFILES))
+][OBJDIR=.obj
+][OBJ=$(addprefix $(OBJDIR)/, $(FILES:.c=.o))
 ][CC=cc
 ][FLAGS= -Wextra -Wall -g3 #-Werror
-][INC=editor.haa
+][INC=editor.h
 ][NAME=editor
 ][PATHLIB=libft/
 ][LIBFT = $(PATHLIB)libft.a
 ][
 ][all: $(NAME)
-][a
+][
 ][$(NAME): $(OBJ) $(LIBFT)
 ][	$(CC) $(OBJ) -o $(NAME) $(LIBFT)
 ][$(LIBFT): libft
 ][
-][$(LIBFT):a
+][$(LIBFT):
 ][	$(MAKE) --no-print-directory -C $(PATHLIB)
 ][
 ][$(OBJDIR)/%.o: %.c $(INC) Makefile $(OBJDIR)
@@ -52,8 +45,8 @@
 ][$(OBJDIR):
 ][	mkdir -p $(OBJDIR)
 ][	mkdir -p $(OBJDIR)/$(SRCDIR)
-][	mkdir -p $(OBJDIR)/$(aaSRCDIR)/$(UTILSDIR)
-][	mkdir -p $(OBJDIR)/$aaaaaaaaaa(SRCDIR)/$(PROCESSDIR)
+][	mkdir -p $(OBJDIR)/$(SRCDIR)/$(UTILSDIR)
+][	mkdir -p $(OBJDIR)/$(SRCDIR)/$(PROCESSDIR)
 ][	mkdir -p $(OBJDIR)/$(SRCDIR)/$(PROCESSDIR)/$(SHORTCUTDIR)
 ][	mkdir -p $(OBJDIR)/$(SRCDIR)/$(EDITORDIR)
 ][
