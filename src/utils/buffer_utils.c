@@ -19,7 +19,7 @@ t_line	*new_line(char *str)
 		return (NULL);
 	}
 	new_list->str = ft_strcpy(new_list->str, str);
-	if (!new_list->str)
+	if (!*new_list->str)
 		ft_strcpy(new_list->str, "\n");
 	new_list->capacity = str_len * 2 + 128;
 	new_list->len = str_len;

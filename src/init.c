@@ -72,6 +72,6 @@ static void	init_cursor(t_cursor *cursor)
 
 static void	init_buffer(t_buffer *buffer)
 {
-	buffer->nbr_line = 0;
+	buffer->nbr_line = 1;
 	buffer->head = NULL;
 }

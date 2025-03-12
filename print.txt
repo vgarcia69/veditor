@@ -1,1 +1,72 @@
-[aaaaaaaaaaaa][][][a][][aaaaaaa]
+[
+][aa
+][a
+][a
+][aa
+][S=input.c arrow.c key.c mouse.c command.ca
+][SHORTCUTFILES=shortcut.c shortcut_2.c
+][UTILSFILES=mouse_utaaaaaaails.c buffer_utils.c utils.c shortcut_utils.c
+][SRCFILES=main.c eraror.c file.c termios.c init.c buffer.c 
+][a
+][SHORTCUTDIR=shoratcut
+][OUTPUTDIR=outpuat
+][aa
+][aaaaaaaaaaaaaaaaaaaaaaaaaa
+][a
+][a
+][aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+][aaa
+][aaaaaa
+][aBUFFaaaaERDIR=bufferaa
+][WINDOWDIR=windowaaaaaa
+][UTILSDIR=utilsaa
+][PROCESSDIR=process
+][EDITORDIR=editor
+][SRCDIR=src
+][FILES=$(addprefix $(SRCDIR)/, $(SRCFILES))\
+][aaa	aaaa$(addprefix $(SRCDIR)/$(PROCESSaaDIR)/, $(PROCESSFILES))\aa
+][	$(addprefix $(SRCDIR)/$(PROCEaaSSDIR)/$(SHORTCUTDIR)/, $(SHORTCUTFILES))\
+][a	$(addprefix $(SRCDIR)/$(UTILSDIR)/, $(UTILSFILES))\
+][aaa	$(adadprefix $(SaRCDIR)/$(EDITORDIR)/, $(EDITORFILES))
+][OBJDIR=.obja
+][OBJ=$(addprefix $(OBJDIR)/, $(FILESaa:.c=.o))
+][CC=cc
+][FLAGS= -Wextra -Wall -g3 #-Werror
+][INC=editor.haa
+][NAME=editor
+][PATHLIB=libft/
+][LIBFT = $(PATHLIB)libft.a
+][
+][all: $(NAME)
+][a
+][$(NAME): $(OBJ) $(LIBFT)
+][	$(CC) $(OBJ) -o $(NAME) $(LIBFT)
+][$(LIBFT): libft
+][
+][$(LIBFT):a
+][	$(MAKE) --no-print-directory -C $(PATHLIB)
+][
+][$(OBJDIR)/%.o: %.c $(INC) Makefile $(OBJDIR)
+][	$(CC) $(FLAGS) -I$(OBJDIR) -c $< -o $@
+][
+][$(OBJDIR):
+][	mkdir -p $(OBJDIR)
+][	mkdir -p $(OBJDIR)/$(SRCDIR)
+][	mkdir -p $(OBJDIR)/$(aaSRCDIR)/$(UTILSDIR)
+][	mkdir -p $(OBJDIR)/$aaaaaaaaaa(SRCDIR)/$(PROCESSDIR)
+][	mkdir -p $(OBJDIR)/$(SRCDIR)/$(PROCESSDIR)/$(SHORTCUTDIR)
+][	mkdir -p $(OBJDIR)/$(SRCDIR)/$(EDITORDIR)
+][
+][clean:
+][	rm -rf $(OBJDIR)
+][
+][lclean:
+][	$(MAKE) --no-print-directory fclean -C $(PATHLIB)
+][
+][fclean: lclean clean
+][	rm -f $(NAME)
+][
+][re : fclean all
+][
+][.PHONY : fclean clean re all lclean libft
+]
