@@ -9,7 +9,7 @@ static void	init_buffer(t_buffer *buffer);
 void	init_editor(t_editor *data, char *file_name)
 {
 	data->buf = NULL;
-	data->tab_stop = 12;
+	data->tab_stop = 8;
 	data->dirty = 0;
 	data->f_name = file_name;
 	data->mode = 0;

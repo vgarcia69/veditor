@@ -10,7 +10,9 @@ void	insert(t_editor *e, char c)
 	char	to_cat[2];
 	int		cur_x;
 
+	/////
 	printf_fd(2, "c[%c] %d, %d | %d, %d\n", c, e->cursor->xview, e->cursor->yview, e->cursor->x, e->cursor->y);
+	/////
 	line = get_line(e, e->cursor->y);
 	if (c == '\r' || c == '\n')
 	{
@@ -22,7 +24,7 @@ void	insert(t_editor *e, char c)
 	while (!check_capacity(line, to_cat))
 		realloc_line(e, line);
 	cur_x = e->cursor->x;
-	if (e->cursor->x >= e->cursor->xview)
+	if (e->cursor->x > e->cursor->xview)
 		cur_x = e->cursor->xview;
 	line->str = ft_strinsert(line->str, to_cat, cur_x);
 	++line->len;
@@ -41,29 +43,27 @@ void	delete(t_editor *e)
 		return ;
 	}
 	cur_x = e->cursor->x;
-	if (e->cursor->xview < e->cursor->x)
+	if (e->cursor->xview > e->cursor->x)
 		cur_x = e->cursor->xview;	
 	ft_memmove(&line->str[cur_x - 1], \
 				&line->str[cur_x], \
 				ft_strlen(&line->str[cur_x]) + 1);
-	--e->cursor->x;
+	e->cursor->x = cur_x - 1;
 	--line->len;
 }
 
-/*
-bug pas de \n dans certaines condition de insert_line
-ou peut etre que le \n est remplace par lettre
-car e->cursor->x bug qlq part
-des fois lancienne string apparait line 
-*/
 static void	insert_line(t_line *line, t_editor *e)
 {
 	t_line *n_line;
+	int		cur_x;
 
-	n_line = new_line(&line->str[e->cursor->x]);
+	cur_x = e->cursor->x;
+	if (e->cursor->x > e->cursor->xview)
+		cur_x = e->cursor->xview;
+	n_line = new_line(&line->str[cur_x]);
 	if (!n_line)
 		quit_free_msg("Alloc", 1, e);
-	line->str[e->cursor->x] = '\n';
+	line->str[e->cursor->x] = '\r';
 	line->str[e->cursor->x + 1] = 0;
 	line->len = ft_strlen(line->str);
 	n_line->next = line->next;

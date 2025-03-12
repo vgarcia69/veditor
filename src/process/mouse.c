@@ -61,5 +61,5 @@ static void	set_cursor(t_cursor *ip, char *i, t_editor *e)
 		ip->yview = e->buf->nbr_line;
 	ip->y = ip->yview + e->win->starting_row - 1;
 	line = get_line(e, ip->y);
-	ip->x = get_x_from_xview(line, ip->xview, e->tab_stop, e->win->starting_row) - 1;
+	ip->x = get_x_from_xview(line, ip->xview, e->tab_stop, e->win->starting_col) - 1;
 }

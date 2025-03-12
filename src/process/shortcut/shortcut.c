@@ -4,7 +4,7 @@ void	save(t_editor *e)
 {
 }
 
-void	copy_clip_board(t_editor *e)
+void	copy(t_editor *e)
 {
 	t_line *line = e->buf->head;
 
@@ -16,7 +16,7 @@ void	copy_clip_board(t_editor *e)
 	quit_free_msg("byebye_t_editor *e", 1, e);
 }
 
-void	paste_clip_board(t_editor *e)
+void	paste(t_editor *e)
 {
 
 }

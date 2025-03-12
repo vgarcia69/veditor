@@ -1,18 +1,7 @@
 
 
 
-gestion des TAB -> differencier CURSOR_X de FILEPOS_X
-bloquage curseur a faire, clean curseur
-vue X
-scroll, vertical/ horizontale V
+clean scroll, vertical/ horizontale V
 ligne level indic / tild
 raccourcis
 sauvegarde
-
-dans key.c
-/*
-next faire que \n creer un new line
-corriger new_line / delete;
-protection souris mous pose
-leak securiser souris sortie de screen
-*/

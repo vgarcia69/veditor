@@ -66,21 +66,21 @@ static void	keypress(t_editor *e, char input)
 	else if (input == '\x18')
 		delete_line(e);
 	else if (input == '\x03')
-		copy_clip_board(e);
+		copy(e);
 	else if (input == '\x15')
-		paste_clip_board(e);
+		paste(e);
 	else if (input == '\x1A')
 		undo(e);
 	else if (input == '\x19')
 		redo(e);
 	else if (input == '\x01')
-		select_all(e);
+		go_begin_line(e);
 	else if (input == '\x0C')
 		select_line(e);
 	else if (input == '\x04')
-		duplicate_line(e);
+		go_end_line(e);
 	else if (input == '\x06')
-		search(e);
+		select_word(e);
 	else if (input == 127)
 		delete(e);
 	else

@@ -44,7 +44,7 @@ static void	update_scroll(t_editor *e, t_line *line)
 		--e->win->starting_row;
 	}
 	if (e->cursor->xview + 4 > e->win->width \
-        && e->win->width < (int)ft_strlen(line->str))    
+        && e->win->width < line->len + e->cursor->xview - e->cursor->x)    
     {
         ++e->win->starting_col;
     }

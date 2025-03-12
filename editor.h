@@ -104,14 +104,14 @@ void	insert(t_editor *e, char c);
 void	delete(t_editor *e);
 
 /*SHORTCUT*/
-void	select_all(t_editor *e);
+void	go_begin_line(t_editor *e);
 void	select_line(t_editor *e);
-void	duplicate_line(t_editor *e);
-void	search(t_editor *e);
+void	go_end_line(t_editor *e);
+void	select_word(t_editor *e);
 void	delete_line(t_editor *e);
 void	save(t_editor *e);
-void	copy_clip_board(t_editor *e);
-void	paste_clip_board(t_editor *e);
+void	copy(t_editor *e);
+void	paste(t_editor *e);
 void	undo(t_editor *e);
 void	redo(t_editor *e);
 
