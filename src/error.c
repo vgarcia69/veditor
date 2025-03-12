@@ -29,8 +29,3 @@ void	quit_free_msg(char *str, int code, t_editor *e)
 	disable_raw_mode(&e->o_ter);
 	quit_error_msg(str, code);
 }
-
-void	print_err(char *str)
-{
-	printf_fd(STDERR_FILENO, str);
-}

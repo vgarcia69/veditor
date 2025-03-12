@@ -5,7 +5,10 @@ t_line	*new_line(char *str)
 	t_line	*new_list;
 	int		str_len;
 
-	str_len = ft_strlen(str);
+	if (!str)
+		str_len = 1;
+	else
+		str_len = ft_strlen(str);
 	new_list = malloc(sizeof(t_line));
 	if (!new_list)
 		return (NULL);
@@ -16,6 +19,8 @@ t_line	*new_line(char *str)
 		return (NULL);
 	}
 	new_list->str = ft_strcpy(new_list->str, str);
+	if (!new_list->str)
+		ft_strcpy(new_list->str, "\n");
 	new_list->capacity = str_len * 2 + 128;
 	new_list->len = str_len;
 	new_list->next = NULL;

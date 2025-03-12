@@ -44,13 +44,13 @@ typedef struct s_window
 	int	height;
 	int	width;
 	int	starting_row;
-	int	starting_col;
+	int	start_col;
 }	t_window;
 
 typedef	struct s_data
 {
 	int				dirty;
-	int				tab_stop;
+	int				tabstop;
 	int				mode;
 	char			*f_name;
 	char			*clip_board;
@@ -68,20 +68,20 @@ int		tab_align_pos(int tab_stop, int current_x);
 int 	get_tabwidth(int xview, int tab_stop);
 int		get_x_from_xview(t_line *line, int cursor_xview, int tab_stop, int s_col);
 int		get_xview_from_x(t_line *line, int cursor_x, int tab_stop, int s_col);
-t_line	*get_line(t_editor *e, int index);
 int		is_same_pos(t_cursor *p1, t_cursor *p2);
 void	highlight(t_editor *e, t_cursor *pp, t_cursor *ip);
+t_line	*get_line(t_editor *e, int index);
 
 /*---------------------------ERROR---------------------------*/
 void	quit_free_msg(char *str, int code, t_editor *vim);
 void	quit_error_msg(char *str, int code);
-void	print_err(char *str);
 
 /*---------------------------INIT---------------------------*/
 void	init_editor(t_editor *data, char *file_name);
 void	disable_raw_mode(struct termios *orig_termios);
 void	enable_raw_mode(struct termios *orig_termios);
 void	init_fds(t_editor *e);
+void	init_statbar(t_editor *e);
 
 /*---------------------------FILE---------------------------*/
 int		open_file(char *file, t_editor *vim);

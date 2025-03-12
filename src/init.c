@@ -1,49 +1,50 @@
 #include "../editor.h"
 
 
-static void	init_alloc(t_editor *data);
+static void	init_alloc(t_editor *e);
 static void	init_window(t_window *win);
 static void	init_cursor(t_cursor *cursor);
 static void	init_buffer(t_buffer *buffer);
 
-void	init_editor(t_editor *data, char *file_name)
+void	init_editor(t_editor *e, char *file_name)
 {
-	data->buf = NULL;
-	data->tab_stop = 8;
-	data->dirty = 0;
-	data->f_name = file_name;
-	data->mode = 0;
-	data->win = NULL;
-	data->cursor = NULL;
-	data->clip_board = NULL;
-	data->cmd = NULL;
-	data->stat = NULL;
-	init_alloc(data);
-	init_buffer(data->buf);
-	init_window(data->win);
-	init_cursor(data->cursor);
-	data->stat = ft_memset(data->stat, 32, data->win->width);
-	init_fds(data);
-	enable_raw_mode(&data->o_ter);
+	e->buf = NULL;
+	e->tabstop = 8;
+	e->dirty = 0;
+	e->f_name = file_name;
+	e->mode = 0;
+	e->win = NULL;
+	e->cursor = NULL;
+	e->clip_board = NULL;
+	e->cmd = NULL;
+	e->stat = NULL;
+	init_alloc(e);
+	init_buffer(e->buf);
+	init_window(e->win);
+	init_cursor(e->cursor);
+	e->stat = ft_memset(e->stat, 32, e->win->width);
+	init_statbar(e);
+	init_fds(e);
+	enable_raw_mode(&e->o_ter);
 }
 
-static void	init_alloc(t_editor *data)
+static void	init_alloc(t_editor *e)
 {
-	data->buf = malloc(sizeof(t_buffer));
-	if (!data->buf)
-		quit_free_msg("Alloc", 1, data);
-	data->win = malloc(sizeof(t_window));
-	if (!data->win)
-		quit_free_msg("Alloc", 1, data);
-	data->cursor = malloc(sizeof(t_cursor));
-	if (!data->cursor)
-		quit_free_msg("Alloc", 1, data);
-	data->stat = ft_calloc(sizeof(char), 1024);
-	if (!data->stat)
-		quit_free_msg("Alloc", 1, data);
-	data->cmd = ft_calloc(sizeof(char), 1024);
-	if (!data->cmd)
-		quit_free_msg("Alloc", 1, data);
+	e->buf = malloc(sizeof(t_buffer));
+	if (!e->buf)
+		quit_free_msg("Alloc", 1, e);
+	e->win = malloc(sizeof(t_window));
+	if (!e->win)
+		quit_free_msg("Alloc", 1, e);
+	e->cursor = malloc(sizeof(t_cursor));
+	if (!e->cursor)
+		quit_free_msg("Alloc", 1, e);
+	e->stat = ft_calloc(sizeof(char), 1024);
+	if (!e->stat)
+		quit_free_msg("Alloc", 1, e);
+	e->cmd = ft_calloc(sizeof(char), 1024);
+	if (!e->cmd)
+		quit_free_msg("Alloc", 1, e);
 }
 
 static void	init_window(t_window *win)
@@ -57,7 +58,7 @@ static void	init_window(t_window *win)
 	}
 	win->height = ws.ws_row - 2;
 	win->width = ws.ws_col;
-	win->starting_col = 0;
+	win->start_col = 0;
 	win->starting_row = 0;
 }
 

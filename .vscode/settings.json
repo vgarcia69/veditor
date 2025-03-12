@@ -4,7 +4,8 @@
 		"concepts": "c",
 		"type_traits": "c",
 		"new": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"libft.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

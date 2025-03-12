@@ -45,14 +45,14 @@ void	draw_line(t_editor *e, t_line *line)
 	str = line->str;
 	tab_i = 0;
 	view_i = 0;
-	if ((int)ft_strlen(str) < e->win->starting_col)
+	if ((int)ft_strlen(str) < e->win->start_col)
 		return ;
-	str += e->win->starting_col;
+	str += e->win->start_col;
 	while (*str && view_i < e->win->width)
 	{
 		if (*str == '\t')
 		{
-			tab_i = get_tabwidth(view_i, e->tab_stop);
+			tab_i = get_tabwidth(view_i, e->tabstop);
 			while (tab_i-- && view_i < e->win->width)
 				view_i += ft_writechar(' ', STDOUT_FILENO);
 		}

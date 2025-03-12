@@ -24,7 +24,6 @@ void disable_raw_mode(struct termios *orig_termios)
 
 void	init_fds(t_editor *e)
 {
-	struct pollfd	fd[2];
 	sigset_t		mask;
 	int				sigfd;
 
@@ -38,4 +37,17 @@ void	init_fds(t_editor *e)
 	e->fd[0].events = POLLIN;
 	e->fd[1].fd = sigfd;
 	e->fd[1].events = POLLIN;
+}
+
+void	init_statbar(t_editor *e)
+{
+	if (e->mode == NORMAL)
+		ft_memcpy(e->stat, " NORMAL", 7);
+	else
+		ft_memcpy(e->stat, " COMMAND", 8);
+	if (e->f_name)
+		ft_memcpy(&e->stat[20], e->f_name, ft_strlen(e->f_name));
+	else
+		ft_memcpy(&e->stat[20], "[NEW]", 5);
+	printf_fd(2, "[%s]\n", e->stat);
 }
