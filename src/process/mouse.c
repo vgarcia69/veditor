@@ -1,12 +1,9 @@
 #include "../../editor.h"
 
-static void	press(t_cursor *pp, t_cursor *ip);
-static void	release(t_editor *e, t_cursor *pp, t_cursor *ip);
 static void	set_cursor(t_cursor *ip, char *i, t_editor *e);
 
-void	mouse(t_editor *e, char input[2])
+void	mouse(t_editor *e, char input[3])
 {
-	static t_cursor	press_pos;
 	t_cursor		*input_pos;
 
 	input_pos = malloc(sizeof(t_cursor));
@@ -14,35 +11,19 @@ void	mouse(t_editor *e, char input[2])
 		quit_free_msg("Alloc", 1, e);
 	set_cursor(input_pos, input + 1, e);
 	if (input[0] == 35)
-		release(e, &press_pos, input_pos);
-	else if (input[0] < 35)
-		press(&press_pos, input_pos);
-	else if (input[0] == 64)
-		highlight(e, &press_pos, input_pos);
-	// ajouter input[0] 97 pour scrolldown et 96 up
-	free(input_pos);
-}
-
-static void	press(t_cursor *pp, t_cursor *ip)
-{
-	// start highlighing
-	pp->xview = ip->xview;
-	pp->yview = ip->yview;
-	pp->x = ip->x;
-	pp->y= ip->y;
-}
-
-static void	release(t_editor *e, t_cursor *pp, t_cursor *ip)
-{
-	if (!is_same_pos(pp, ip))
 	{
-		printf_fd(2, "[%d][%d] to [%d][%d]\n", pp->xview, pp->yview, ip->xview, ip->yview);
-		// stop highlighting
+		cp_cursor(e->cursor, input_pos);
+		cp_cursor(e->sel->end, input_pos);
 	}
-	e->cursor->x = ip->x;
-	e->cursor->y = ip->y;
-	e->cursor->xview = ip->xview;
-	e->cursor->yview = ip->yview;
+	else if (input[0] < 35)
+	{
+		if (e->sel->is_active)
+			e->sel->is_active = 0;
+		else
+			e->sel->is_active = 1;
+		cp_cursor(e->sel->start, input_pos);
+	}
+	free(input_pos);
 }
 
 static void	set_cursor(t_cursor *ip, char *i, t_editor *e)
@@ -55,7 +36,7 @@ static void	set_cursor(t_cursor *ip, char *i, t_editor *e)
 	ip->yview = i[1] - offset;
 	if (ip->yview >= e->buf->nbr_line || ip->yview <= 0)
 		ip->yview = e->buf->nbr_line;
-	ip->y = ip->yview + e->win->starting_row - 1;
+	ip->y = ip->yview + e->win->start_row - 1;
 	line = get_line(e, ip->y);
 	if (ip->xview <= 0)
 	{

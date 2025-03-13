@@ -40,8 +40,8 @@ static void	read_input(t_editor *e)
 
 static void	read_signal(t_editor *e)
 {
-	int						secure;
 	struct signalfd_siginfo siginfo;
+	int						secure;
 
 	secure = read(e->fd[1].fd, &siginfo, sizeof(siginfo)); 
 	if (secure == -1)
@@ -52,36 +52,35 @@ static void	sequence(t_editor *e, char *input)
 {
 	if (input[0] == '[')
 	{
-		if (input[1] == 'M')
+		if (input[1] == MOUSE)
 			mouse(e, &input[2]);
-		else if (input[1] >= 'A' && input[1] <= 'D')
+		else if (input[1] >= ARROW_UP && input[1] <= ARROW_LEFT)
 			arrow(e, input[1]);
 	}
 }
-
 static void	keypress(t_editor *e, char input)
 {
-	if (input == '\x13') 
+	if (input == CTRL_S) 
     	save(e);
-	else if (input == '\x18')
-		delete_line(e);
-	else if (input == '\x03')
+	else if (input == CTRL_C)
 		copy(e);
-	else if (input == '\x15')
+	else if (input == CTRL_U)
 		paste(e);
-	else if (input == '\x1A')
+	else if (input == CTRL_Z)
 		undo(e);
-	else if (input == '\x19')
+	else if (input == CTRL_Y)
 		redo(e);
-	else if (input == '\x01')
+	else if (input == CTRL_A)
 		go_begin_line(e);
-	else if (input == '\x0C')
-		select_line(e);
-	else if (input == '\x04')
+	else if (input == CTRL_D)
 		go_end_line(e);
-	else if (input == '\x06')
+	else if (input == CTRL_L)
+		select_line(e);
+	else if (input == CTRL_F)
 		select_word(e);
-	else if (input == 127)
+	else if (input == CTRL_X)
+		delete_line(e);
+	else if (input == BACKSPACE)
 		delete(e);
 	else
 		insert(e, input);

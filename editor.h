@@ -13,8 +13,25 @@
 #include <poll.h>
 #include <sys/signalfd.h>
 
-# define NORMAL 0
-# define COMMAND 1
+# define NORMAL 0                // Write in file
+# define COMMAND 1               // Write a command
+# define CTRL_S '\x13'           // Save
+# define CTRL_C '\x03'           // Copy
+# define CTRL_U '\x15'           // Paste
+# define CTRL_Z '\x1A'           // Undo
+# define CTRL_Y '\x19'           // Redo
+# define CTRL_A '\x01'           // Go to the beginning of the line
+# define CTRL_D '\x04'           // Go to the end of the line
+# define CTRL_L '\x0C'           // Select the current line
+# define CTRL_F '\x06'           // Select the current word
+# define CTRL_X '\x18'           // Delete a line
+# define BACKSPACE 127           // Delete a char
+
+# define MOUSE 'M'
+# define ARROW_UP 'A'
+# define ARROW_DOWN 'B'
+# define ARROW_RIGHT 'C'
+# define ARROW_LEFT 'D'
 
 typedef	struct s_line
 {
@@ -39,11 +56,18 @@ typedef struct s_cursor
 	int	yview;
 }	t_cursor;
 
+typedef struct	s_selection
+{
+	t_cursor *start;	
+	t_cursor *end;	
+	int is_active;
+}	t_selection;
+
 typedef struct s_window
 {
 	int	height;
 	int	width;
-	int	starting_row;
+	int	start_row;
 	int	start_col;
 }	t_window;
 
@@ -59,6 +83,7 @@ typedef	struct s_data
 	t_cursor		*cursor;
 	t_buffer		*buf;
 	t_window		*win;
+	t_selection		*sel;
 	struct pollfd	fd[2];
 	struct termios	o_ter;
 }	t_editor;
@@ -69,7 +94,8 @@ int 	get_tabwidth(int xview, int tab_stop);
 int		get_x_from_xview(t_line *line, int cursor_xview, int tab_stop, int s_col);
 int		get_xview_from_x(t_line *line, int cursor_x, int tab_stop, int s_col);
 int		is_same_pos(t_cursor *p1, t_cursor *p2);
-void	highlight(t_editor *e, t_cursor *pp, t_cursor *ip);
+void	cp_cursor(t_cursor *dst, t_cursor *src);
+int		is_ordered(t_cursor *first, t_cursor *last);
 t_line	*get_line(t_editor *e, int index);
 
 /*---------------------------ERROR---------------------------*/
@@ -82,6 +108,7 @@ void	disable_raw_mode(struct termios *orig_termios);
 void	enable_raw_mode(struct termios *orig_termios);
 void	init_fds(t_editor *e);
 void	init_statbar(t_editor *e);
+void	init_selection(t_editor *e);
 
 /*---------------------------FILE---------------------------*/
 int		open_file(char *file, t_editor *vim);
@@ -97,7 +124,7 @@ t_line		*new_line(char *str);
 /*---------------------------PROCESS---------------------------*/
 void	process_input(t_editor *e);
 void	command(t_editor *e, char *input);
-void	mouse(t_editor *e, char input[2]);
+void	mouse(t_editor *e, char input[3]);
 void	arrow(t_editor *e, char c);
 /*KEY*/
 void	insert(t_editor *e, char c);
@@ -119,8 +146,7 @@ void	redo(t_editor *e);
 void	editor_refresh_win(t_editor *e);
 void	draw_window(t_editor *e);
 void	draw_cursor(t_cursor *c);
-void	draw_status(int height, char *stat, int mode);
-void	draw_command(int height, char *cmd);
+void	draw_bottom(int height, char *stat, int mode, char *cmd);
 void	draw_line(t_editor *e, t_line *line);
 
 #endif

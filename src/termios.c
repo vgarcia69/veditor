@@ -41,6 +41,7 @@ void	init_fds(t_editor *e)
 
 void	init_statbar(t_editor *e)
 {
+	ft_memset(e->stat, 32, e->win->width);
 	if (e->mode == NORMAL)
 		ft_memcpy(e->stat, " -- NORMAL --", 13);
 	else
@@ -50,4 +51,20 @@ void	init_statbar(t_editor *e)
 	else
 		ft_memcpy(&e->stat[20], "[NEW] - /name \"file_name\" to define it", 38);
 	ft_memcpy(&e->stat[e->win->width / 2], "CTRL + Q to quit", 16);
+}
+
+void	init_selection(t_editor *e)
+{
+	t_selection *s;
+	
+	s = e->sel;
+	s->start = malloc(sizeof(t_cursor));
+	if (!s->start)
+		quit_free_msg("Alloc", 1, e);
+	s->end = malloc(sizeof(t_cursor));
+	if (!s->end)
+		quit_free_msg("Alloc", 1, e);
+	s->is_active = 0;
+	cp_cursor(e->sel->start, e->cursor);
+	cp_cursor(e->sel->end, e->cursor);
 }

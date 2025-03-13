@@ -6,7 +6,7 @@ void	draw_window(t_editor *e)
 	int		i;
 
 	i = 0;
-	line = get_line(e, e->win->starting_row);
+	line = get_line(e, e->win->start_row);
 	while (line && i < e->win->height)
 	{
 	  	printf_fd(STDOUT_FILENO, "\033[%d;1H", ++i);
@@ -29,15 +29,11 @@ void	draw_cursor(t_cursor *c)
 	printf_fd(STDOUT_FILENO, "\033[0m");
 }
 
-void	draw_status(int height, char *stat, int mode)
+void	draw_bottom(int height, char *stat, int mode, char *cmd)
 {
 	printf_fd(STDOUT_FILENO, "\033[%d;1H\033[1;7m", height + 1);
 	printf_fd(STDOUT_FILENO, "%s", stat);
 	printf_fd(STDOUT_FILENO, "\033[%d;1H\033[0m", height + 2);
-}
-
-void	draw_command(int height, char *cmd)
-{
 	printf_fd(STDOUT_FILENO, "\033[%d;1H", height + 3);
 	printf_fd(STDOUT_FILENO, "%s", cmd);
 }

@@ -13,11 +13,10 @@ void	quit_free_msg(char *str, int code, t_editor *e)
 	if (e->f_name)
 		free(e->f_name);
 	if (e->buf)
-	{
 		if (e->buf->head)
 			free_line(e->buf->head);
+	if (e->buf)
 		free(e->buf);
-	}
 	if (e->cursor)
 		free(e->cursor);
 	if (e->win)
@@ -26,6 +25,14 @@ void	quit_free_msg(char *str, int code, t_editor *e)
 		free(e->cmd);
 	if (e->stat)
 		free(e->stat);
+	if (e->sel)
+	{
+		if (e->sel->end)
+			free(e->sel->end);
+		if (e->sel->start)
+			free(e->sel->start);
+		free(e->sel);
+	}
 	disable_raw_mode(&e->o_ter);
 	quit_error_msg(str, code);
 }

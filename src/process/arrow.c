@@ -5,9 +5,9 @@ static void	width_arrows(char c, t_editor *e);
 
 void	arrow(t_editor *e, char c)
 {
-	if (c == 'A' || c == 'B')
+	if (c == ARROW_UP || c == ARROW_DOWN)
 		height_arrows(c, e);
-	if (c == 'C' || c == 'D')
+	if (c == ARROW_RIGHT || c == ARROW_LEFT)
 		width_arrows(c, e);
 }
 
@@ -20,16 +20,16 @@ static void	width_arrows(char c, t_editor *e)
 	line = get_line(e, cursor->y);
 	if (cursor->x >= line->len)
 		cursor->x = line->len - 1;
-	if (c == 'C' && line->str[cursor->x + 1])
+	if (c == ARROW_RIGHT && line->str[cursor->x + 1])
 		++cursor->x;
-	else if (c == 'D' && cursor->x > 0)
+	else if (c == ARROW_LEFT && cursor->x > 0)
 		--cursor->x;
 }
 
 static void	height_arrows(char c, t_editor *e)
 {
-	if (c == 'A' && e->cursor->y > 0)
+	if (c == ARROW_UP && e->cursor->y > 0)
 		--e->cursor->y;
-	else if (c == 'B' && e->cursor->y < e->buf->nbr_line - 1)
+	else if (c == ARROW_DOWN && e->cursor->y < e->buf->nbr_line - 1)
 		++e->cursor->y;
 }
