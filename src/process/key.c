@@ -20,7 +20,7 @@ void	insert(t_editor *e, char c)
 	to_cat[1] = 0;
 	while (!check_capacity(line, to_cat))
 		realloc_line(e, line);
-	cur_x = get_x_from_xview(line, e->cursor->xview, e->tabstop, e->win->start_col);
+	cur_x = get_x_from_xview(line, e->cursor->xview, e->win);
 	line->str = ft_strinsert(line->str, to_cat, cur_x);
 	++line->len;
 	++e->cursor->x;
@@ -37,7 +37,7 @@ void	delete(t_editor *e)
 		del_line(line, e);
 		return ;
 	}
-	cur_x = get_x_from_xview(line, e->cursor->xview, e->tabstop, e->win->start_col);
+	cur_x = get_x_from_xview(line, e->cursor->xview, e->win);
 	ft_memmove(&line->str[cur_x - 1], \
 				&line->str[cur_x], \
 				ft_strlen(&line->str[cur_x]) + 1);
@@ -50,7 +50,7 @@ static void	insert_line(t_line *line, t_editor *e)
 	t_line	*n_line;
 	int		cur_x;
 
-	cur_x = get_x_from_xview(line, e->cursor->xview, e->tabstop, e->win->start_col);
+	cur_x = get_x_from_xview(line, e->cursor->xview, e->win);
 	n_line = new_line(&line->str[cur_x]);
 	if (!n_line)
 		quit_free_msg("Alloc", 1, e);

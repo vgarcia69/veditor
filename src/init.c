@@ -9,7 +9,6 @@ static void	init_buffer(t_buffer *buffer);
 void	init_editor(t_editor *e, char *file_name)
 {
 	e->buf = NULL;
-	e->tabstop = 8;
 	e->dirty = 0;
 	e->f_name = file_name;
 	e->mode = 0;
@@ -66,6 +65,7 @@ static void	init_window(t_window *win)
 	win->width = ws.ws_col;
 	win->start_col = 0;
 	win->start_row = 0;
+	win->tabstop = 8;
 }
 
 static void	init_cursor(t_cursor *cursor)

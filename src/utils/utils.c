@@ -1,16 +1,16 @@
 #include "../../editor.h"
 
-int	get_xview_from_x(t_line *line, int cursor_x, int tab_stop, int s_col)
+int	get_xview_from_x(t_line *line, int cursor_x, t_window *window)
 {
 	int xview;
 	int	i;
 
 	xview = 0;
-	i = s_col;
+	i = window->start_col;
 	while (i < cursor_x && i < line->len - 1)
 	{
 		if (line->str[i] == '\t')
-			xview += get_tabwidth(xview, tab_stop);	
+			xview += get_tabwidth(xview, window->tabstop);	
 		else
 			++xview;
 		++i;
@@ -18,7 +18,7 @@ int	get_xview_from_x(t_line *line, int cursor_x, int tab_stop, int s_col)
 	return (xview);
 }
 
-int	get_x_from_xview(t_line *line, int cursor_xview, int tab_stop, int s_col)
+int	get_x_from_xview(t_line *line, int cursor_xview, t_window *window)
 {
 	int x;
 	int	current_xview;
@@ -28,23 +28,22 @@ int	get_x_from_xview(t_line *line, int cursor_xview, int tab_stop, int s_col)
 	while (current_xview < cursor_xview && x < line->len)
 	{
 		if (line->str[x] == '\t')
-			current_xview += get_tabwidth(current_xview, tab_stop);	
+			current_xview += get_tabwidth(current_xview, window->tabstop);	
 		else
 			++current_xview;
 		++x;
 	}
-	x += s_col;
-	return (x);
+	return (x + window->start_col);
 }
 
-int get_tabwidth(int xview, int tab_stop)
+int get_tabwidth(int xview, int tabstop)
 {
-	return (tab_stop - (xview % tab_stop));
+	return (tabstop - (xview % tabstop));
 }
 
-int	tab_align_pos(int tab_stop, int current_x)
+int	tab_align_pos(int tabstop, int current_x)
 {
-	return ((current_x / tab_stop + 1) * tab_stop);
+	return ((current_x / tabstop + 1) * tabstop);
 }
 
 t_line	*get_line(t_editor *e, int index)

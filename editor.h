@@ -69,13 +69,13 @@ typedef struct s_window
 	int	width;
 	int	start_row;
 	int	start_col;
+	int	tabstop;
 }	t_window;
 
 typedef	struct s_data
 {
-	int				dirty;
-	int				tabstop;
 	int				mode;
+	int				dirty;
 	char			*f_name;
 	char			*clip_board;
 	char			*stat;
@@ -91,12 +91,13 @@ typedef	struct s_data
 /*---------------------------UTILS---------------------------*/
 int		tab_align_pos(int tab_stop, int current_x);
 int 	get_tabwidth(int xview, int tab_stop);
-int		get_x_from_xview(t_line *line, int cursor_xview, int tab_stop, int s_col);
-int		get_xview_from_x(t_line *line, int cursor_x, int tab_stop, int s_col);
+int		get_xview_from_x(t_line *line, int cursor_xview, t_window *window);
+int		get_x_from_xview(t_line *line, int cursor_xview, t_window *window);
 int		is_same_pos(t_cursor *p1, t_cursor *p2);
 void	cp_cursor(t_cursor *dst, t_cursor *src);
 int		is_ordered(t_cursor *first, t_cursor *last);
 t_line	*get_line(t_editor *e, int index);
+char	get_char_at(t_editor *e, int xview, int yview);
 
 /*---------------------------ERROR---------------------------*/
 void	quit_free_msg(char *str, int code, t_editor *vim);
@@ -122,6 +123,7 @@ int			check_capacity(t_line *line, char *to_cat);
 t_line		*new_line(char *str);
 
 /*---------------------------PROCESS---------------------------*/
+/*INPUT*/
 void	process_input(t_editor *e);
 void	command(t_editor *e, char *input);
 void	mouse(t_editor *e, char input[3]);
@@ -143,10 +145,14 @@ void	undo(t_editor *e);
 void	redo(t_editor *e);
 
 /*---------------------------EDITOR---------------------------*/
+/*REFRESH*/
 void	editor_refresh_win(t_editor *e);
+
+/*DRAW*/
 void	draw_window(t_editor *e);
 void	draw_cursor(t_cursor *c);
 void	draw_bottom(int height, char *stat, int mode, char *cmd);
 void	draw_line(t_editor *e, t_line *line);
+void	draw_selection(t_selection *sel, t_editor *e);
 
 #endif
