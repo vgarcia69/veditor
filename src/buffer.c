@@ -1,6 +1,5 @@
 #include "../editor.h"
 
-static void	create_empty_buffer(t_editor *data);
 static void	add_tocat_in_buffer(t_editor *data, char *to_cat);
 
 void	load_buffer(t_editor *e, int file)
@@ -11,7 +10,7 @@ void	load_buffer(t_editor *e, int file)
 	if (!e->f_name)
 	{
 		create_empty_buffer(e);
-		e->buf->nbr_line = 1;
+		e->nb_line = 1;
 		return ;
 	}
 	finished = 0;
@@ -38,10 +37,10 @@ void	realloc_line(t_editor *data, t_line *line)
 	line->str = new_string;
 }
 
-static void	create_empty_buffer(t_editor *data)
+void	create_empty_buffer(t_editor *data)
 {
-	data->buf->head= new_line(NULL);
-	if (!data->buf->head)
+	data->head= new_line(NULL);
+	if (!data->head)
 		quit_free_msg("Alloc", 1, data);
 }
 
@@ -52,7 +51,7 @@ static void	add_tocat_in_buffer(t_editor *data, char *to_cat)
 	head = new_line(to_cat);
 	if (!head)
 		quit_free_msg("Alloc", 1, data);
-	addback_line(&data->buf->head, head);
-	++data->buf->nbr_line;
+	addback_line(&data->head, head);
+	++data->nb_line;
 	free(to_cat);
 }

@@ -52,7 +52,7 @@ t_line	*get_line(t_editor *e, int index)
 	int		i;
 
 	i = 0;
-	line = e->buf->head;
+	line = e->head;
 	while (i < index && line)
 	{
 		line = line->next;

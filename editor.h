@@ -15,6 +15,7 @@
 
 # define NORMAL 0                // Write in file
 # define COMMAND 1               // Write a command
+# define CTRL_Q '\x11'           // Quit
 # define CTRL_S '\x13'           // Save
 # define CTRL_C '\x03'           // Copy
 # define CTRL_U '\x15'           // Paste
@@ -23,7 +24,7 @@
 # define CTRL_A '\x01'           // Go to the beginning of the line
 # define CTRL_D '\x04'           // Go to the end of the line
 # define CTRL_L '\x0C'           // Select the current line
-# define CTRL_F '\x06'           // Select the current word
+# define CTRL_W '\x17'           // Select the current word
 # define CTRL_X '\x18'           // Delete a line
 # define BACKSPACE 127           // Delete a char
 
@@ -44,8 +45,6 @@ typedef	struct s_line
 
 typedef struct s_buffer
 {
-	int		nbr_line;
-	t_line	*head;
 }	t_buffer;
 
 typedef struct s_cursor
@@ -80,8 +79,9 @@ typedef	struct s_data
 	char			*clip_board;
 	char			*stat;
 	char			*cmd;
+	int				nb_line;
+	t_line			*head;
 	t_cursor		*cursor;
-	t_buffer		*buf;
 	t_window		*win;
 	t_selection		*sel;
 	struct pollfd	fd[2];
@@ -121,6 +121,7 @@ void		free_line(t_line *lst);
 void		addback_line(t_line **lst, t_line *new);
 int			check_capacity(t_line *line, char *to_cat);
 t_line		*new_line(char *str);
+void		create_empty_buffer(t_editor *data);
 
 /*---------------------------PROCESS---------------------------*/
 /*INPUT*/
@@ -143,6 +144,7 @@ void	copy(t_editor *e);
 void	paste(t_editor *e);
 void	undo(t_editor *e);
 void	redo(t_editor *e);
+void	quit(t_editor *e);
 
 /*---------------------------EDITOR---------------------------*/
 /*REFRESH*/

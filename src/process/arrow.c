@@ -5,6 +5,7 @@ static void	width_arrows(char c, t_editor *e);
 
 void	arrow(t_editor *e, char c)
 {
+	e->sel->is_active = 0;
 	if (c == ARROW_UP || c == ARROW_DOWN)
 		height_arrows(c, e);
 	if (c == ARROW_RIGHT || c == ARROW_LEFT)
@@ -30,6 +31,6 @@ static void	height_arrows(char c, t_editor *e)
 {
 	if (c == ARROW_UP && e->cursor->y > 0)
 		--e->cursor->y;
-	else if (c == ARROW_DOWN && e->cursor->y < e->buf->nbr_line - 1)
+	else if (c == ARROW_DOWN && e->cursor->y < e->nb_line - 1)
 		++e->cursor->y;
 }

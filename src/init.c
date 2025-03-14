@@ -8,7 +8,6 @@ static void	init_buffer(t_buffer *buffer);
 
 void	init_editor(t_editor *e, char *file_name)
 {
-	e->buf = NULL;
 	e->dirty = 0;
 	e->f_name = file_name;
 	e->mode = 0;
@@ -18,10 +17,11 @@ void	init_editor(t_editor *e, char *file_name)
 	e->cmd = NULL;
 	e->stat = NULL;
 	e->sel = NULL;
+	e->nb_line = 0;
+	e->head = NULL;
 	init_alloc(e);
 	e->sel->end = NULL;
 	e->sel->start = NULL;
-	init_buffer(e->buf);
 	init_window(e->win);
 	init_statbar(e);
 	init_cursor(e->cursor);
@@ -32,9 +32,6 @@ void	init_editor(t_editor *e, char *file_name)
 
 static void	init_alloc(t_editor *e)
 {
-	e->buf = malloc(sizeof(t_buffer));
-	if (!e->buf)
-		quit_free_msg("Alloc", 1, e);
 	e->win = malloc(sizeof(t_window));
 	if (!e->win)
 		quit_free_msg("Alloc", 1, e);
@@ -78,6 +75,4 @@ static void	init_cursor(t_cursor *cursor)
 
 static void	init_buffer(t_buffer *buffer)
 {
-	buffer->nbr_line = 0;
-	buffer->head = NULL;
 }

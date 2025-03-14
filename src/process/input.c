@@ -58,10 +58,13 @@ static void	sequence(t_editor *e, char *input)
 			arrow(e, input[1]);
 	}
 }
+
 static void	keypress(t_editor *e, char input)
 {
 	if (input == CTRL_S) 
     	save(e);
+	else if (input == CTRL_Q)
+		quit(e);
 	else if (input == CTRL_C)
 		copy(e);
 	else if (input == CTRL_U)
@@ -76,7 +79,7 @@ static void	keypress(t_editor *e, char input)
 		go_end_line(e);
 	else if (input == CTRL_L)
 		select_line(e);
-	else if (input == CTRL_F)
+	else if (input == CTRL_W)
 		select_word(e);
 	else if (input == CTRL_X)
 		delete_line(e);

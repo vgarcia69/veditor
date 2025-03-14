@@ -32,14 +32,11 @@ static void	set_cursor(t_cursor *ip, char *i, t_editor *e)
 	offset = 32;
 	ip->xview = i[0] - offset;
 	ip->yview = i[1] - offset;
-	if (ip->yview >= e->buf->nbr_line || ip->yview <= 0)
-		ip->yview = e->buf->nbr_line;
+	if (ip->yview >= e->nb_line || ip->yview <= 0)
+		ip->yview = e->nb_line;
 	ip->y = ip->yview + e->win->start_row - 1;
 	line = get_line(e, ip->y);
-	if (ip->xview <= 0 \
-		|| get_xview_from_x(line, \
-					get_char_at(e, line->len - 1, ip->yview), \
-					e->win) <= ip->xview)
+	if (ip->xview <= 0 || get_xview_from_x(line, line->len, e->win) < ip->xview)
 		ip->xview = get_xview_from_x(line, line->len, e->win) + 1;
 	ip->x = get_x_from_xview(line, ip->xview, e->win) - 1;
 	cp_cursor(e->cursor, ip);

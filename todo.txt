@@ -1,7 +1,12 @@
 
 
 
-clean scroll, vertical/ horizontale V
-ligne level indic / tild
-raccourcis
+ligne level indic
+commandes
+raccourcis :: en cours
 sauvegarde
+
+/*
+check si sel est deja ordered par d autres function
+finir delete_selection
+*/
