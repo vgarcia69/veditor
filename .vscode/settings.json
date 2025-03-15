@@ -5,7 +5,13 @@
 		"type_traits": "c",
 		"new": "c",
 		"typeinfo": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"*.tcc": "c",
+		"deque": "c",
+		"string": "c",
+		"unordered_map": "c",
+		"vector": "c",
+		"ostream": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

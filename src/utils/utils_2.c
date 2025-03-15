@@ -35,7 +35,7 @@ char	get_char_at(t_editor *e, int xview, int yview)
 
 	line = get_line(e, yview + e->win->start_row - 1);
 	c_index = get_x_from_xview(line, xview, e->win) - 1;
-	if (c_index > line->len)
+	if (c_index >= line->len - 1 || c_index < 0)
 		return (0);
 	c = line->str[c_index];
 	return (c);

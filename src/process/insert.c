@@ -43,5 +43,5 @@ static void	insert_newline(t_line *line, t_editor *e)
 		n_line->next->prev = n_line;
 	e->cursor->x = 0;
 	++e->cursor->y;
-	++e->nbr_line;
+	++e->nb_line;
 }

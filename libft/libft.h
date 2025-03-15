@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgarcia <vgarcia@student.42.fr>            +#+  +:+       +#+        */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:15:20 by vgarcia           #+#    #+#             */
-/*   Updated: 2025/03/06 11:50:29 by vgarcia          ###   ########.fr       */
+/*   Updated: 2025/03/15 15:07:27 by v                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ char	*ft_strcat(char *dst, const char *src);
 int		ft_isualnum(int c);
 char	*ft_strcpy(char *s1, const char *s2);
 char	*ft_strinsert(char *str, char *to_insert, int i);
+int		ft_min(int nb1, int nb2);
+int		ft_max(int nb1, int nb2);
+void	ft_revptr(void **ptr1, void **ptr2);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096

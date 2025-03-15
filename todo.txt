@@ -6,7 +6,5 @@ commandes
 raccourcis :: en cours
 sauvegarde
 
-/*
-check si sel est deja ordered par d autres function
-finir delete_selection
-*/
+
+bug moving cursor, highlight goes further in line -> invalid read 

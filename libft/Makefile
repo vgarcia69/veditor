@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vgarcia <vgarcia@student.42.fr>            +#+  +:+       +#+         #
+#    By: v <v@student.42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 16:28:26 by vgarcia           #+#    #+#              #
-#    Updated: 2025/03/06 11:50:49 by vgarcia          ###   ########.fr        #
+#    Updated: 2025/03/15 14:53:32 by v                ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,8 @@ SRC = ./ft_isalpha.c\
 		./ft_printf_fd.c\
 		./ft_strcpy.c\
 		./ft_strinsert.c\
+		./ft_maths.c\
+		./ft_revptr.c\
 		./get_next_line.c
 SRC_BONUS = ./ft_lstadd_back.c\
 		./ft_lstadd_front.c\

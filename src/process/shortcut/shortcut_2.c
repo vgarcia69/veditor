@@ -1,19 +1,20 @@
 #include "../../../editor.h"
-
-void	go_begin_line(t_editor *e)
+void	sc_go_begin_line(t_editor *e)
 {
+	e->sel->is_active = 0;
 	e->cursor->x = 0;
 }
 
-void	go_end_line(t_editor *e)
+void	sc_go_end_line(t_editor *e)
 {
 	t_line *line;
 
+	e->sel->is_active = 0;
 	line = get_line(e, e->cursor->y);
 	e->cursor->x = line->len - 1;
 }
 
-void	select_line(t_editor *e)
+void	sc_select_line(t_editor *e)
 {
 	t_line		*line;
 	t_cursor	*start;
@@ -33,7 +34,7 @@ void	select_line(t_editor *e)
 	e->sel->is_active = 1;
 }
 
-void	select_word(t_editor *e)
+void	sc_select_word(t_editor *e)
 {
 	t_line		*line;
 	t_cursor	*start;
@@ -49,7 +50,7 @@ void	select_word(t_editor *e)
 	end->y = e->cursor->y;
 	end->yview = e->cursor->y + 1;
 	start->x = e->cursor->x;
-	while (ft_isualnum(line->str[start->x - 1]))
+	while (start->x > 0 && ft_isualnum(line->str[start->x - 1]))
 		--start->x;
 	start->xview = get_xview_from_x(line, start->x + 1, e->win);
 	start->y = e->cursor->y;
@@ -57,7 +58,7 @@ void	select_word(t_editor *e)
 	e->sel->is_active = 1;
 }
 
-void	quit(t_editor *e)
+void	sc_quit(t_editor *e)
 {
 	t_line	*line = e->head;
 

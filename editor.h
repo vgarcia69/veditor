@@ -99,6 +99,11 @@ int		is_ordered(t_cursor *first, t_cursor *last);
 t_line	*get_line(t_editor *e, int index);
 char	get_char_at(t_editor *e, int xview, int yview);
 
+/*---------------------------UPADTE---------------------------*/
+void	update_vars(t_line *line, t_cursor *cursor, t_window *window);
+void	update_scroll(t_cursor *cursor, t_line *line, \
+			t_window *window, int nb_line);
+
 /*---------------------------ERROR---------------------------*/
 void	quit_free_msg(char *str, int code, t_editor *vim);
 void	quit_error_msg(char *str, int code);
@@ -131,20 +136,23 @@ void	mouse(t_editor *e, char input[3]);
 void	arrow(t_editor *e, char c);
 /*KEY*/
 void	insert(t_editor *e, char c);
+/*DELETE*/
+void	delete_line(t_editor *e);
 void	delete(t_editor *e);
+void	delete_selection(t_selection *sel, t_editor *e);
 
 /*SHORTCUT*/
-void	go_begin_line(t_editor *e);
-void	select_line(t_editor *e);
-void	go_end_line(t_editor *e);
-void	select_word(t_editor *e);
-void	delete_line(t_editor *e);
-void	save(t_editor *e);
-void	copy(t_editor *e);
-void	paste(t_editor *e);
-void	undo(t_editor *e);
-void	redo(t_editor *e);
-void	quit(t_editor *e);
+void	sc_go_begin_line(t_editor *e);
+void	sc_select_line(t_editor *e);
+void	sc_go_end_line(t_editor *e);
+void	sc_select_word(t_editor *e);
+void	sc_delete_line(t_editor *e);
+void	sc_save(t_editor *e);
+void	sc_copy(t_editor *e);
+void	sc_paste(t_editor *e);
+void	sc_undo(t_editor *e);
+void	sc_redo(t_editor *e);
+void	sc_quit(t_editor *e);
 
 /*---------------------------EDITOR---------------------------*/
 /*REFRESH*/
