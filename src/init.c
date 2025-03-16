@@ -4,7 +4,6 @@
 static void	init_alloc(t_editor *e);
 static void	init_window(t_window *win);
 static void	init_cursor(t_cursor *cursor);
-static void	init_buffer(t_buffer *buffer);
 
 void	init_editor(t_editor *e, char *file_name)
 {
@@ -62,7 +61,8 @@ static void	init_window(t_window *win)
 	win->width = ws.ws_col;
 	win->start_col = 0;
 	win->start_row = 0;
-	win->tabstop = 8;
+	win->tabstop = 8; //  changer ptet
+	win->margin_left = 9;
 }
 
 static void	init_cursor(t_cursor *cursor)
@@ -71,8 +71,4 @@ static void	init_cursor(t_cursor *cursor)
 	cursor->y = 0;
 	cursor->xview = 0;
 	cursor->yview = 0;
-}
-
-static void	init_buffer(t_buffer *buffer)
-{
 }

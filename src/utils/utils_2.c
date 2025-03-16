@@ -57,7 +57,7 @@ void	draw_line(t_editor *e, t_line *line)
 	{
 		if (*str == '\t')
 		{
-			tab_i = get_tabwidth(view_i, e->win->tabstop);
+			tab_i = get_tabwidth(view_i + e->win->margin_left, e->win->tabstop);
 			while (tab_i-- && view_i < e->win->width)
 				view_i += ft_writechar(' ', STDOUT_FILENO);
 		}

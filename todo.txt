@@ -1,10 +1,4 @@
-
-
-
 ligne level indic
 commandes
 raccourcis :: en cours
 sauvegarde
-
-
-bug moving cursor, highlight goes further in line -> invalid read 

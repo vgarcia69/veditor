@@ -5,7 +5,7 @@ int	get_xview_from_x(t_line *line, int cursor_x, t_window *window)
 	int xview;
 	int	i;
 
-	xview = 0;
+	xview = window->margin_left;
 	i = window->start_col;
 	while (i < cursor_x && i < line->len - 1)
 	{
@@ -18,19 +18,19 @@ int	get_xview_from_x(t_line *line, int cursor_x, t_window *window)
 	return (xview);
 }
 
-int	get_x_from_xview(t_line *line, int cursor_xview, t_window *window)
+int	get_x_from_xview(t_line *line, int xview, t_window *window)
 {
 	int x;
-	int	current_xview;
+	int	i_xview;
 
 	x = 0;
-	current_xview = 0;
-	while (current_xview < cursor_xview && x < line->len)
+	i_xview = window->margin_left;
+	while (i_xview < xview && x < line->len)
 	{
 		if (line->str[x] == '\t')
-			current_xview += get_tabwidth(current_xview, window->tabstop);	
+			i_xview += get_tabwidth(i_xview, window->tabstop);	
 		else
-			++current_xview;
+			++i_xview;
 		++x;
 	}
 	return (x + window->start_col);

@@ -43,9 +43,14 @@ typedef	struct s_line
 	struct s_line	*prev;
 }	t_line;
 
-typedef struct s_buffer
+typedef	struct s_option 
 {
-}	t_buffer;
+	int	tablen;
+	int	draw_strlen;
+	int	is_mouse_active;
+	int	is_color_active;
+}	t_option;
+
 
 typedef struct s_cursor
 {
@@ -69,6 +74,7 @@ typedef struct s_window
 	int	start_row;
 	int	start_col;
 	int	tabstop;
+	int	margin_left;
 }	t_window;
 
 typedef	struct s_data
@@ -83,6 +89,7 @@ typedef	struct s_data
 	t_line			*head;
 	t_cursor		*cursor;
 	t_window		*win;
+	t_option		*opt;
 	t_selection		*sel;
 	struct pollfd	fd[2];
 	struct termios	o_ter;

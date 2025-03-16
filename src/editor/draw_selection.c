@@ -7,7 +7,9 @@ void	draw_selection(t_selection *sel, t_editor *e)
 	if (!sel->is_active)
 		return ;
 	if (!is_ordered(sel->start, sel->end))
-		ft_revptr((void **)&sel->start, (void **)&sel->end);	
+		ft_revptr((void **)&sel->start, (void **)&sel->end);
+	if (sel->start->xview < e->win->margin_left)
+		sel->start->xview = e->win->margin_left;
 	draw_loop_selection(*sel->start, *sel->end, e);
 }
 
@@ -25,7 +27,7 @@ static void	draw_loop_selection(t_cursor start, t_cursor end, t_editor *e)
 		{
 			while (get_x_from_xview(line, start.xview, e->win) < line->len)
 				draw_char_selection(start.xview++, start.yview, e);
-			start.xview = 0;
+			start.xview = e->win->margin_left;
 			++start.yview;
 			++start.y;
 		}
@@ -56,6 +58,6 @@ static void	draw_char_selection(int xview, int yview, t_editor *e)
 	}
 	else
 		printf_fd(STDOUT_FILENO, "\033[%d;%dH%c", yview, xview, c);
-	if (xview == 0)
-		printf_fd(STDOUT_FILENO, "\033[%d;%dH ", yview, 1);
+	if (xview == e->win->margin_left)
+		printf_fd(STDOUT_FILENO, "\033[%d;%dH ", yview, e->win->margin_left + 1);
 }
