@@ -43,7 +43,7 @@ static char	*join_strings(t_line *start, t_line *end, t_selection *sel)
 	if (!new_string)
 		return (NULL);
 	new_string = ft_strncpy(new_string, start->str, sel->start->x);
-	new_string = ft_strcpy(new_string, &end->str[sel->end->x + 1]);
+	new_string = ft_strcat(new_string, &end->str[sel->end->x + 1]);
 	new_string[new_len] = '\n';
 	new_string[new_len + 1] = '\0';
 	return (new_string);

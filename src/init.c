@@ -1,6 +1,5 @@
 #include "../editor.h"
 
-
 static void	init_alloc(t_editor *e);
 static void	init_window(t_window *win);
 static void	init_cursor(t_cursor *cursor);
@@ -62,7 +61,7 @@ static void	init_window(t_window *win)
 	win->start_col = 0;
 	win->start_row = 0;
 	win->tabstop = 8; //  changer ptet
-	win->margin_left = 9;
+	win->margin_left = -1;
 }
 
 static void	init_cursor(t_cursor *cursor)

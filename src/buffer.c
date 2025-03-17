@@ -39,7 +39,7 @@ void	realloc_line(t_editor *data, t_line *line)
 
 void	create_empty_buffer(t_editor *data)
 {
-	data->head= new_line(NULL);
+	data->head = new_line(NULL);
 	if (!data->head)
 		quit_free_msg("Alloc", 1, data);
 }

@@ -1,30 +1,45 @@
 #include "../../editor.h"
 
 static void	draw_tild(int i, int height);
+static void	draw_border(t_editor *e, t_line *line, int i, int max_len);
 
 void	draw_window(t_editor *e)
 {
 	t_line	*line;
-	char	*count;
+	int		max_len;
 	int		i;
 
-	i = 0; // set MARGIN A FAIRE (si option marign = plus grand ligne(len) + [] + nb_line plus spaces)
+	i = 0;
 	line = get_line(e, e->win->start_row);
-	set_margin();
-	count = ft_itoa(e->nb_line);
-	e->win->margin_left = ft_strlen(count) + 2;
-	free(count);
+	max_len = len_int(get_max_len(e->head));
+	if (max_len == -1)
+		quit_free_msg("Alloc", 1, e);
 	while (line && i < e->win->height)
 	{
-		count = ft_itoa(i);
-	  	printf_fd(STDOUT_FILENO, "\033[%d;%dH%d  ", i + 1, e->win->margin_left - ft_strlen(count) - 1, i);
+		draw_border(e, line, i, max_len);
 		draw_line(e, line);
-	  	// printf_fd(STDOUT_FILENO, "\033[%d;%dH[%d]", i, e->win->width - 5, line->len - 1); a mettre en option
 		line = line->next;
-		free(count);
 		i++;
 	}
-	draw_tild(i, e->win->height);
+	draw_tild(i + 1, e->win->height + 1);
+}
+
+static void	draw_border(t_editor *e, t_line *line, int i, int max_len)
+{
+	int	margin;
+	int	len_len;
+	int	len_nb;
+	int	spaces;
+
+	spaces = 3;
+	len_nb = len_int(i + e->win->start_row);
+	len_len = len_int(line->len - 1);
+	margin = get_margin(e, e->opt);
+	printf_fd(STDOUT_FILENO, "\033[%d;%dH", i + 1, margin - (len_nb + max_len));
+	printf_fd(STDOUT_FILENO, "%d", i + e->win->start_row);
+	printf_fd(STDOUT_FILENO, "\033[%d;%dH", i + 1, margin - len_len + 1);
+	printf_fd(STDOUT_FILENO, "[%d]", line->len - 1);
+	printf_fd(STDOUT_FILENO, "\033[%d;%dH", i + 1, margin + spaces + 1);
 }
 
 static void	draw_tild(int i, int height)

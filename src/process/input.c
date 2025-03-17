@@ -60,7 +60,7 @@ static void	sequence(t_editor *e, char *input)
 		{
 			arrow(e, input[1]);
 			line = get_line(e, e->cursor->y);
-			update_scroll(e->cursor, line, e->win, e->nb_line);
+			update_scroll(e->cursor, e->win, e->nb_line);
 		}
 	}
 }
@@ -75,10 +75,6 @@ static void	keypress(t_editor *e, char input)
 		sc_copy(e);
 	else if (input == CTRL_U)
 		sc_paste(e);
-	else if (input == CTRL_Z)
-		sc_undo(e);
-	else if (input == CTRL_Y)
-		sc_redo(e);
 	else if (input == CTRL_A)
 		sc_go_begin_line(e);
 	else if (input == CTRL_D)
@@ -91,6 +87,6 @@ static void	keypress(t_editor *e, char input)
 		sc_delete_line(e);
 	else if (input == BACKSPACE)
 		delete(e);
-	else
+	else if (input > 0 && input < 127)
 		insert(e, input);
 }

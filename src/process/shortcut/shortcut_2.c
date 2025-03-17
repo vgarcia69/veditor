@@ -1,4 +1,5 @@
 #include "../../../editor.h"
+
 void	sc_go_begin_line(t_editor *e)
 {
 	e->sel->is_active = 0;

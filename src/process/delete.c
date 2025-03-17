@@ -1,16 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/15 15:46:14 by v                 #+#    #+#             */
-/*   Updated: 2025/03/16 13:56:52 by v                ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-
 #include "../../editor.h"
 
 static void	delete_newline(t_line *line, t_editor *e);
@@ -31,6 +18,7 @@ void	delete(t_editor *e)
 		delete_newline(line, e);
 		return ;
 	}
+	printf_fd(4, "xview[%d]-margin[%d]\n", e->cursor->xview, e->win->margin_left);
 	cur_x = get_x_from_xview(line, e->cursor->xview, e->win);
 	ft_memmove(&line->str[cur_x - 1], \
 				&line->str[cur_x], \
@@ -50,31 +38,30 @@ static void	delete_newline(t_line *line, t_editor *e)
 				line->str, \
 				line->len + 1);
 	e->cursor->x = line->prev->len - 1;
-	line->prev->len += line->len;
-	free(line->str);
-	free(line);
-	--e->nb_line;
-	--e->cursor->y;
+	line->prev->len += line->len - 1;
+	delete_line(e, line);
+	update_vars(get_line(e, e->cursor->y), e->cursor, e->win, e);
+	update_scroll(e->cursor, e->win, e->nb_line);
 }
 
-void	delete_line(t_editor *e)
+void	delete_line(t_editor *e, t_line *line)
 {
-	t_line	*line;
-
-	line = get_line(e, e->cursor->y);
-	if (line->len == 1 && e->nb_line == 0)
+	if (e->nb_line <= 1)
+	{
+		line->str[0] = '\n';
+		line->str[1] = 0;
+		line->len = 1;
 		return ;
+	}
 	if (line->prev)
 		line->prev->next = line->next;
 	else
 		e->head = e->head->next;
 	if (line->next)
 		line->next->prev = line->prev;
-	else
-		--e->cursor->y;
+	--e->nb_line;
+	--e->cursor->y;
+	e->win->start_col = 0;
 	free(line->str);
 	free(line);
-	--e->nb_line;
-	if (e->nb_line == 0)
-		create_empty_buffer(e);
 }
