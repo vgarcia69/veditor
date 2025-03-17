@@ -54,7 +54,6 @@ void	delete_line(t_editor *e, t_line *line)
 	if (line->next)
 		line->next->prev = line->prev;
 	--e->nb_line;
-	--e->cursor->y;
 	e->win->start_col = 0;
 	free(line->str);
 	free(line);

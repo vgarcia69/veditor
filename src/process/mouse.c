@@ -45,6 +45,6 @@ static void	set_cursor(t_cursor *ip, char *i, t_editor *e)
 	if (ip->xview <= 0 \
 		|| get_xview_from_x(line, line->len, e->win) < ip->xview)
 		ip->xview = get_xview_from_x(line, line->len, e->win);
-	ip->x = get_x_from_xview(line, ip->xview, e->win);
+	ip->x = get_x_from_xview(line, ip->xview, e->win) - 1;
 	cp_cursor(e->cursor, ip);
 }
