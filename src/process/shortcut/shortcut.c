@@ -15,8 +15,6 @@ void	sc_copy(t_editor *e)
 	clear_cpy(e->cpy);
 	start = e->sel->start;	
 	end = e->sel->end;
-	if (!is_ordered(start, end))
-		ft_revptr((void **)start, (void **)end);
 	if (start->y == end->y)
 	{
 		cpy_single(start->x, end->x, start->y, e);
@@ -29,20 +27,27 @@ void	sc_copy(t_editor *e)
 		cpy_last(end, e);
 		e->cpy->type = MULTI;
 	}
-	///////////////////////////////////////
 	t_line *line;
+
 	line = e->cpy->head;
 	while (line)
 	{
 		printf_fd(4, "%s", line->str);
 		line = line->next;
 	}
-	////////////////////////////////////////
 }
 
 void	sc_paste(t_editor *e)
 {
+	t_line	*line;
 
+	if (!e->cpy->nb_line)
+		return ;
+	line = get_line(e, e->cursor->y);
+	if (e->cpy->type == SINGLE)
+		paste_single(line, e->cursor->x, e);
+	else if (e->cpy->type == MULTI)
+		paste_multi(line, e->cursor->x, e);
 }
 
 void	sc_delete_line(t_editor *e)

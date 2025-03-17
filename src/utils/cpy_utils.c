@@ -1,5 +1,8 @@
 #include "../../editor.h"
 
+/*
+calloc + 2 for \n and \0 char
+*/
 void	cpy_single(int start, int end, int y, t_editor *e)
 {
 	t_line	*line;	
@@ -10,6 +13,7 @@ void	cpy_single(int start, int end, int y, t_editor *e)
 	if (!str)
 		quit_free_msg("Alloc", 1, e);
 	ft_strncpy(str, &line->str[start], end - start);
+	printf_fd(4, "\n[%s]\n", str);
 	line = new_line(str);
 	free(str);
 	if (!line)
@@ -62,10 +66,10 @@ void	cpy_last(t_cursor *end, t_editor *e)
 	char	*str;
 
 	line = get_line(e, end->y);
-	str = ft_calloc(sizeof(char), line->len - end->x + 2);
+	str = ft_calloc(sizeof(char), end->x + 1);
 	if (!str)
 		quit_free_msg("Alloc", 1, e);
-	ft_strncpy(str, line->str, end->x + 1);
+	ft_strncpy(str, line->str, end->x);
 	last = new_line(str);
 	free(str);
 	if (!last)

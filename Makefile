@@ -1,7 +1,7 @@
 EDITORFILES=refresh.c draw.c draw_selection.c
 PROCESSFILES=input.c arrow.c insert.c delete.c mouse.c command.c delete_selection.c
 SHORTCUTFILES=shortcut.c shortcut_2.c
-UTILSFILES=utils_2.c buffer_utils.c utils.c utils_3.c cpy_utils.c
+UTILSFILES=utils_2.c buffer_utils.c utils.c utils_3.c cpy_utils.c paste_utils.c
 SRCFILES=main.c error.c file.c termios.c init.c buffer.c update.c
 
 SHORTCUTDIR=shortcut

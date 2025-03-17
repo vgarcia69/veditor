@@ -6,8 +6,6 @@ void	draw_selection(t_selection *sel, t_editor *e)
 {
 	if (!sel->is_active)
 		return ;
-	if (!is_ordered(sel->start, sel->end))
-		ft_revptr((void **)&sel->start, (void **)&sel->end);
 	if (sel->start->xview < e->win->margin_left)
 		sel->start->xview = e->win->margin_left;
 	draw_loop_selection(*sel->start, *sel->end, e);

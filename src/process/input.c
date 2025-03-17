@@ -70,7 +70,7 @@ static void	keypress(t_editor *e, char input)
 		sc_quit(e);
 	else if (input == CTRL_C)
 		sc_copy(e);
-	else if (input == CTRL_U)
+	else if (input == CTRL_V)
 		sc_paste(e);
 	else if (input == CTRL_A)
 		sc_go_begin_line(e);

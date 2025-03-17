@@ -12,8 +12,6 @@ void	delete_selection(t_selection *sel, t_editor *e)
 	char	*temp;
 
 	sel->is_active = 0;
-	if (!is_ordered(sel->start, sel->end))
-		ft_revptr((void **)&sel->start, (void **)&sel->end);
 	start = get_line(e, sel->start->y);
 	end = get_line(e, sel->end->y);
 	temp = join_strings(start, end, sel);

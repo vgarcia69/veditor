@@ -13,14 +13,14 @@
 #include <poll.h>
 #include <sys/signalfd.h>
 
-# define SINGLE 0                // Single string copied
-# define MULTI 1                 // Multiple strings copied
+# define SINGLE 2                // Single string copied
+# define MULTI 3                 // Multiple strings copied
 # define NORMAL 0                // Write in file
 # define COMMAND 1               // Write a command
 # define CTRL_Q '\x11'           // Quit
 # define CTRL_S '\x13'           // Save
 # define CTRL_C '\x03'           // Copy
-# define CTRL_U '\x15'           // Paste
+# define CTRL_V '\x16'           // Paste
 # define CTRL_Z '\x1A'           // Undo
 # define CTRL_Y '\x19'           // Redo
 # define CTRL_A '\x01'           // Go to the beginning of the line
@@ -175,6 +175,8 @@ void	cpy_last(t_cursor *end, t_editor *e);
 void	cpy_mid(t_cursor *start, t_cursor *end, t_editor *e);
 void	cpy_first(t_cursor *start, t_editor *e);
 void	cpy_single(int start, int end, int y, t_editor *e);
+void	paste_single(t_line *line, int x, t_editor *e);
+void	paste_multi(t_line *line, int x, t_editor *e);
 
 /*---------------------------EDITOR---------------------------*/
 /*REFRESH*/

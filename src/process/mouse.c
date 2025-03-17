@@ -2,9 +2,6 @@
 
 static void	set_cursor(t_cursor *ip, char *i, t_editor *e);
 
-/*
-je check pas si end est plus petit que currentline->len;
-*/
 void	mouse(t_editor *e, char input[3])
 {
 	t_cursor		*input_pos;
@@ -47,7 +44,7 @@ static void	set_cursor(t_cursor *ip, char *i, t_editor *e)
 	line = get_line(e, ip->y);
 	if (ip->xview <= 0 \
 		|| get_xview_from_x(line, line->len, e->win) < ip->xview)
-		ip->xview = get_xview_from_x(line, line->len, e->win) + 1;
-	ip->x = get_x_from_xview(line, ip->xview, e->win) - 1;
+		ip->xview = get_xview_from_x(line, line->len, e->win);
+	ip->x = get_x_from_xview(line, ip->xview, e->win);
 	cp_cursor(e->cursor, ip);
 }
