@@ -58,6 +58,8 @@ void	init_selection(t_editor *e)
 	t_selection *s;
 	
 	s = e->sel;
+	s->end = NULL;
+	s->start = NULL;
 	s->start = malloc(sizeof(t_cursor));
 	if (!s->start)
 		quit_free_msg("Alloc", 1, e);

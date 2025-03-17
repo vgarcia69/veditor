@@ -2,8 +2,8 @@
 
 void	update_vars(t_line *line, t_cursor *cursor, t_window *win, t_editor *e)
 {
-	struct winsize ws;
-	int		spaces;
+	struct winsize	ws;
+	int				spaces;
 
 	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) != -1)
 	{
@@ -22,7 +22,7 @@ void	update_scroll(t_cursor *cursor, t_window *window, int nb_line)
 
 	pad = 4;
 	if (cursor->yview + pad > window->height - 2 \
-		&& cursor->yview + window->start_row <= nb_line)	
+		&& cursor->yview + window->start_row <= nb_line)
 		++window->start_row;
 	else if (cursor->yview < pad && window->start_row)
 		--window->start_row;

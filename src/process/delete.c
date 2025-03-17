@@ -9,22 +9,18 @@ void	delete(t_editor *e)
 
 	line = get_line(e, e->cursor->y);
 	if (e->sel->is_active)
-	{
 		delete_selection(e->sel, e);
-		return ;
-	}
 	else if (e->cursor->xview == e->win->margin_left)
-	{
 		delete_newline(line, e);
-		return ;
+	else
+	{
+		cur_x = get_x_from_xview(line, e->cursor->xview, e->win);
+		ft_memmove(&line->str[cur_x - 1], \
+					&line->str[cur_x], \
+					ft_strlen(&line->str[cur_x]) + 1);
+		--e->cursor->x;
+		--line->len;
 	}
-	printf_fd(4, "xview[%d]-margin[%d]\n", e->cursor->xview, e->win->margin_left);
-	cur_x = get_x_from_xview(line, e->cursor->xview, e->win);
-	ft_memmove(&line->str[cur_x - 1], \
-				&line->str[cur_x], \
-				ft_strlen(&line->str[cur_x]) + 1);
-	--e->cursor->x;
-	--line->len;
 }
 
 static void	delete_newline(t_line *line, t_editor *e)
@@ -40,8 +36,6 @@ static void	delete_newline(t_line *line, t_editor *e)
 	e->cursor->x = line->prev->len - 1;
 	line->prev->len += line->len - 1;
 	delete_line(e, line);
-	update_vars(get_line(e, e->cursor->y), e->cursor, e->win, e);
-	update_scroll(e->cursor, e->win, e->nb_line);
 }
 
 void	delete_line(t_editor *e, t_line *line)

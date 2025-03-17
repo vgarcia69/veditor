@@ -50,8 +50,6 @@ static void	read_signal(t_editor *e)
 
 static void	sequence(t_editor *e, char *input)
 {
-	t_line	*line;
-
 	if (input[0] == '[')
 	{
 		if (input[1] == MOUSE)
@@ -59,7 +57,6 @@ static void	sequence(t_editor *e, char *input)
 		else if (input[1] >= ARROW_UP && input[1] <= ARROW_LEFT)
 		{
 			arrow(e, input[1]);
-			line = get_line(e, e->cursor->y);
 			update_scroll(e->cursor, e->win, e->nb_line);
 		}
 	}
@@ -89,4 +86,6 @@ static void	keypress(t_editor *e, char input)
 		delete(e);
 	else if (input > 0 && input < 127)
 		insert(e, input);
+	update_vars(get_line(e, e->cursor->y), e->cursor, e->win, e);
+	update_scroll(e->cursor, e->win, e->nb_line);
 }

@@ -13,6 +13,8 @@
 #include <poll.h>
 #include <sys/signalfd.h>
 
+# define SINGLE 0                // Single string copied
+# define MULTI 1                 // Multiple strings copied
 # define NORMAL 0                // Write in file
 # define COMMAND 1               // Write a command
 # define CTRL_Q '\x11'           // Quit
@@ -77,12 +79,18 @@ typedef struct s_window
 	int	margin_left;
 }	t_window;
 
+typedef struct	s_clipboard
+{
+	t_line	*head;
+	int 	nb_line;
+	int 	type;
+}	t_clipboard;
+
 typedef	struct s_data
 {
 	int				mode;
 	int				dirty;
 	char			*f_name;
-	char			*clip_board;
 	char			*stat;
 	char			*cmd;
 	int				nb_line;
@@ -90,6 +98,7 @@ typedef	struct s_data
 	t_cursor		*cursor;
 	t_window		*win;
 	t_option		*opt;
+	t_clipboard		*cpy;
 	t_selection		*sel;
 	struct pollfd	fd[2];
 	struct termios	o_ter;
@@ -109,7 +118,7 @@ int		get_margin(t_editor *e, t_option *option);
 int		len_int(int nb);
 int		get_max_len(t_line *line);
 
-/*---------------------------UPADTE---------------------------*/
+/*---------------------------UPDATE---------------------------*/
 void	update_vars(t_line *line, t_cursor *cursor, t_window *win, t_editor *e);
 void	update_scroll(t_cursor *cursor, t_window *window, int nb_line);
 
@@ -160,6 +169,12 @@ void	sc_save(t_editor *e);
 void	sc_copy(t_editor *e);
 void	sc_paste(t_editor *e);
 void	sc_quit(t_editor *e);
+/*SHORTCUT UTILS*/
+void	clear_cpy(t_clipboard *cpy);
+void	cpy_last(t_cursor *end, t_editor *e);
+void	cpy_mid(t_cursor *start, t_cursor *end, t_editor *e);
+void	cpy_first(t_cursor *start, t_editor *e);
+void	cpy_single(int start, int end, int y, t_editor *e);
 
 /*---------------------------EDITOR---------------------------*/
 /*REFRESH*/

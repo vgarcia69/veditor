@@ -11,6 +11,18 @@ void	quit_error_msg(char *str, int code)
 	exit(code);
 }
 
+static void	free_sel(t_selection *sel)
+{
+	if (sel)
+	{
+		if (sel->end)
+			free(sel->end);
+		if (sel->start)
+			free(sel->start);
+		free(sel);
+	}
+}
+
 void	quit_free_msg(char *str, int code, t_editor *e)
 {
 	if (e->f_name)
@@ -25,14 +37,13 @@ void	quit_free_msg(char *str, int code, t_editor *e)
 		free(e->cmd);
 	if (e->stat)
 		free(e->stat);
-	if (e->sel)
+	if (e->cpy)
 	{
-		if (e->sel->end)
-			free(e->sel->end);
-		if (e->sel->start)
-			free(e->sel->start);
-		free(e->sel);
+		if (e->cpy->head)
+			free_line(e->cpy->head);
+		free(e->cpy);
 	}
+	free_sel(e->sel);
 	disable_raw_mode(&e->o_ter);
 	quit_error_msg(str, code);
 }

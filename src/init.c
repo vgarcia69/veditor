@@ -3,6 +3,7 @@
 static void	init_alloc(t_editor *e);
 static void	init_window(t_window *win);
 static void	init_cursor(t_cursor *cursor);
+static void	init_clipboard(t_clipboard *cpy);
 
 void	init_editor(t_editor *e, char *file_name)
 {
@@ -11,15 +12,14 @@ void	init_editor(t_editor *e, char *file_name)
 	e->mode = 0;
 	e->win = NULL;
 	e->cursor = NULL;
-	e->clip_board = NULL;
+	e->cpy = NULL;
 	e->cmd = NULL;
 	e->stat = NULL;
 	e->sel = NULL;
 	e->nb_line = 0;
 	e->head = NULL;
 	init_alloc(e);
-	e->sel->end = NULL;
-	e->sel->start = NULL;
+	init_clipboard(e->cpy);
 	init_window(e->win);
 	init_statbar(e);
 	init_cursor(e->cursor);
@@ -44,6 +44,9 @@ static void	init_alloc(t_editor *e)
 		quit_free_msg("Alloc", 1, e);
 	e->sel = malloc(sizeof(t_selection));
 	if (!e->sel)
+		quit_free_msg("Alloc", 1, e);
+	e->cpy = malloc(sizeof(t_clipboard));
+	if (!e->cpy)
 		quit_free_msg("Alloc", 1, e);
 }
 
@@ -70,4 +73,11 @@ static void	init_cursor(t_cursor *cursor)
 	cursor->y = 0;
 	cursor->xview = 0;
 	cursor->yview = 0;
+}
+
+static void	init_clipboard(t_clipboard *cpy)
+{
+	cpy->head = NULL;
+	cpy->nb_line = 0;
+	cpy->type = 0;
 }

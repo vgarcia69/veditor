@@ -22,8 +22,6 @@ void	insert(t_editor *e, char c)
 	line->str = ft_strinsert(line->str, to_cat, cur_x);
 	++line->len;
 	++e->cursor->x;
-	update_vars(get_line(e, e->cursor->y), e->cursor, e->win, e);
-	update_scroll(e->cursor, e->win, e->nb_line);
 }
 
 static void	insert_newline(t_line *line, t_editor *e)
@@ -46,6 +44,4 @@ static void	insert_newline(t_line *line, t_editor *e)
 	e->cursor->x = 0;
 	++e->cursor->y;
 	++e->nb_line;
-	update_vars(get_line(e, e->cursor->y), e->cursor, e->win, e);
-	update_scroll(e->cursor, e->win, e->nb_line);
 }

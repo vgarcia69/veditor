@@ -11,7 +11,8 @@
 		"string": "c",
 		"unordered_map": "c",
 		"vector": "c",
-		"ostream": "c"
+		"ostream": "c",
+		"numbers": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

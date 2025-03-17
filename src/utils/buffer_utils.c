@@ -52,7 +52,8 @@ void	free_line(t_line *lst)
 	{
 		tmp = lst;
 		lst = lst->next;
-		free(tmp->str);
+		if (tmp->str)
+			free(tmp->str);
 		free(tmp);
 	}
 }
@@ -68,4 +69,3 @@ int	check_capacity(t_line *line, char *to_cat)
 		return (0);
 	return (1);
 }
-

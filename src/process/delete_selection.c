@@ -1,7 +1,7 @@
 #include "../../editor.h"
 
 static char	*join_strings(t_line *start, t_line *end, t_selection *sel);
-static void	update_list(t_line *start, t_line *end, \
+static void	update_line(t_line *start, t_line *end, \
 				t_line *new, t_editor *e);
 
 void	delete_selection(t_selection *sel, t_editor *e)
@@ -28,7 +28,7 @@ void	delete_selection(t_selection *sel, t_editor *e)
 	free(temp);
 	new->str[new->len] = '\n';
 	new->str[++new->len] = '\0';
-	update_list(start, end, new, e);
+	update_line(start, end, new, e);
 	e->cursor->x = sel->start->x;
 	e->cursor->y = sel->start->y;
 }
@@ -49,7 +49,7 @@ static char	*join_strings(t_line *start, t_line *end, t_selection *sel)
 	return (new_string);
 }
 
-static void	update_list(t_line *start, t_line *end, \
+static void	update_line(t_line *start, t_line *end, \
 				t_line *new, t_editor *e)
 {
 	t_line	*temp;

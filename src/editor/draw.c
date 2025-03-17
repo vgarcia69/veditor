@@ -32,11 +32,11 @@ static void	draw_border(t_editor *e, t_line *line, int i, int max_len)
 	int	spaces;
 
 	spaces = 3;
-	len_nb = len_int(i + e->win->start_row);
+	len_nb = len_int(i + 1 + e->win->start_row);
 	len_len = len_int(line->len - 1);
 	margin = get_margin(e, e->opt);
 	printf_fd(STDOUT_FILENO, "\033[%d;%dH", i + 1, margin - (len_nb + max_len));
-	printf_fd(STDOUT_FILENO, "%d", i + e->win->start_row);
+	printf_fd(STDOUT_FILENO, "%d", i + 1 + e->win->start_row);
 	printf_fd(STDOUT_FILENO, "\033[%d;%dH", i + 1, margin - len_len + 1);
 	printf_fd(STDOUT_FILENO, "[%d]", line->len - 1);
 	printf_fd(STDOUT_FILENO, "\033[%d;%dH", i + 1, margin + spaces + 1);
