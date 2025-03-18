@@ -15,39 +15,44 @@ void	sc_copy(t_editor *e)
 	clear_cpy(e->cpy);
 	start = e->sel->start;	
 	end = e->sel->end;
-	if (start->y == end->y)
+	if (start->y == end->y && get_line(e, start->y)->len == end->x)
 	{
-		cpy_single(start->x, end->x, start->y, e);
+		e->cpy->type = SINGLE_NODE;
+		cpy_node(get_line(e, start->y), e);
+	}
+	else if (start->y == end->y)
+	{
 		e->cpy->type = SINGLE;
+		cpy_single(start->x, end->x, start->y, e);
 	}
 	else
 	{
+		e->cpy->type = MULTI;
 		cpy_first(start, e);
 		cpy_mid(start, end, e);
 		cpy_last(end, e);
-		e->cpy->type = MULTI;
-	}
-	t_line *line;
-
-	line = e->cpy->head;
-	while (line)
-	{
-		printf_fd(4, "%s", line->str);
-		line = line->next;
 	}
 }
 
 void	sc_paste(t_editor *e)
 {
 	t_line	*line;
+	char	*carry;
 
+	line = get_line(e, e->cursor->y);
 	if (!e->cpy->nb_line)
 		return ;
-	line = get_line(e, e->cursor->y);
 	if (e->cpy->type == SINGLE)
 		paste_single(line, e->cursor->x, e);
+	else if (e->cpy->type == SINGLE_NODE)
+		paste_single_node(line, e);
 	else if (e->cpy->type == MULTI)
-		paste_multi(line, e->cursor->x, e);
+	{
+		carry = paste_first(line, e->cursor->x, e);
+		line = paste_mid(line, e, carry);
+		paste_last(line, e, carry);
+		free(carry);
+	}
 }
 
 void	sc_delete_line(t_editor *e)

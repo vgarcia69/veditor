@@ -11,8 +11,9 @@ int	get_margin(t_editor *e, t_option *option)
 	size_len = len_int(get_max_len(e->head) - 1);
 	if (size_nb == -1 || size_len == -1)
 		quit_free_msg("Alloc", 1, e);
-	// if (option->draw_strlen)
-	return (size_nb + size_len + 2);
+	if (option->draw_strlen)
+		return (size_nb + size_len + 5);
+	return (size_nb + 2);
 }
 
 int	len_int(int nb)

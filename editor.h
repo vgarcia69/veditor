@@ -13,6 +13,7 @@
 #include <poll.h>
 #include <sys/signalfd.h>
 
+# define SINGLE_NODE 4			 // Single string copied with \n
 # define SINGLE 2                // Single string copied
 # define MULTI 3                 // Multiple strings copied
 # define NORMAL 0                // Write in file
@@ -145,6 +146,7 @@ void		addback_line(t_line **lst, t_line *new);
 int			check_capacity(t_line *line, char *to_cat);
 t_line		*new_line(char *str);
 void		create_empty_buffer(t_editor *data);
+void		insert_line(t_line **lst, t_line *new);
 
 /*---------------------------PROCESS---------------------------*/
 /*INPUT*/
@@ -176,7 +178,11 @@ void	cpy_mid(t_cursor *start, t_cursor *end, t_editor *e);
 void	cpy_first(t_cursor *start, t_editor *e);
 void	cpy_single(int start, int end, int y, t_editor *e);
 void	paste_single(t_line *line, int x, t_editor *e);
-void	paste_multi(t_line *line, int x, t_editor *e);
+char	*paste_first(t_line *line, int x, t_editor *e);
+t_line	*paste_mid(t_line *after, t_editor *e, char *carry);
+void	paste_last(t_line *line, t_editor *e, char *carry);
+void	cpy_node(t_line *line, t_editor *e);
+void	paste_single_node(t_line *line, t_editor *e);
 
 /*---------------------------EDITOR---------------------------*/
 /*REFRESH*/

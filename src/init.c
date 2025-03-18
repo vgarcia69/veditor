@@ -2,8 +2,8 @@
 
 static void	init_alloc(t_editor *e);
 static void	init_window(t_window *win);
-static void	init_cursor(t_cursor *cursor);
-static void	init_clipboard(t_clipboard *cpy);
+static void	init_clipboard_cursor(t_clipboard *cpy, t_cursor *cursor);
+static void init_option(t_option *opt);
 
 void	init_editor(t_editor *e, char *file_name)
 {
@@ -19,10 +19,10 @@ void	init_editor(t_editor *e, char *file_name)
 	e->nb_line = 0;
 	e->head = NULL;
 	init_alloc(e);
-	init_clipboard(e->cpy);
+	init_option(e->opt);
+	init_clipboard_cursor(e->cpy, e->cursor);
 	init_window(e->win);
 	init_statbar(e);
-	init_cursor(e->cursor);
 	init_selection(e);
 	init_fds(e);
 	enable_raw_mode(&e->o_ter);
@@ -48,6 +48,9 @@ static void	init_alloc(t_editor *e)
 	e->cpy = malloc(sizeof(t_clipboard));
 	if (!e->cpy)
 		quit_free_msg("Alloc", 1, e);
+	e->opt = malloc(sizeof(t_clipboard));
+	if (!e->opt)
+		quit_free_msg("Alloc", 1, e);
 }
 
 static void	init_window(t_window *win)
@@ -63,21 +66,25 @@ static void	init_window(t_window *win)
 	win->width = ws.ws_col;
 	win->start_col = 0;
 	win->start_row = 0;
-	win->tabstop = 8; //  changer ptet
+	win->tabstop = 8;
 	win->margin_left = -1;
 }
 
-static void	init_cursor(t_cursor *cursor)
+static void	init_clipboard_cursor(t_clipboard *cpy, t_cursor *cursor)
 {
+	cpy->head = NULL;
+	cpy->nb_line = 0;
+	cpy->type = 0;
 	cursor->x = 0;
 	cursor->y = 0;
 	cursor->xview = 0;
 	cursor->yview = 0;
 }
 
-static void	init_clipboard(t_clipboard *cpy)
+static void init_option(t_option *opt)
 {
-	cpy->head = NULL;
-	cpy->nb_line = 0;
-	cpy->type = 0;
+	opt->draw_strlen = 0;
+	opt->is_mouse_active = 1;
+	opt->tablen = 8;
+	opt->is_color_active = 1;
 }

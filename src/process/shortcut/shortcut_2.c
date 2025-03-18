@@ -24,7 +24,7 @@ void	sc_select_line(t_editor *e)
 	start = e->sel->start;
 	end = e->sel->end;
 	line = get_line(e, e->cursor->y);
-	end->x = line->len - 1;
+	end->x = line->len;
 	end->xview = get_xview_from_x(line, end->x, e->win);
 	end->y = e->cursor->y;
 	end->yview = e->cursor->y + 1;

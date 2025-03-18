@@ -6,13 +6,12 @@ void	cpy_single(int start, int end, int y, t_editor *e)
 	char	*str;
 	int		str_len;
 
-	str_len = end - start + 1;
+	str_len = end - start;
 	line = get_line(e, y);
 	str = ft_calloc(sizeof(char), str_len + 1);
 	if (!str)
 		quit_free_msg("Alloc", 1, e);
 	ft_strncpy(str, &line->str[start], str_len);
-	printf_fd(4, "\n[%s]\n", str);
 	line = new_line(str);
 	free(str);
 	if (!line)

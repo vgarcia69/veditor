@@ -57,6 +57,7 @@ static void	sequence(t_editor *e, char *input)
 		else if (input[1] >= ARROW_UP && input[1] <= ARROW_LEFT)
 		{
 			arrow(e, input[1]);
+			update_vars(get_line(e, e->cursor->y), e->cursor, e->win, e);
 			update_scroll(e->cursor, e->win, e->nb_line);
 		}
 	}

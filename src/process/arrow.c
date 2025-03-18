@@ -33,4 +33,5 @@ static void	height_arrows(char c, t_editor *e)
 		--e->cursor->y;
 	else if (c == ARROW_DOWN && e->cursor->y < e->nb_line - 1)
 		++e->cursor->y;
+	e->win->start_col = 0; // a changer ?
 }

@@ -36,6 +36,7 @@ static void	delete_newline(t_line *line, t_editor *e)
 	e->cursor->x = line->prev->len - 1;
 	line->prev->len += line->len - 1;
 	delete_line(e, line);
+	--e->cursor->y;
 }
 
 void	delete_line(t_editor *e, t_line *line)

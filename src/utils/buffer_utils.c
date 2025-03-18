@@ -69,3 +69,17 @@ int	check_capacity(t_line *line, char *to_cat)
 		return (0);
 	return (1);
 }
+
+void	insert_line(t_line **lst, t_line *new)
+{
+	if (!*lst)
+		*lst = new;
+	else
+	{
+		new->next = (*lst)->next;
+		new->prev = *lst;
+		(*lst)->next = new;
+		if (new->next)
+			new->next->prev = new;
+	}
+}

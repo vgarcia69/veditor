@@ -36,11 +36,7 @@ static void	insert_newline(t_line *line, t_editor *e)
 	line->str[cur_x] = '\n';
 	line->str[cur_x + 1] = 0;
 	line->len = ft_strlen(line->str);
-	n_line->next = line->next;
-	n_line->prev = line;
-	line->next = n_line;
-	if (n_line->next)
-		n_line->next->prev = n_line;
+	insert_line(&line, n_line);
 	e->cursor->x = 0;
 	++e->cursor->y;
 	++e->nb_line;
