@@ -2,10 +2,6 @@
 
 void	editor_refresh_win(t_editor *e)
 {
-	t_line	*current;	
-
-	current = get_line(e, e->cursor->y);
-	update_vars(current, e->cursor, e->win, e);
 	printf_fd(STDOUT_FILENO, "\033[2J");
 	printf_fd(STDOUT_FILENO, "\033[?25l");
 	draw_window(e);

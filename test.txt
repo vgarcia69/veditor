@@ -1,20 +1,20 @@
-==69395== Memcheck, a memory error detector
-==69395== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==69395== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==69395== Command: ./editor Makefile
-==69395== 
-==69395== 
-==69395== HEAP SUMMARY:
-==69395==     in use at exit: 16 bytes in 1 blocks
-==69395==   total heap usage: 17,269 allocs, 17,268 frees, 74,116 bytes allocated
-==69395== 
-==69395== LEAK SUMMARY:
-==69395==    definitely lost: 0 bytes in 0 blocks
-==69395==    indirectly lost: 0 bytes in 0 blocks
-==69395==      possibly lost: 0 bytes in 0 blocks
-==69395==    still reachable: 16 bytes in 1 blocks
-==69395==         suppressed: 0 bytes in 0 blocks
-==69395== Rerun with --leak-check=full to see details of leaked memory
-==69395== 
-==69395== For lists of detected and suppressed errors, rerun with: -s
-==69395== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==15952== Memcheck, a memory error detector
+==15952== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==15952== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==15952== Command: ./editor Makefile
+==15952== 
+==15952== 
+==15952== HEAP SUMMARY:
+==15952==     in use at exit: 16 bytes in 1 blocks
+==15952==   total heap usage: 221,161 allocs, 221,160 frees, 631,912 bytes allocated
+==15952== 
+==15952== LEAK SUMMARY:
+==15952==    definitely lost: 0 bytes in 0 blocks
+==15952==    indirectly lost: 0 bytes in 0 blocks
+==15952==      possibly lost: 0 bytes in 0 blocks
+==15952==    still reachable: 16 bytes in 1 blocks
+==15952==         suppressed: 0 bytes in 0 blocks
+==15952== Rerun with --leak-check=full to see details of leaked memory
+==15952== 
+==15952== For lists of detected and suppressed errors, rerun with: -s
+==15952== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

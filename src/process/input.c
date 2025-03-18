@@ -1,6 +1,6 @@
 #include "../../editor.h"
 
-static void	sequence(t_editor *e, char *input);
+static void	sequence(t_editor *e, unsigned char *input);
 static void	keypress(t_editor *e, char input);
 static void	read_input(t_editor *e);
 static void	read_signal(t_editor *e);
@@ -20,7 +20,7 @@ void	process_input(t_editor *e)
 
 static void	read_input(t_editor *e)
 {
-	char	input[16];
+	unsigned char	input[16];
 	int		input_len;
 
 	input_len = read(STDIN_FILENO, &input, 16);
@@ -35,7 +35,7 @@ static void	read_input(t_editor *e)
     		keypress(e, input[0]);
 	}
 	else
-		command(e, input);
+		command(e, (char *)input);
 }
 
 static void	read_signal(t_editor *e)
@@ -48,17 +48,19 @@ static void	read_signal(t_editor *e)
 		quit_free_msg("Read function", 1, e);
 }
 
-static void	sequence(t_editor *e, char *input)
+static void	sequence(t_editor *e, unsigned char *input)
 {
 	if (input[0] == '[')
 	{
 		if (input[1] == MOUSE)
+		{
 			mouse(e, &input[2]);
+			update_vars(e->cursor, e->win, e);
+		}
 		else if (input[1] >= ARROW_UP && input[1] <= ARROW_LEFT)
 		{
 			arrow(e, input[1]);
-			update_vars(get_line(e, e->cursor->y), e->cursor, e->win, e);
-			update_scroll(e->cursor, e->win, e->nb_line);
+			update_all(e);
 		}
 	}
 }
@@ -85,8 +87,7 @@ static void	keypress(t_editor *e, char input)
 		sc_delete_line(e);
 	else if (input == BACKSPACE)
 		delete(e);
-	else if (input > 0 && input < 127)
+	else if (ft_isprint(input))
 		insert(e, input);
-	update_vars(get_line(e, e->cursor->y), e->cursor, e->win, e);
-	update_scroll(e->cursor, e->win, e->nb_line);
+	update_all(e);
 }

@@ -120,8 +120,10 @@ int		len_int(int nb);
 int		get_max_len(t_line *line);
 
 /*---------------------------UPDATE---------------------------*/
-void	update_vars(t_line *line, t_cursor *cursor, t_window *win, t_editor *e);
-void	update_scroll(t_cursor *cursor, t_window *window, int nb_line);
+void	update_all(t_editor *e);
+void	update_vars(t_cursor *cursor, t_window *win, t_editor *e);
+void	update_height(t_window *win, int nb_line, t_cursor *cursor);
+void	update_width(t_window *win, t_cursor *cursor, t_editor *e);
 
 /*---------------------------ERROR---------------------------*/
 void	quit_free_msg(char *str, int code, t_editor *vim);
@@ -152,7 +154,7 @@ void		insert_line(t_line **lst, t_line *new);
 /*INPUT*/
 void	process_input(t_editor *e);
 void	command(t_editor *e, char *input);
-void	mouse(t_editor *e, char input[3]);
+void	mouse(t_editor *e, unsigned char input[3]);
 void	arrow(t_editor *e, char c);
 /*KEY*/
 void	insert(t_editor *e, char c);

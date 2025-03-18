@@ -1,8 +1,4 @@
 commandes
-raccourcis :: en cours
 sauvegarde
 
-/*
-copy bug invalid read/write sur les lignes vide si commence par / finis par
-paste cursor_x / xview pas a jour;
-*/
+/*mouse click*/

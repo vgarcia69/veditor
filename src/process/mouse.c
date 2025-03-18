@@ -1,8 +1,8 @@
 #include "../../editor.h"
 
-static void	set_cursor(t_cursor *ip, char *i, t_editor *e);
+static void	set_cursor(t_cursor *ip, unsigned char *i, t_editor *e);
 
-void	mouse(t_editor *e, char input[3])
+void	mouse(t_editor *e, unsigned char input[3])
 {
 	t_cursor		*input_pos;
 
@@ -28,7 +28,7 @@ void	mouse(t_editor *e, char input[3])
 	free(input_pos);
 }
 
-static void	set_cursor(t_cursor *ip, char *i, t_editor *e)
+static void	set_cursor(t_cursor *ip, unsigned char *i, t_editor *e)
 {
 	t_line	*line;
 	int		offset;
