@@ -29,7 +29,6 @@ void	delete_selection(t_selection *sel, t_editor *e)
 	update_line(start, end, new, e);
 	e->cursor->x = sel->start->x;
 	e->cursor->y = sel->start->y;
-	e->act = T_MULTI;
 }
 
 static char	*join_strings(t_line *start, t_line *end, t_selection *sel)

@@ -15,6 +15,5 @@ raccourcis en cmd
 */
 void	command(t_editor *e, char *input)
 {
-	e->act = OTHER;
 	update_statbar(e, "HELLO");
 }

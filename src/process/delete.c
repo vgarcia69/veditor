@@ -21,7 +21,6 @@ void	delete(t_editor *e)
 					ft_strlen(&line->str[cur_x]) + 1);
 		--e->cursor->x;
 		--line->len;
-		e->act = T_SINGLE;
 	}
 }
 
@@ -39,7 +38,6 @@ static void	delete_newline(t_line *line, t_editor *e)
 	line->prev->len += line->len - 1;
 	delete_line(e, line);
 	--e->cursor->y;
-	e->act = T_MULTI;
 }
 
 void	delete_line(t_editor *e, t_line *line)
@@ -63,5 +61,4 @@ void	delete_line(t_editor *e, t_line *line)
 	e->win->start_col = 0;
 	free(line->str);
 	free(line);
-	e->act = T_MULTI;
 }

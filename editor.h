@@ -26,7 +26,7 @@
 # define MULTI 3                 // Multiple strings copied
 # define SINGLE_NODE 4			 // Single string copied with \n
 
-# define COMMAND_TEXT " -- COMAND --"
+# define COMMAND_TEXT " -- COMMAND --"
 # define INSERT_TEXT " -- INSERT --"
 # define CTRL_Q '\x11'           // Quit
 # define CTRL_S '\x13'           // Save
@@ -48,16 +48,6 @@
 # define ARROW_RIGHT 'C'
 # define ARROW_LEFT 'D'
 
-typedef enum e_action
-{
-	T_SINGLE,
-	T_MULTI,
-	SCROLL,
-	SELECTION,
-	MOVE,
-	OTHER
-}	t_action;
-
 typedef	struct s_line
 {
 	char			*str;
@@ -70,7 +60,7 @@ typedef	struct s_line
 typedef	struct s_option 
 {
 	int	tablen;
-	int	draw_strlen;
+	int	is_len;
 	int	is_mouse_active;
 	int	is_color_active;
 }	t_option;
@@ -116,7 +106,6 @@ typedef	struct s_data
 	char			*stat;
 	char			*cmd;
 	int				nb_line;
-	t_action		act;
 	t_line			*head;
 	t_cursor		*cursor;
 	t_window		*win;
@@ -211,12 +200,17 @@ void	paste_single_node(t_line *line, t_editor *e);
 /*---------------------------EDITOR---------------------------*/
 /*REFRESH*/
 void	editor_refresh_win(t_editor *e);
+char	*fill_line_buffer(char *str, char *buffer, t_window *win);
+char	*buffer_line(t_editor *e, t_line *line);
+
+
+char	*clear_window(t_editor *e, char *buffer);
+
 
 /*DRAW*/
-void	draw_window(t_editor *e);
+char	*add_buffer_window(t_editor *e, char *buffer);
 void	draw_cursor(t_cursor *c);
-void	draw_bottom(int height, char *stat, int mode, char *cmd);
-void	draw_line(t_editor *e, t_line *line);
-void	draw_selection(t_selection *sel, t_editor *e);
+void	draw_bottom(int height, char *stat, char *cmd);
+char	*add_buffer_selection(t_selection *sel, t_editor *e, char *buffer);
 
 #endif

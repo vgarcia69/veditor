@@ -40,32 +40,3 @@ char	get_char_at(t_editor *e, int xview, int yview)
 	c = line->str[c_index];
 	return (c);
 }
-
-void	draw_line(t_editor *e, t_line *line)
-{
-	int		tab_i;
-	int		view_i;
-	char	*str;
-
-	str = line->str;
-	tab_i = 0;
-	view_i = 0;
-	if (line->len <= e->win->start_col + 1)
-	{
-		ft_putchar_fd(' ', STDOUT_FILENO);
-		return ;
-	}
-	str += e->win->start_col;
-	while (*str && view_i < e->win->width)
-	{
-		if (*str == '\t')
-		{
-			tab_i = get_tabwidth(view_i + e->win->margin_left, e->win->tabstop);
-			while (tab_i-- && view_i < e->win->width)
-				view_i += ft_writechar(' ', STDOUT_FILENO);
-		}
-		else
-			view_i += ft_writechar(*str, STDOUT_FILENO);
-		++str;
-	}
-}

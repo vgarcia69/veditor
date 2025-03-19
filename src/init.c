@@ -18,7 +18,6 @@ void	init_editor(t_editor *e, char *file_name)
 	e->sel = NULL;
 	e->nb_line = 0;
 	e->head = NULL;
-	e->act = T_MULTI;
 	init_alloc(e);
 	init_option(e->opt);
 	init_clipboard_cursor(e->cpy, e->cursor);
@@ -83,7 +82,7 @@ static void	init_clipboard_cursor(t_clipboard *cpy, t_cursor *cursor)
 
 static void init_option(t_option *opt)
 {
-	opt->draw_strlen = 1;
+	opt->is_len = 1;
 	opt->is_mouse_active = 1;
 	opt->tablen = 8;
 	opt->is_color_active = 1;

@@ -10,7 +10,6 @@ void	load_buffer(t_editor *e, int file)
 	if (!e->f_name)
 	{
 		create_empty_buffer(e);
-		e->nb_line = 1;
 		return ;
 	}
 	finished = 0;
@@ -22,6 +21,8 @@ void	load_buffer(t_editor *e, int file)
 		else
 			add_tocat_in_buffer(e, to_cat);
 	}
+	if (e->head == NULL)
+		create_empty_buffer(e);
 	close(file);
 }
 
@@ -43,6 +44,7 @@ void	create_empty_buffer(t_editor *data)
 	data->head = new_line(NULL);
 	if (!data->head)
 		quit_free_msg("Alloc", 1, data);
+	data->nb_line = 1;
 }
 
 static void	add_tocat_in_buffer(t_editor *data, char *to_cat)

@@ -4,27 +4,38 @@ void	editor_refresh_win(t_editor *e)
 {
 	static time_t	last_time;
 	time_t			elapsed_time;
-	int				i;
+	char			*buffer;
 
 	elapsed_time = get_time_ms();
-	i = 0;
-	if (elapsed_time - last_time > 20)
+	if (elapsed_time - last_time > 40)
 	{
-		printf_fd(STDOUT_FILENO, "\033[?25l");
-		if (e->act == T_MULTI || e->act == T_SINGLE)
-		{
-			while (i <= e->win->height)
-			{
-				printf_fd(STDOUT_FILENO, "\033[%dH\033[2K", i);
-				++i;
-			}
-		}
-		draw_window(e);
-		if (e->act == OTHER || !last_time)
-			draw_bottom(e->win->height, e->stat, e->mode, e->cmd);
+		buffer = ft_calloc(1, (e->win->width) * (e->win->height) * 4);
+		if (!buffer)
+			quit_free_msg("Alloc", 1, e);
+		buffer = clear_window(e, buffer);
+		buffer = add_buffer_window(e, buffer);
+		buffer = add_buffer_selection(e->sel, e, buffer);
+		ft_putstr_fd(buffer, STDOUT_FILENO);
+		free(buffer);
+		draw_bottom(e->win->height, e->stat, e->cmd);
 		draw_cursor(e->cursor);
-		draw_selection(e->sel, e);
-		printf_fd(STDOUT_FILENO, "\033[?25h");
 		last_time = elapsed_time;
 	}
+}
+
+void	draw_cursor(t_cursor *c)
+{
+	printf_fd(STDOUT_FILENO, "\033[%d;%dH", c->yview + 1, c->xview + 1);
+	printf_fd(STDOUT_FILENO, "\033[7m");
+	printf_fd(STDOUT_FILENO, "\033[%d;%dH", c->yview + 1, c->xview + 1);
+	printf_fd(STDOUT_FILENO, "\033[0m");
+}
+
+void	draw_bottom(int height, char *stat, char *cmd)
+{
+	printf_fd(STDOUT_FILENO, "\033[%d;1H\033[1;7m", height + 1);
+	printf_fd(STDOUT_FILENO, "%s", stat);
+	printf_fd(STDOUT_FILENO, "\033[%d;1H\033[0m", height + 2);
+	printf_fd(STDOUT_FILENO, "\033[%d;1H", height + 3);
+	printf_fd(STDOUT_FILENO, "%s", cmd);
 }

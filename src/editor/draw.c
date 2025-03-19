@@ -1,93 +1,72 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vgarcia <vgarcia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 16:19:52 by vgarcia           #+#    #+#             */
-/*   Updated: 2025/03/19 16:34:56 by vgarcia          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../editor.h"
 
-static void	draw_tild(int i, int height);
-static void	draw_border(t_editor *e, t_line *line, int i, int max_len);
+static char	*add_tild(int i, int height, char *buffer);
+static char	*fill_border(t_editor *e, t_line *line, int i, char *buf);
 
-void	draw_window(t_editor *e)
+char	*add_buffer_window(t_editor *e, char *buffer)
 {
-	t_line	*line;
-	int		max_len;
+	char	*line_buf;
 	int		i;
+	t_line	*line;
 
 	i = 0;
 	line = get_line(e, e->win->start_row);
-	max_len = 0;
-	if (e->opt->draw_strlen)
-	{
-		max_len = len_int(get_max_len(e->head) - 1);
-		if (max_len == -1)
-			quit_free_msg("Alloc", 1, e);
-	}
 	while (line && i < e->win->height)
 	{
-		draw_border(e, line, i + 1, max_len);
-		draw_line(e, line);
+		buffer = fill_border(e, line, ++i, buffer);
+		line_buf = buffer_line(e, line);
+		if (line_buf == NULL)
+		{
+			free(buffer);
+			quit_free_msg("Alloc", 1, e);
+		}
+		buffer = ft_strcat(buffer, line_buf);
+		free(line_buf);
 		line = line->next;
-		i++;
 	}
-	draw_tild(i + 1, e->win->height + 1);
+	buffer = add_tild(i + 1, e->win->height + 1, buffer);
+	return (buffer);
 }
 
-static void	draw_border(t_editor *e, t_line *line, int i, int max_len)
+static char	*fill_border(t_editor *e, t_line *line, int i, char *buf)
 {
 	int	x_viewi;
 	int	x_viewlen;
-	int option;
 	int	margin;
+	int	max_len;
+	int	pos;
 
-	option = 0;
-	if (e->opt->draw_strlen)
-		option = 1;
+	pos = ft_strlen(buf);
+	max_len = 0;
+	if (e->opt->is_len)
+		max_len = len_int(get_max_len(e->head) - 1);
+	if (max_len == -1)
+		quit_free_msg("Alloc", 1, e);
 	margin = get_margin(e, e->opt);
-	x_viewi = margin - len_int(i + e->win->start_row) - max_len - option*3;
+	x_viewi = margin - \
+		len_int(i + e->win->start_row) - max_len-e->opt->is_len * 3;
 	x_viewlen = margin - len_int(line->len - 1) - 2;
-	printf_fd(STDOUT_FILENO, "\033[%d;%dH", i, x_viewi);
-	printf_fd(STDOUT_FILENO, YELLOW"%d"RESET, i + e->win->start_row);
-	if (e->opt->draw_strlen)
+	pos += snprintf(buf + pos, 8024, "\033[%d;%dH", i, x_viewi);
+	pos += snprintf(buf + pos, 8024, YELLOW"%d"RESET, i + e->win->start_row);
+	if (e->opt->is_len)
 	{
-		printf_fd(STDOUT_FILENO, "\033[%d;%dH", i, x_viewlen);
-		printf_fd(STDOUT_FILENO, "["BLUE"%d"RESET"]", line->len - 1);
+		pos += snprintf(buf + pos, 8024, "\033[%d;%dH", i, x_viewlen);
+		pos += snprintf(buf + pos, 8024, "["BLUE"%d"RESET"]", line->len - 1);
 	}
-	printf_fd(STDOUT_FILENO, "\033[%d;%dH", i, margin + 1);
+	pos += snprintf(buf + pos, 8024, "\033[%d;%dH", i, margin + 1);
+	return (buf);
 }
 
-static void	draw_tild(int i, int height)
+static char	*add_tild(int i, int height, char *buffer)
 {
+	int	pos;
+
+	pos = ft_strlen(buffer);
 	while (i < height)
 	{
-	  	printf_fd(STDOUT_FILENO, "\033[%d;1H", i);
-		printf_fd(STDOUT_FILENO, BLUE"~"RESET);
+	  	pos += snprintf(buffer + pos, 64, "\033[%d;1H", i);
+		pos += snprintf(buffer + pos, 64, BLUE"~"RESET);
 		i++;
 	}
+	return (buffer);
 }
-
-void	draw_cursor(t_cursor *c)
-{
-	printf_fd(STDOUT_FILENO, "\033[%d;%dH", c->yview + 1, c->xview + 1);
-	printf_fd(STDOUT_FILENO, "\033[7m");
-	printf_fd(STDOUT_FILENO, "\033[%d;%dH", c->yview + 1, c->xview + 1);
-	printf_fd(STDOUT_FILENO, "\033[0m");
-}
-
-void	draw_bottom(int height, char *stat, int mode, char *cmd)
-{
-	printf_fd(STDOUT_FILENO, "\033[%d;1H\033[1;7m", height + 1);
-	printf_fd(STDOUT_FILENO, "%s", stat);
-	printf_fd(STDOUT_FILENO, "\033[%d;1H\033[0m", height + 2);
-	printf_fd(STDOUT_FILENO, "\033[%d;1H", height + 3);
-	printf_fd(STDOUT_FILENO, "%s", cmd);
-}
-
-/* initialiser i a cursor Y ??*/

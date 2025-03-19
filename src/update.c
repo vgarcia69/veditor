@@ -1,7 +1,6 @@
 #include "../editor.h"
 
-static void	update_height \
-			(t_window *win, int nb_line, t_cursor *cursor, t_action *action);
+static void	update_height (t_window *win, int nb_line, t_cursor *cursor);
 
 void	update_statbar(t_editor *e, char *str)
 {
@@ -30,20 +29,17 @@ void update_win(t_editor *e)
 	line = get_line(e, e->cursor->y);
 	e->cursor->xview = get_xview_from_x(line, e->cursor->x, e->win);
 	e->cursor->yview = e->cursor->y - e->win->start_row;
-	update_height(e->win, e->nb_line, e->cursor, &e->act);	
+	update_height(e->win, e->nb_line, e->cursor);	
 	update_width(e->win, e->cursor, e);	
 	update_vars(e->cursor, e->win, e);
 }
 
-static void	update_height \
-			(t_window *win, int nb_line, t_cursor *cursor, t_action *action)
+static void	update_height (t_window *win, int nb_line, t_cursor *cursor)
 {
     int		target_row;
-	int		prev_startrow;
 	int		pad;
 
 	pad = 4;
-	prev_startrow = win->start_row;
 	if (cursor->yview + pad > win->height - 2)
     {
         target_row = cursor->y - (win->height - 2 - pad);
@@ -58,8 +54,6 @@ static void	update_height \
     }
 	if (win->start_row < 0)
 		win->start_row = 0;
-	if (prev_startrow != win->start_row)
-		*action = T_MULTI;
 }
 
 void	update_width(t_window *win, t_cursor *cursor, t_editor *e)
@@ -67,12 +61,10 @@ void	update_width(t_window *win, t_cursor *cursor, t_editor *e)
 	t_line	*line;
 	int		target_col;
 	int		pad;
-	int		prev_startcol;
 
 	pad = 4;
-	prev_startcol = win->start_col;
 	line = get_line(e, cursor->y);
-	if (line->len - win->start_col < win->width - win->margin_left - pad * 2)
+	if (line->len - win->start_col < win->width - win->margin_left - pad*2)
 		win->start_col = line->len - (win->width - win->margin_left) + pad;
 	else if (cursor->xview + pad > win->width)
 	{
@@ -86,8 +78,6 @@ void	update_width(t_window *win, t_cursor *cursor, t_editor *e)
 	}
 	if (win->start_col < 0)
 		win->start_col = 0;
-	if (prev_startcol != win->start_col)	
-		e->act = T_MULTI;
 }
 
 void	update_vars(t_cursor *cursor, t_window *win, t_editor *e)

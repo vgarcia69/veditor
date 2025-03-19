@@ -5,7 +5,6 @@ void	sc_save(t_editor *e)
 	t_line	*line;
 	int	fd;
 
-	e->act = OTHER;
 	if (!e->f_name)
 	{
 		ft_memcpy(&e->stat[e->win->width / 2 - 16], \

@@ -33,7 +33,6 @@ void	sc_select_line(t_editor *e)
 	start->y = e->cursor->y;
 	start->yview = e->cursor->yview + 1;
 	e->sel->is_active = 1;
-	e->act = SELECTION;
 }
 
 void	sc_select_word(t_editor *e)
@@ -58,7 +57,6 @@ void	sc_select_word(t_editor *e)
 	start->y = e->cursor->y;
 	start->yview = e->cursor->yview + 1;
 	e->sel->is_active = 1;
-	e->act = SELECTION;
 }
 
 void	sc_quit(t_editor *e)
@@ -67,7 +65,6 @@ void	sc_quit(t_editor *e)
 	{
 		update_statbar(e, "File unsaved ! Press CTRL + Q again to quit");
 		e->dirty = 0;
-		e->act = OTHER;
 	}
 	else
 		quit_free_msg("Exit with Success !", 0, e);

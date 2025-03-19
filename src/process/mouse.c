@@ -15,7 +15,6 @@ void	mouse(t_editor *e, unsigned char input[3])
 		set_cursor(input_pos, input + 1, e);
 		cp_cursor(e->sel->start, input_pos);
 		cp_cursor(e->sel->end, input_pos);
-		e->act = MOVE;
 	}
 	else if (input[0] == 64)
 	{
@@ -25,7 +24,6 @@ void	mouse(t_editor *e, unsigned char input[3])
 			cp_cursor(e->sel->end, input_pos);
 		else
 			cp_cursor(e->sel->start, input_pos);
-		e->act = SELECTION;
 	}
 	free(input_pos);
 }

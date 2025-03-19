@@ -1,30 +1,36 @@
 #include "../../editor.h"
 
-static void	draw_loop_selection(t_cursor start, t_cursor end, t_editor *e);
+static char	*add_sel_loop \
+			(t_cursor start, t_cursor end, t_editor *e, char *buffer);
+static char	*add_sel_char \
+			(int xview, int yview, t_editor *e, char *buffer);
 
-void	draw_selection(t_selection *sel, t_editor *e)
+char	*add_buffer_selection(t_selection *sel, t_editor *e, char *buffer)
 {
-	if (!sel->is_active || e->act != SELECTION)
-		return ;
+	if (!sel->is_active)
+		return (buffer);
 	if (sel->start->xview < e->win->margin_left)
 		sel->start->xview = e->win->margin_left;
-	draw_loop_selection(*sel->start, *sel->end, e);
+	buffer = add_sel_loop(*sel->start, *sel->end, e, buffer);
+	return (buffer);
 }
 
-static void	draw_char_selection(int xview, int yview, t_editor *e);
 
-static void	draw_loop_selection(t_cursor start, t_cursor end, t_editor *e)
+static char	*add_sel_loop \
+			(t_cursor start, t_cursor end, t_editor *e, char *buffer)
 {
+	int			pos;
 	t_line		*line;
 
-	printf_fd(STDOUT_FILENO, INVERT);
+	pos = ft_strlen(buffer);
+	snprintf(buffer + pos, 10, INVERT);
 	while (!is_same_pos(&start, &end))
 	{
 		line = get_line(e, start.y);
 		if (start.y < end.y)
 		{
 			while (get_x_from_xview(line, start.xview, e->win) < line->len)
-				draw_char_selection(start.xview++, start.yview, e);
+				buffer = add_sel_char(start.xview++, start.yview, e, buffer);
 			start.xview = e->win->margin_left;
 			++start.yview;
 			++start.y;
@@ -32,30 +38,37 @@ static void	draw_loop_selection(t_cursor start, t_cursor end, t_editor *e)
 		else
 		{
 			while (start.xview < end.xview)
-				draw_char_selection(start.xview++, start.yview, e);
+				buffer = add_sel_char(start.xview++, start.yview, e, buffer);
 			break ;
 		}
 	}
-	printf_fd(STDOUT_FILENO, RESET);
+	pos = ft_strlen(buffer);
+	snprintf(buffer + pos, 10, RESET);
+	return (buffer);
 }
 
-static void	draw_char_selection(int xview, int yview, t_editor *e)
+static char	*add_sel_char \
+			(int xview, int yview, t_editor *e, char *buffer)
 {
 	char	c;
+	int		pos;
 	int		tab_width;
 
+	pos = ft_strlen(buffer);
 	c = get_char_at(e, xview, yview);
 	if (c == '\t')
 	{
 		tab_width = get_tabwidth(xview, e->win->tabstop);
 		while (tab_width >= 0)
 		{
-			printf_fd(STDOUT_FILENO, "\033[%d;%dH ", yview, xview++);
+			pos += snprintf(buffer + pos, 64, "\033[%d;%dH ", yview, xview++);
 			--tab_width;
 		}
 	}
 	else
-		printf_fd(STDOUT_FILENO, "\033[%d;%dH%c", yview, xview, c);
+		pos += snprintf(buffer + pos, 64, "\033[%d;%dH%c", yview, xview, c);
 	if (xview == e->win->margin_left)
-		printf_fd(STDOUT_FILENO, "\033[%d;%dH ", yview, e->win->margin_left + 1);
+		pos += snprintf(buffer + pos, 64, "\033[%d;%dH ", \
+						yview, e->win->margin_left + 1);
+	return (buffer);
 }
