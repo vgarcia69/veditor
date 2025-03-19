@@ -10,6 +10,7 @@ void	arrow(t_editor *e, char c)
 		height_arrows(c, e);
 	if (c == ARROW_RIGHT || c == ARROW_LEFT)
 		width_arrows(c, e);
+	e->act = MOVE;
 }
 
 static void	width_arrows(char c, t_editor *e)

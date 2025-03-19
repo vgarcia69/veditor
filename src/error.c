@@ -43,6 +43,8 @@ void	quit_free_msg(char *str, int code, t_editor *e)
 			free_line(e->cpy->head);
 		free(e->cpy);
 	}
+	if (e->opt)
+		free(e->opt);
 	free_sel(e->sel);
 	disable_raw_mode(&e->o_ter);
 	quit_error_msg(str, code);

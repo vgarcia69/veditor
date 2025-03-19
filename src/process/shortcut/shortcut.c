@@ -2,7 +2,28 @@
 
 void	sc_save(t_editor *e)
 {
+	t_line	*line;
+	int	fd;
 
+	e->act = OTHER;
+	if (!e->f_name)
+	{
+		ft_memcpy(&e->stat[e->win->width / 2 - 16], \
+					"Error no name, /name \"file_name\"", 32);
+		return ;
+	}
+	fd = open(e->f_name, O_TRUNC | O_CREAT | O_WRONLY, 0777);
+	if (fd == -1)
+		quit_free_msg("Savefile", 1, e);
+	line = e->head;
+	while (line)
+	{
+		printf_fd(fd, "%s", line->str);
+		line = line->next;
+	}
+	ft_memcpy(&e->stat[e->win->width / 2 - 9], "Successfully saved", 18);
+	e->dirty = 0;
+	close(fd);
 }
 
 void	sc_copy(t_editor *e)
@@ -42,6 +63,7 @@ void	sc_paste(t_editor *e)
 	line = get_line(e, e->cursor->y);
 	if (!e->cpy->nb_line)
 		return ;
+	e->dirty = 1;
 	if (e->cpy->type == SINGLE)
 		paste_single(line, e->cursor->x, e);
 	else if (e->cpy->type == SINGLE_NODE)
@@ -59,6 +81,7 @@ void	sc_delete_line(t_editor *e)
 {
 	t_line	*line;
 
+	e->dirty = 1;
 	if (e->sel->is_active)
 	{
 		delete_selection(e->sel, e);

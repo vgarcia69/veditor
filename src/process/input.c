@@ -27,9 +27,9 @@ static void	read_input(t_editor *e)
 	if (input_len == -1)
 		quit_free_msg("Read function", 1, e);
 	input[input_len] = '\0';
-	if (e->mode == NORMAL)
+	if (e->mode == INSERT)
 	{
-		if (input[0] == '\033')
+		if (input[0] == ESC && input[1])
 			sequence(e, input + 1);
 		else if (input_len == 1)
     		keypress(e, input[0]);
@@ -41,11 +41,18 @@ static void	read_input(t_editor *e)
 static void	read_signal(t_editor *e)
 {
 	struct signalfd_siginfo siginfo;
+	struct winsize			ws;
 	int						secure;
 
 	secure = read(e->fd[1].fd, &siginfo, sizeof(siginfo)); 
 	if (secure == -1)
 		quit_free_msg("Read function", 1, e);
+	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) != -1)
+	{
+		e->win->height = ws.ws_row - 2;
+		e->win->width = ws.ws_col;
+	}
+	update_statbar(e, NULL);
 }
 
 static void	sequence(t_editor *e, unsigned char *input)
@@ -56,11 +63,12 @@ static void	sequence(t_editor *e, unsigned char *input)
 		{
 			mouse(e, &input[2]);
 			update_vars(e->cursor, e->win, e);
+			update_width(e->win, e->cursor, e);	
 		}
 		else if (input[1] >= ARROW_UP && input[1] <= ARROW_LEFT)
 		{
 			arrow(e, input[1]);
-			update_all(e);
+			update_win(e);
 		}
 	}
 }
@@ -89,5 +97,7 @@ static void	keypress(t_editor *e, char input)
 		delete(e);
 	else if (ft_isprint(input))
 		insert(e, input);
-	update_all(e);
+	else if (input == ESC)
+		e->mode = COMMAND;
+	update_win(e);
 }

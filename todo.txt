@@ -1,4 +1,0 @@
-commandes
-sauvegarde
-
-/*mouse click*/

@@ -4,7 +4,7 @@ static void	draw_loop_selection(t_cursor start, t_cursor end, t_editor *e);
 
 void	draw_selection(t_selection *sel, t_editor *e)
 {
-	if (!sel->is_active)
+	if (!sel->is_active || e->act != SELECTION)
 		return ;
 	if (sel->start->xview < e->win->margin_left)
 		sel->start->xview = e->win->margin_left;
@@ -17,7 +17,7 @@ static void	draw_loop_selection(t_cursor start, t_cursor end, t_editor *e)
 {
 	t_line		*line;
 
-	printf_fd(STDOUT_FILENO, "\033[7m");
+	printf_fd(STDOUT_FILENO, INVERT);
 	while (!is_same_pos(&start, &end))
 	{
 		line = get_line(e, start.y);
@@ -36,7 +36,7 @@ static void	draw_loop_selection(t_cursor start, t_cursor end, t_editor *e)
 			break ;
 		}
 	}
-	printf_fd(STDOUT_FILENO, "\033[0m");
+	printf_fd(STDOUT_FILENO, RESET);
 }
 
 static void	draw_char_selection(int xview, int yview, t_editor *e)

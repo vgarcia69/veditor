@@ -22,6 +22,7 @@ void	load_buffer(t_editor *e, int file)
 		else
 			add_tocat_in_buffer(e, to_cat);
 	}
+	close(file);
 }
 
 void	realloc_line(t_editor *data, t_line *line)

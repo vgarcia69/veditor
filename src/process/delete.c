@@ -7,6 +7,7 @@ void	delete(t_editor *e)
 	t_line	*line;
 	int		cur_x;
 
+	e->dirty = 1;
 	line = get_line(e, e->cursor->y);
 	if (e->sel->is_active)
 		delete_selection(e->sel, e);
@@ -20,6 +21,7 @@ void	delete(t_editor *e)
 					ft_strlen(&line->str[cur_x]) + 1);
 		--e->cursor->x;
 		--line->len;
+		e->act = T_SINGLE;
 	}
 }
 
@@ -37,6 +39,7 @@ static void	delete_newline(t_line *line, t_editor *e)
 	line->prev->len += line->len - 1;
 	delete_line(e, line);
 	--e->cursor->y;
+	e->act = T_MULTI;
 }
 
 void	delete_line(t_editor *e, t_line *line)
@@ -44,7 +47,7 @@ void	delete_line(t_editor *e, t_line *line)
 	if (e->nb_line <= 1)
 	{
 		line->str[0] = '\n';
-		line->str[1] = 0;
+		line->str[1] = '\0';
 		line->len = 1;
 		return ;
 	}
@@ -54,8 +57,11 @@ void	delete_line(t_editor *e, t_line *line)
 		e->head = e->head->next;
 	if (line->next)
 		line->next->prev = line->prev;
+	else
+		--e->cursor->y;
 	--e->nb_line;
 	e->win->start_col = 0;
 	free(line->str);
 	free(line);
+	e->act = T_MULTI;
 }

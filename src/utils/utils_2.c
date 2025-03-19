@@ -50,8 +50,11 @@ void	draw_line(t_editor *e, t_line *line)
 	str = line->str;
 	tab_i = 0;
 	view_i = 0;
-	if ((int)ft_strlen(str) < e->win->start_col)
+	if (line->len <= e->win->start_col + 1)
+	{
+		ft_putchar_fd(' ', STDOUT_FILENO);
 		return ;
+	}
 	str += e->win->start_col;
 	while (*str && view_i < e->win->width)
 	{

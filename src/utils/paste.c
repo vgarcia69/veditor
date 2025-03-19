@@ -9,6 +9,7 @@ void	paste_single(t_line *line, int x, t_editor *e)
 		realloc_line(e, line);
 	line->str = ft_strinsert(line->str, str, x);
 	line->len = ft_strlen(line->str);
+	e->act = T_SINGLE;
 }
 
 char	*paste_first(t_line *line, int x, t_editor *e)
@@ -73,4 +74,18 @@ void	paste_last(t_line *last, t_editor *e, char *carry)
 		e->cursor->x = last->len;
 		last->len += ft_strlen(carry);
 	}
+	e->act = T_MULTI;
+}
+
+void	paste_single_node(t_line *line, t_editor *e)
+{
+	t_line	*cpy;
+
+	cpy = new_line(e->cpy->head->str);
+	if (!cpy)
+		quit_free_msg("Alloc", 1, e);
+	insert_line(&line, cpy);
+	++e->nb_line;
+	++e->cursor->y;
+	e->act = T_SINGLE;
 }

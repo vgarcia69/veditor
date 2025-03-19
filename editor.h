@@ -8,16 +8,26 @@
 #include <unistd.h>
 #include <errno.h>
 #include <sys/ioctl.h>
+#include <sys/time.h>
 #include <termios.h>
 #include <signal.h>
 #include <poll.h>
 #include <sys/signalfd.h>
 
-# define SINGLE_NODE 4			 // Single string copied with \n
+# define YELLOW	"\033[33m"
+# define BLUE	"\033[36m"
+# define RESET	"\033[0m"
+# define INVERT	"\033[7m"
+// # define BLUE	"\033[36m"
+
+# define INSERT 0                // Write in file
+# define COMMAND 1               // Write a command
 # define SINGLE 2                // Single string copied
 # define MULTI 3                 // Multiple strings copied
-# define NORMAL 0                // Write in file
-# define COMMAND 1               // Write a command
+# define SINGLE_NODE 4			 // Single string copied with \n
+
+# define COMMAND_TEXT " -- COMAND --"
+# define INSERT_TEXT " -- INSERT --"
 # define CTRL_Q '\x11'           // Quit
 # define CTRL_S '\x13'           // Save
 # define CTRL_C '\x03'           // Copy
@@ -30,12 +40,23 @@
 # define CTRL_W '\x17'           // Select the current word
 # define CTRL_X '\x18'           // Delete a line
 # define BACKSPACE 127           // Delete a char
+# define ESC '\x1B'              // Switch mode
 
 # define MOUSE 'M'
 # define ARROW_UP 'A'
 # define ARROW_DOWN 'B'
 # define ARROW_RIGHT 'C'
 # define ARROW_LEFT 'D'
+
+typedef enum e_action
+{
+	T_SINGLE,
+	T_MULTI,
+	SCROLL,
+	SELECTION,
+	MOVE,
+	OTHER
+}	t_action;
 
 typedef	struct s_line
 {
@@ -95,6 +116,7 @@ typedef	struct s_data
 	char			*stat;
 	char			*cmd;
 	int				nb_line;
+	t_action		act;
 	t_line			*head;
 	t_cursor		*cursor;
 	t_window		*win;
@@ -118,11 +140,12 @@ char	get_char_at(t_editor *e, int xview, int yview);
 int		get_margin(t_editor *e, t_option *option);
 int		len_int(int nb);
 int		get_max_len(t_line *line);
+time_t	get_time_ms(void);
 
 /*---------------------------UPDATE---------------------------*/
-void	update_all(t_editor *e);
+void	update_win(t_editor *e);
 void	update_vars(t_cursor *cursor, t_window *win, t_editor *e);
-void	update_height(t_window *win, int nb_line, t_cursor *cursor);
+void	update_statbar(t_editor *e, char *str);
 void	update_width(t_window *win, t_cursor *cursor, t_editor *e);
 
 /*---------------------------ERROR---------------------------*/
@@ -134,7 +157,6 @@ void	init_editor(t_editor *data, char *file_name);
 void	disable_raw_mode(struct termios *orig_termios);
 void	enable_raw_mode(struct termios *orig_termios);
 void	init_fds(t_editor *e);
-void	init_statbar(t_editor *e);
 void	init_selection(t_editor *e);
 
 /*---------------------------FILE---------------------------*/

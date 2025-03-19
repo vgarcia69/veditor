@@ -8,7 +8,8 @@ int main(int ac, char **av)
 		return (1);
 	init_editor(&data, ft_strdup(av[1]));
 	load_buffer(&data, open_file(data.f_name, &data));
-	update_all(&data);
+	update_win(&data);
+	update_statbar(&data, "CTRL+Q to quit");
 	while (1)
 	{
 		editor_refresh_win(&data);
