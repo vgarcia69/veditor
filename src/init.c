@@ -83,7 +83,7 @@ static void	init_clipboard_cursor(t_clipboard *cpy, t_cursor *cursor)
 static void init_option(t_option *opt)
 {
 	opt->is_len = 1;
-	opt->is_mouse_active = 1;
+	opt->is_mouse = 1;
 	opt->tablen = 8;
-	opt->is_color_active = 1;
+	opt->is_color = 1;
 }

@@ -16,4 +16,5 @@ raccourcis en cmd
 void	command(t_editor *e, char *input)
 {
 	update_statbar(e, "HELLO");
+	e->mode = INSERT;
 }

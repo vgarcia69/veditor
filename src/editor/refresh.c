@@ -14,11 +14,13 @@ void	editor_refresh_win(t_editor *e)
 			quit_free_msg("Alloc", 1, e);
 		buffer = clear_window(e, buffer);
 		buffer = add_buffer_window(e, buffer);
-		buffer = add_buffer_selection(e->sel, e, buffer);
+		if (e->sel->is_active)
+			buffer = add_buffer_selection(e->sel, e, buffer);
 		ft_putstr_fd(buffer, STDOUT_FILENO);
 		free(buffer);
 		draw_bottom(e->win->height, e->stat, e->cmd);
-		draw_cursor(e->cursor);
+		if (!e->sel->is_active)
+			draw_cursor(e->cursor);
 		last_time = elapsed_time;
 	}
 }

@@ -46,14 +46,14 @@ static char	*fill_border(t_editor *e, t_line *line, int i, char *buf)
 	x_viewi = margin - \
 		len_int(i + e->win->start_row) - max_len-e->opt->is_len * 3;
 	x_viewlen = margin - len_int(line->len - 1) - 2;
-	pos += snprintf(buf + pos, 8024, "\033[%d;%dH", i, x_viewi);
-	pos += snprintf(buf + pos, 8024, YELLOW"%d"RESET, i + e->win->start_row);
+	pos += sprintf(buf + pos, "\033[%d;%dH", i, x_viewi);
+	pos += sprintf(buf + pos, YELLOW"%d"RESET, i + e->win->start_row);
 	if (e->opt->is_len)
 	{
-		pos += snprintf(buf + pos, 8024, "\033[%d;%dH", i, x_viewlen);
-		pos += snprintf(buf + pos, 8024, "["BLUE"%d"RESET"]", line->len - 1);
+		pos += sprintf(buf + pos, "\033[%d;%dH", i, x_viewlen);
+		pos += sprintf(buf + pos, "["BLUE"%d"RESET"]", line->len - 1);
 	}
-	pos += snprintf(buf + pos, 8024, "\033[%d;%dH", i, margin + 1);
+	pos += sprintf(buf + pos, "\033[%d;%dH", i, margin + 1);
 	return (buf);
 }
 
@@ -64,8 +64,8 @@ static char	*add_tild(int i, int height, char *buffer)
 	pos = ft_strlen(buffer);
 	while (i < height)
 	{
-	  	pos += snprintf(buffer + pos, 64, "\033[%d;1H", i);
-		pos += snprintf(buffer + pos, 64, BLUE"~"RESET);
+	  	pos += sprintf(buffer + pos, "\033[%d;1H", i);
+		pos += sprintf(buffer + pos, BLUE"~"RESET);
 		i++;
 	}
 	return (buffer);

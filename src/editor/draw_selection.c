@@ -23,7 +23,7 @@ static char	*add_sel_loop \
 	t_line		*line;
 
 	pos = ft_strlen(buffer);
-	snprintf(buffer + pos, 10, INVERT);
+	sprintf(buffer + pos, INVERT);
 	while (!is_same_pos(&start, &end))
 	{
 		line = get_line(e, start.y);
@@ -37,13 +37,13 @@ static char	*add_sel_loop \
 		}
 		else
 		{
-			while (start.xview < end.xview)
+			while (start.xview < end.xview + 1)
 				buffer = add_sel_char(start.xview++, start.yview, e, buffer);
 			break ;
 		}
 	}
 	pos = ft_strlen(buffer);
-	snprintf(buffer + pos, 10, RESET);
+	sprintf(buffer + pos, RESET);
 	return (buffer);
 }
 
@@ -61,14 +61,14 @@ static char	*add_sel_char \
 		tab_width = get_tabwidth(xview, e->win->tabstop);
 		while (tab_width >= 0)
 		{
-			pos += snprintf(buffer + pos, 64, "\033[%d;%dH ", yview, xview++);
+			pos += sprintf(buffer + pos, "\033[%d;%dH ", yview, xview++);
 			--tab_width;
 		}
 	}
 	else
-		pos += snprintf(buffer + pos, 64, "\033[%d;%dH%c", yview, xview, c);
+		pos += sprintf(buffer + pos, "\033[%d;%dH%c", yview, xview, c);
 	if (xview == e->win->margin_left)
-		pos += snprintf(buffer + pos, 64, "\033[%d;%dH ", \
+		pos += sprintf(buffer + pos, "\033[%d;%dH ", \
 						yview, e->win->margin_left + 1);
 	return (buffer);
 }

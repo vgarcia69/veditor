@@ -61,10 +61,9 @@ typedef	struct s_option
 {
 	int	tablen;
 	int	is_len;
-	int	is_mouse_active;
-	int	is_color_active;
+	int	is_mouse;
+	int	is_color;
 }	t_option;
-
 
 typedef struct s_cursor
 {
@@ -198,16 +197,10 @@ void	cpy_node(t_line *line, t_editor *e);
 void	paste_single_node(t_line *line, t_editor *e);
 
 /*---------------------------EDITOR---------------------------*/
-/*REFRESH*/
 void	editor_refresh_win(t_editor *e);
 char	*fill_line_buffer(char *str, char *buffer, t_window *win);
 char	*buffer_line(t_editor *e, t_line *line);
-
-
 char	*clear_window(t_editor *e, char *buffer);
-
-
-/*DRAW*/
 char	*add_buffer_window(t_editor *e, char *buffer);
 void	draw_cursor(t_cursor *c);
 void	draw_bottom(int height, char *stat, char *cmd);
