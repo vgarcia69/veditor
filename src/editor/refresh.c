@@ -38,6 +38,6 @@ void	draw_bottom(int height, char *stat, char *cmd)
 	printf_fd(STDOUT_FILENO, "\033[%d;1H\033[1;7m", height + 1);
 	printf_fd(STDOUT_FILENO, "%s", stat);
 	printf_fd(STDOUT_FILENO, "\033[%d;1H\033[0m", height + 2);
-	printf_fd(STDOUT_FILENO, "\033[%d;1H", height + 3);
+	printf_fd(STDOUT_FILENO, "\033[%d;1H\033[2K", height + 3);
 	printf_fd(STDOUT_FILENO, "%s", cmd);
 }

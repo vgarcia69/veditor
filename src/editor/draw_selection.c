@@ -65,9 +65,9 @@ static char	*add_sel_char \
 			--tab_width;
 		}
 	}
-	else
+	else 
 		pos += sprintf(buffer + pos, "\033[%d;%dH%c", yview, xview, c);
-	if (xview == e->win->margin_left)
+	if (xview <= e->win->margin_left)
 		pos += sprintf(buffer + pos, "\033[%d;%dH ", \
 						yview, e->win->margin_left + 1);
 	return (buffer);

@@ -2,17 +2,19 @@
 
 static void	update_height (t_window *win, int nb_line, t_cursor *cursor);
 
-void	update_statbar(t_editor *e, char *str)
+void	update_statbar(t_editor *e, char *str, int mode)
 {
 	int	f_len;
 	int	str_len;
 
+	if (mode != -1)
+		e->mode = mode;
 	f_len = ft_strlen(e->f_name);
 	str_len = ft_strlen(str);
 	ft_memset(e->stat, ' ', e->win->width);
 	if (e->mode == INSERT)
 		ft_memcpy(e->stat, INSERT_TEXT, 13);
-	else
+	else if (e->mode == COMMAND)
 		ft_memcpy(e->stat, COMMAND_TEXT, 14);
 	if (f_len > 0)
 		ft_memcpy(&e->stat[e->win->width - (f_len + 1)], e->f_name, f_len);

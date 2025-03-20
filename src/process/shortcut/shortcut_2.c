@@ -63,7 +63,7 @@ void	sc_quit(t_editor *e)
 {
 	if (e->dirty)
 	{
-		update_statbar(e, "File unsaved ! Press CTRL + Q again to quit");
+		update_statbar(e, "File unsaved ! Press CTRL + Q again to quit", -1);
 		e->dirty = 0;
 	}
 	else

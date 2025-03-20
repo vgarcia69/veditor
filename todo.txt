@@ -1,0 +1,5 @@
+tab soucis difference affichage quand edit tablen
+
+command a finir.
+
+affichage a refaire / segfaults si spam tabs lié

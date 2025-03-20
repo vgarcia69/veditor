@@ -17,10 +17,10 @@ void	sc_save(t_editor *e)
 	line = e->head;
 	while (line)
 	{
-		printf_fd(fd, "%s", line->str);
+		write(fd, line->str, line->len);
 		line = line->next;
 	}
-	ft_memcpy(&e->stat[e->win->width / 2 - 9], "Successfully saved", 18);
+	update_statbar(e, "Successfully saved", -1);
 	e->dirty = 0;
 	close(fd);
 }

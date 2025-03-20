@@ -9,7 +9,7 @@ int main(int ac, char **av)
 	init_editor(&data, ft_strdup(av[1]));
 	load_buffer(&data, open_file(data.f_name, &data));
 	update_win(&data);
-	update_statbar(&data, "CTRL+Q to quit");
+	update_statbar(&data, "CTRL+Q to quit", INSERT);
 	while (1)
 	{
 		editor_refresh_win(&data);

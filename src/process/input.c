@@ -52,7 +52,7 @@ static void	read_signal(t_editor *e)
 		e->win->height = ws.ws_row - 2;
 		e->win->width = ws.ws_col;
 	}
-	update_statbar(e, NULL);
+	update_statbar(e, NULL, INSERT);
 }
 
 static void	sequence(t_editor *e, unsigned char *input)
@@ -98,6 +98,6 @@ static void	keypress(t_editor *e, char input)
 	else if (ft_isprint(input))
 		insert(e, input);
 	else if (input == ESC)
-		e->mode = COMMAND;
+		update_statbar(e, "Command mode activated", COMMAND);
 	update_win(e);
 }

@@ -1,16 +1,16 @@
 #include "../../editor.h"
 
-int	get_xview_from_x(t_line *line, int cursor_x, t_window *window)
+int	get_xview_from_x(t_line *line, int cursor_x, t_window *win)
 {
 	int xview;
 	int	i;
 
-	xview = window->margin_left;
-	i = window->start_col;
+	xview = win->margin_left;
+	i = win->start_col;
 	while (i < cursor_x && i < line->len - 1)
 	{
 		if (line->str[i] == '\t')
-			xview += get_tabwidth(xview, window->tabstop);	
+			xview += get_tabwidth(xview - win->margin_left, win->tabstop);	
 		else
 			++xview;
 		++i;
@@ -18,22 +18,22 @@ int	get_xview_from_x(t_line *line, int cursor_x, t_window *window)
 	return (xview);
 }
 
-int	get_x_from_xview(t_line *line, int xview, t_window *window)
+int	get_x_from_xview(t_line *line, int xview, t_window *win)
 {
 	int x;
 	int	i_xview;
 
 	x = 0;
-	i_xview = window->margin_left;
+	i_xview = win->margin_left;
 	while (i_xview < xview && x < line->len)
 	{
 		if (line->str[x] == '\t')
-			i_xview += get_tabwidth(i_xview, window->tabstop);	
+			i_xview += get_tabwidth(i_xview - win->margin_left, win->tabstop);	
 		else
 			++i_xview;
 		++x;
 	}
-	return (x + window->start_col);
+	return (x + win->start_col);
 }
 
 int get_tabwidth(int xview, int tabstop)

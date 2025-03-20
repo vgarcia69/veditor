@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   editor.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/20 17:48:16 by v                 #+#    #+#             */
+/*   Updated: 2025/03/20 21:26:29 by v                ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EDITOR_H
 # define EDITOR_H
 
@@ -48,6 +60,17 @@
 # define ARROW_RIGHT 'C'
 # define ARROW_LEFT 'D'
 
+# define SET "set"
+# define TAB_CMD "tablen"
+# define LEN_CMD "length"
+# define MOUSE_CMD "mouse"
+# define COLOR_CMD "color"
+
+# define NOT_FOUND "Error : Command not found"
+# define EMPTY "Error : Empty command"
+# define WRONG_AMONT "Error : Wrong amount of arguments"
+# define WRONG_NUM "Error : Number has to be bitween 2 and 24"
+
 typedef	struct s_line
 {
 	char			*str;
@@ -75,9 +98,9 @@ typedef struct s_cursor
 
 typedef struct	s_selection
 {
-	t_cursor *start;	
-	t_cursor *end;	
-	int is_active;
+	int			is_active;
+	t_cursor	*start;	
+	t_cursor	*end;	
 }	t_selection;
 
 typedef struct s_window
@@ -97,15 +120,23 @@ typedef struct	s_clipboard
 	int 	type;
 }	t_clipboard;
 
+typedef struct s_display
+{
+	char	*content;
+	int		size;
+	int		capacity;
+}	t_display;
+
 typedef	struct s_data
 {
 	int				mode;
 	int				dirty;
+	int				nb_line;
 	char			*f_name;
 	char			*stat;
 	char			*cmd;
-	int				nb_line;
 	t_line			*head;
+	t_display		*buffer;
 	t_cursor		*cursor;
 	t_window		*win;
 	t_option		*opt;
@@ -115,7 +146,7 @@ typedef	struct s_data
 	struct termios	o_ter;
 }	t_editor;
 
-/*---------------------------UTILS---------------------------*/
+/*---------------------------UTILS--------------------------------------------*/
 int		tab_align_pos(int tab_stop, int current_x);
 int 	get_tabwidth(int xview, int tab_stop);
 int		get_xview_from_x(t_line *line, int cursor_xview, t_window *window);
@@ -133,7 +164,7 @@ time_t	get_time_ms(void);
 /*---------------------------UPDATE---------------------------*/
 void	update_win(t_editor *e);
 void	update_vars(t_cursor *cursor, t_window *win, t_editor *e);
-void	update_statbar(t_editor *e, char *str);
+void	update_statbar(t_editor *e, char *str, int mode);
 void	update_width(t_window *win, t_cursor *cursor, t_editor *e);
 
 /*---------------------------ERROR---------------------------*/
@@ -142,13 +173,14 @@ void	quit_error_msg(char *str, int code);
 
 /*---------------------------INIT---------------------------*/
 void	init_editor(t_editor *data, char *file_name);
+void	init_struct_1 \
+		(t_clipboard *cpy, t_cursor *cur, t_option *opt, t_window *win);
+void	init_struct_2(t_editor *e);
+void	init_struct_3(t_editor *e);
+
+int		open_file(char *file, t_editor *vim);
 void	disable_raw_mode(struct termios *orig_termios);
 void	enable_raw_mode(struct termios *orig_termios);
-void	init_fds(t_editor *e);
-void	init_selection(t_editor *e);
-
-/*---------------------------FILE---------------------------*/
-int		open_file(char *file, t_editor *vim);
 
 /*---------------------------BUFFER---------------------------*/
 void		realloc_line(t_editor *data, t_line *line);
@@ -183,6 +215,7 @@ void	sc_save(t_editor *e);
 void	sc_copy(t_editor *e);
 void	sc_paste(t_editor *e);
 void	sc_quit(t_editor *e);
+
 /*SHORTCUT UTILS*/
 void	clear_cpy(t_clipboard *cpy);
 void	cpy_last(t_cursor *end, t_editor *e);
@@ -195,6 +228,12 @@ t_line	*paste_mid(t_line *after, t_editor *e, char *carry);
 void	paste_last(t_line *line, t_editor *e, char *carry);
 void	cpy_node(t_line *line, t_editor *e);
 void	paste_single_node(t_line *line, t_editor *e);
+
+/*COMMAND*/
+char	*tablen_cmd(t_editor *e, char *arg);
+char	*mouse_cmd(t_editor *e, char *arg);
+char	*lenstr_cmd(t_editor *e, char *arg);
+char	*color_cmd(t_editor *e, char *arg);
 
 /*---------------------------EDITOR---------------------------*/
 void	editor_refresh_win(t_editor *e);
