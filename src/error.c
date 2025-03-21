@@ -49,8 +49,6 @@ void	quit_free_msg(char *str, int code, t_editor *e)
 		free(e->cmd);
 	if (e->stat)
 		free(e->stat);
-	if (e->opt)
-		free(e->opt);
 	quit_free_2(e);
 	disable_raw_mode(&e->o_ter);
 	quit_error_msg(str, code);

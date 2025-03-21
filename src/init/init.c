@@ -7,7 +7,7 @@ void	init_editor(t_editor *e, char *file_name)
 {
 	init_vars(e, file_name);
 	init_alloc(e);
-	init_struct_1(e->cpy, e->cursor, e->opt, e->win);
+	init_struct_1(e->cpy, e->cursor, e->win);
 	init_struct_2(e);
 	init_struct_3(e);
 	enable_raw_mode(&e->o_ter);
@@ -33,9 +33,6 @@ static void	init_alloc(t_editor *e)
 	e->cpy = malloc(sizeof(t_clipboard));
 	if (!e->cpy)
 		quit_free_msg("Alloc", 1, e);
-	e->opt = malloc(sizeof(t_clipboard));
-	if (!e->opt)
-		quit_free_msg("Alloc", 1, e);
 	e->buffer = malloc(sizeof(t_display));
 	if (!e->buffer)
 		quit_free_msg("Alloc", 1, e);
@@ -46,6 +43,7 @@ static void	init_vars(t_editor *e, char *file_name)
 	e->f_name = file_name;
 	e->dirty = 0;
 	e->mode = 0;
+	e->len_visu = 0;
 	e->nb_line = 0;
 	e->win = NULL;
 	e->cursor = NULL;

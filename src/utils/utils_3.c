@@ -1,6 +1,6 @@
 #include "../../editor.h"
 
-int	get_margin(t_editor *e, t_option *option)
+int	get_margin(t_editor *e)
 {
 	int		size_len;
 	int		size_nb;
@@ -9,7 +9,7 @@ int	get_margin(t_editor *e, t_option *option)
 	size_len = len_int(get_max_len(e->head) - 1) + 2;
 	if (size_nb == -1 || size_len == -1)
 		quit_free_msg("Alloc", 1, e);
-	if (option->is_len)
+	if (e->len_visu)
 		return (size_nb + size_len + 3);
 	return (size_nb + 2);
 }

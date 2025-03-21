@@ -67,7 +67,7 @@ void	init_struct_2(t_editor *e)
 }
 
 void	init_struct_1 \
-		(t_clipboard *copy, t_cursor *cursor, t_option *option, t_window *window)
+		(t_clipboard *copy, t_cursor *cursor, t_window *window)
 {
 	struct winsize ws;
 
@@ -89,8 +89,4 @@ void	init_struct_1 \
 	cursor->y = 0;
 	cursor->xview = 0;
 	cursor->yview = 0;
-	option->tablen = 8;
-	option->is_len = 1;
-	option->is_mouse = 1;
-	option->is_color = 1;
 }

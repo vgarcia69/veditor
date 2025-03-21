@@ -37,7 +37,7 @@ static char	*add_sel_loop \
 		}
 		else
 		{
-			while (start.xview < end.xview + 1)
+			while (start.xview <= end.xview)
 				buffer = add_sel_char(start.xview++, start.yview, e, buffer);
 			break ;
 		}

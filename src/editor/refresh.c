@@ -19,7 +19,7 @@ void	editor_refresh_win(t_editor *e)
 		ft_putstr_fd(buffer, STDOUT_FILENO);
 		free(buffer);
 		draw_bottom(e->win->height, e->stat, e->cmd);
-		if (!e->sel->is_active)
+		if (!e->sel->is_active && e->mode == INSERT)
 			draw_cursor(e->cursor);
 		last_time = elapsed_time;
 	}

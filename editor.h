@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   editor.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: v <v@student.42.fr>                        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/20 17:48:16 by v                 #+#    #+#             */
-/*   Updated: 2025/03/20 21:26:29 by v                ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef EDITOR_H
 # define EDITOR_H
 
@@ -61,15 +49,17 @@
 # define ARROW_LEFT 'D'
 
 # define SET "set"
-# define TAB_CMD "tablen"
+# define TAB_CMD "tabstop"
 # define LEN_CMD "length"
 # define MOUSE_CMD "mouse"
 # define COLOR_CMD "color"
+# define NAME_CMD "name"
 
 # define NOT_FOUND "Error : Command not found"
 # define EMPTY "Error : Empty command"
 # define WRONG_AMONT "Error : Wrong amount of arguments"
 # define WRONG_NUM "Error : Number has to be bitween 2 and 24"
+# define TOO_MANY "Error : Too many chars in Command"
 
 typedef	struct s_line
 {
@@ -79,14 +69,6 @@ typedef	struct s_line
 	struct s_line	*next;
 	struct s_line	*prev;
 }	t_line;
-
-typedef	struct s_option 
-{
-	int	tablen;
-	int	is_len;
-	int	is_mouse;
-	int	is_color;
-}	t_option;
 
 typedef struct s_cursor
 {
@@ -132,6 +114,7 @@ typedef	struct s_data
 	int				mode;
 	int				dirty;
 	int				nb_line;
+	int				len_visu;
 	char			*f_name;
 	char			*stat;
 	char			*cmd;
@@ -139,7 +122,6 @@ typedef	struct s_data
 	t_display		*buffer;
 	t_cursor		*cursor;
 	t_window		*win;
-	t_option		*opt;
 	t_clipboard		*cpy;
 	t_selection		*sel;
 	struct pollfd	fd[2];
@@ -156,7 +138,7 @@ void	cp_cursor(t_cursor *dst, t_cursor *src);
 int		is_ordered(t_cursor *first, t_cursor *last);
 t_line	*get_line(t_editor *e, int index);
 char	get_char_at(t_editor *e, int xview, int yview);
-int		get_margin(t_editor *e, t_option *option);
+int		get_margin(t_editor *e);
 int		len_int(int nb);
 int		get_max_len(t_line *line);
 time_t	get_time_ms(void);
@@ -174,7 +156,7 @@ void	quit_error_msg(char *str, int code);
 /*---------------------------INIT---------------------------*/
 void	init_editor(t_editor *data, char *file_name);
 void	init_struct_1 \
-		(t_clipboard *cpy, t_cursor *cur, t_option *opt, t_window *win);
+		(t_clipboard *cpy, t_cursor *cur, t_window *win);
 void	init_struct_2(t_editor *e);
 void	init_struct_3(t_editor *e);
 
@@ -231,9 +213,9 @@ void	paste_single_node(t_line *line, t_editor *e);
 
 /*COMMAND*/
 char	*tablen_cmd(t_editor *e, char *arg);
-char	*mouse_cmd(t_editor *e, char *arg);
+char	*mouse_cmd(char *arg);
 char	*lenstr_cmd(t_editor *e, char *arg);
-char	*color_cmd(t_editor *e, char *arg);
+char	*name_cmd(t_editor *e, char *arg);
 
 /*---------------------------EDITOR---------------------------*/
 void	editor_refresh_win(t_editor *e);

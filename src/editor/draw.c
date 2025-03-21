@@ -38,17 +38,17 @@ static char	*fill_border(t_editor *e, t_line *line, int i, char *buf)
 
 	pos = ft_strlen(buf);
 	max_len = 0;
-	if (e->opt->is_len)
+	if (e->len_visu)
 		max_len = len_int(get_max_len(e->head) - 1);
 	if (max_len == -1)
 		quit_free_msg("Alloc", 1, e);
-	margin = get_margin(e, e->opt);
+	margin = get_margin(e);
 	x_viewi = margin - \
-		len_int(i + e->win->start_row) - max_len-e->opt->is_len * 3;
+		len_int(i + e->win->start_row) - max_len-e->len_visu * 3;
 	x_viewlen = margin - len_int(line->len - 1) - 2;
 	pos += sprintf(buf + pos, "\033[%d;%dH", i, x_viewi);
 	pos += sprintf(buf + pos, YELLOW"%d"RESET, i + e->win->start_row);
-	if (e->opt->is_len)
+	if (e->len_visu)
 	{
 		pos += sprintf(buf + pos, "\033[%d;%dH", i, x_viewlen);
 		pos += sprintf(buf + pos, "["BLUE"%d"RESET"]", line->len - 1);

@@ -1,18 +1,6 @@
 
 #include "../../editor.h"
 
-/*
-buffer command quand \n send et empty it
-*/
-
-/*
-raccourcis en cmd
-
-/name file
-/tp
-/doc
-/tabstop
-*/
 static void	delete_cmd(t_editor *e, char *cmd);
 static void	insert_cmd(t_editor *e, char *cmd, char c);
 static void	send_command(t_editor *e, char *cmd);
@@ -24,14 +12,17 @@ void	command(t_editor *e, char *input)
 	else if (input[0] == '\r' || input[0] == '\n')
 	{
 		send_command(e, e->cmd);
-		e->cmd[0] = '\0';
+		ft_bzero(e->cmd, 255);
 	}
-	else if (ft_isualnum(input[0]) || input[0] == ' ')
-		insert_cmd(e, e->cmd, input[0]);
 	else if (input[0] == BACKSPACE)
 		delete_cmd(e, e->cmd);
 	else if (input[0] == ESC)
+	{
 		update_statbar(e, "Insert mode activated", INSERT);
+		ft_bzero(e->cmd, 255);
+	}
+	else if (ft_isprint(input[0]))
+		insert_cmd(e, e->cmd, input[0]);
 	else if (input[0] == CTRL_Q)
 		sc_quit(e);
 }
@@ -44,7 +35,7 @@ static void	delete_cmd(t_editor *e, char *cmd)
 	if (!len_cmd)
 		update_statbar(e, "No chars to delete", -1);
 	else
-		cmd[len_cmd - 1] = '\0';
+		ft_bzero(&cmd[len_cmd - 1], 256 - len_cmd - 1);
 }
 
 static void	insert_cmd(t_editor *e, char *cmd, char c)
@@ -53,7 +44,7 @@ static void	insert_cmd(t_editor *e, char *cmd, char c)
 
 	len_cmd = ft_strlen(cmd);
 	if (len_cmd >= 255)
-		update_statbar(e, "Error : Too many chars in Command", -1);
+		update_statbar(e, TOO_MANY, -1);
 	else
 	{
 		cmd[len_cmd] = c;
@@ -79,13 +70,13 @@ static void	send_command(t_editor *e, char *cmd)
 	if (ft_strcmp(cmd_args[0], SET))
 		return (update_statbar(e, NOT_FOUND, -1));
 	if (!ft_strcmp(cmd_args[1], TAB_CMD))
-		update_statbar(e, tablen_cmd(e, cmd_args[2]), INSERT);
+		update_statbar(e, tablen_cmd(e, cmd_args[2]), -1);
 	else if (!ft_strcmp(cmd_args[1], MOUSE_CMD))
-		update_statbar(e, mouse_cmd(e, cmd_args[2]), INSERT);
+		update_statbar(e, mouse_cmd(cmd_args[2]), -1);
 	else if (!ft_strcmp(cmd_args[1], LEN_CMD))
-		update_statbar(e, lenstr_cmd(e, cmd_args[2]), INSERT);
-	else if (!ft_strcmp(cmd_args[1], COLOR_CMD))
-		update_statbar(e, color_cmd(e, cmd_args[2]), INSERT);
+		update_statbar(e, lenstr_cmd(e, cmd_args[2]), -1);
+	else if (!ft_strcmp(cmd_args[1], NAME_CMD))
+		update_statbar(e, name_cmd(e, cmd_args[2]), -1);
 	else
 		update_statbar(e, NOT_FOUND, -1);
 }
