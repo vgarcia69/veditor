@@ -18,7 +18,6 @@
 # define BLUE	"\033[36m"
 # define RESET	"\033[0m"
 # define INVERT	"\033[7m"
-// # define BLUE	"\033[36m"
 
 # define INSERT 0                // Write in file
 # define COMMAND 1               // Write a command
