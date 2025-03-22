@@ -1,14 +1,14 @@
-==481473== Memcheck, a memory error detector
-==481473== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==481473== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==481473== Command: ./editor Makefile
-==481473== 
-==481473== 
-==481473== HEAP SUMMARY:
-==481473==     in use at exit: 0 bytes in 0 blocks
-==481473==   total heap usage: 3,090 allocs, 3,090 frees, 41,698 bytes allocated
-==481473== 
-==481473== All heap blocks were freed -- no leaks are possible
-==481473== 
-==481473== For lists of detected and suppressed errors, rerun with: -s
-==481473== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==14372== Memcheck, a memory error detector
+==14372== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==14372== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==14372== Command: ./editor Makefile
+==14372== 
+==14372== 
+==14372== HEAP SUMMARY:
+==14372==     in use at exit: 0 bytes in 0 blocks
+==14372==   total heap usage: 2,214 allocs, 2,214 frees, 38,553 bytes allocated
+==14372== 
+==14372== All heap blocks were freed -- no leaks are possible
+==14372== 
+==14372== For lists of detected and suppressed errors, rerun with: -s
+==14372== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

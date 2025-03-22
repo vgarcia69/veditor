@@ -14,19 +14,19 @@ void	fill_window(t_display *buffer, t_editor *e)
 	index = 0;
 	view = e->win;
 	row = get_line(e, view->start_row);
-	append_string(buffer, e, "\033[1;1H\033[2J\033[25J");	
+	append_string(buffer, e, "\033[1;1H\033[2J");	
 	while (row && index < view->height)
 	{
-		fill_index(view, index, buffer, e);
+		fill_index(view, index + 1, buffer, e);
 		if (e->len_visu)
 			fill_strlen(row->len - 1, buffer, e);
 		fill_text(index + view->start_row, row->str, buffer, e);
-		append_string(buffer, e, "\033[%d;1H", index + 1);
-		row = row->next;
 		++index;
+		row = row->next;
+		append_string(buffer, e, "\033[%d;1H", index + 1);
 	}
 	while (index < view->height)
-		append_string(buffer, e, BLUE"\033[%d;1H~"RESET, index++);
+		append_string(buffer, e, BLUE"\033[%d;1H~"RESET, ++index);
 }
 
 static void	fill_index(t_window *view, int index, t_display *buf, t_editor *e)
