@@ -14,7 +14,7 @@ void	fill_window(t_display *buffer, t_editor *e)
 	index = 0;
 	view = e->win;
 	row = get_line(e, view->start_row);
-	append_string(buffer, e, "\033[1;1H\033[2J");	
+	append_string(buffer, e, "\033[1;1H\033[2J\033[25J");	
 	while (row && index < view->height)
 	{
 		fill_index(view, index, buffer, e);
@@ -36,7 +36,7 @@ static void	fill_index(t_window *view, int index, t_display *buf, t_editor *e)
 	int	max_index;
 
 	nb_index = index + view->start_row;
-	max_index = index + view->start_row + view->height;
+	max_index = view->start_row + view->height;
 	x_index = len_int(max_index) - len_int(nb_index);
 	while (x_index--)
 		append_string(buf, e, " ");
@@ -75,12 +75,11 @@ static void	fill_text(int y, char *str, t_display *buf, t_editor *e)
 			tab = get_tabwidth(view_x, view->tabstop);
 			while (tab-- && view_x++ < view->width)
 				append_string(buf, e, " ");
+			++x;
+			continue ;
 		}
-		else
-		{
-			append_string(buf, e, "%c", str[x]);
-			++view_x;
-		}
+		append_string(buf, e, "%c", str[x]);
+		++view_x;
 		++x;
 	}
 }

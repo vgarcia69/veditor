@@ -232,6 +232,7 @@ void	editor_refresh_win(t_editor *e);
 
 
 void	fill_window(t_display *buffer, t_editor *e);
+void	fill_cursor(t_display *buffer, t_editor *e);
 int		wait_fps(void);
 void	append_string(t_display *buffer, t_editor *e, char *string, ...);
 #endif
