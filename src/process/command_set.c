@@ -43,11 +43,13 @@ char	*lenstr_cmd(t_editor *e, char *arg)
 	if (request == 0)
 	{
 		e->len_visu = 0;
+		e->win->margin_left = get_margin(e);
 		comment = "String Length Visualizer Disabled";
 	}
 	else if (request == 1)
 	{
 		e->len_visu = 1;
+		e->win->margin_left = get_margin(e);
 		comment = "String Length Visualizer Enabled";
 	}
 	else

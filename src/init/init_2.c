@@ -30,7 +30,7 @@ void	init_struct_3(t_editor *e)
 	buffer = e->buffer;
 	buffer->capacity = 1;
 	buffer->size = 0;
-	buffer->content = malloc(sizeof(char) * 1);
+	buffer->content = malloc(sizeof(char) * 50);
 	if (!buffer->content)
 		quit_free_msg("Alloc", 1, e);
 	buffer->content[0] = 0;

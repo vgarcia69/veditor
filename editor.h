@@ -13,6 +13,7 @@
 #include <signal.h>
 #include <poll.h>
 #include <sys/signalfd.h>
+# include <stdarg.h>
 
 # define YELLOW	"\033[33m"
 # define BLUE	"\033[36m"
@@ -140,7 +141,6 @@ char	get_char_at(t_editor *e, int xview, int yview);
 int		get_margin(t_editor *e);
 int		len_int(int nb);
 int		get_max_len(t_line *line);
-time_t	get_time_ms(void);
 
 /*---------------------------UPDATE---------------------------*/
 void	update_win(t_editor *e);
@@ -217,13 +217,21 @@ char	*lenstr_cmd(t_editor *e, char *arg);
 char	*name_cmd(t_editor *e, char *arg);
 
 /*---------------------------EDITOR---------------------------*/
-void	editor_refresh_win(t_editor *e);
-char	*fill_line_buffer(char *str, char *buffer, t_window *win);
-char	*buffer_line(t_editor *e, t_line *line);
-char	*clear_window(t_editor *e, char *buffer);
-char	*add_buffer_window(t_editor *e, char *buffer);
-void	draw_cursor(t_cursor *c);
-void	draw_bottom(int height, char *stat, char *cmd);
-char	*add_buffer_selection(t_selection *sel, t_editor *e, char *buffer);
+// void	editor_refresh_win(t_editor *e);
+// char	*fill_line_buffer(char *str, char *buffer, t_window *win);
+// char	*buffer_line(t_editor *e, t_line *line);
+// char	*clear_window(t_editor *e, char *buffer);
+// char	*add_buffer_window(t_editor *e, char *buffer);
+// void	draw_cursor(t_cursor *c);
+// void	draw_bottom(int height, char *stat, char *cmd);
+// char	*add_buffer_selection(t_selection *sel, t_editor *e, char *buffer);
 
+
+/*---------------------------EDITOR---------------------------*/
+void	editor_refresh_win(t_editor *e);
+
+
+void	fill_window(t_display *buffer, t_editor *e);
+int		wait_fps(void);
+void	append_string(t_display *buffer, t_editor *e, char *string, ...);
 #endif

@@ -1,7 +1,7 @@
-EDITORFILES=refresh.c draw.c draw_selection.c
+EDITORFILES=refresh.c fill_window.c fill_others.c editor_utils.c
 PROCESSFILES=input.c arrow.c insert.c delete.c mouse.c command.c delete_selection.c command_set.c
 SHORTCUTFILES=shortcut.c shortcut_2.c
-UTILSFILES=utils_2.c buffer_utils.c utils.c utils_3.c paste.c multi_copy.c single_copy.c editor_utils.c
+UTILSFILES=utils_2.c buffer_utils.c utils.c utils_3.c paste.c multi_copy.c single_copy.c
 SRCFILES=main.c error.c buffer.c update.c
 INITFILES=init.c init_2.c
 
