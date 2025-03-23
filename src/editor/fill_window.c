@@ -62,9 +62,9 @@ static void	fill_text(int y, char *str, t_display *buf, t_editor *e)
 	int			view_x;
 
 	on_off = 0;
-	view_x = e->win->margin_left;
+	view_x = 0;
 	x = ft_min(e->win->start_col, ft_strlen(str));
-	while (str[x] && view_x < e->win->width)
+	while (str[x] && view_x + e->win->margin_left < e->win->width)
 	{
 		update_hl(&on_off, (int[]){x, y}, buf, e);
 		if (str[x] == '\t')

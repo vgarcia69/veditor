@@ -64,20 +64,17 @@ static void	sequence(t_editor *e, unsigned char *input)
 			mouse(e, &input[2]);
 			update_vars(e->cursor, e->win, e);
 			update_width(e->win, e->cursor, e);	
-			printf_fd(3, "mouse x[%d]xv[%d]y[%d]yv[%d]\n\n", e->cursor->x, e->cursor->xview, e->cursor->y, e->cursor->yview);
 		}
 		else if (input[1] >= ARROW_UP && input[1] <= ARROW_LEFT)
 		{
 			arrow(e, input[1]);
 			update_win(e);
-			printf_fd(3, "move x[%d]xv[%d]y[%d]yv[%d]\n\n", e->cursor->x, e->cursor->xview, e->cursor->y, e->cursor->yview);
 		}
 	}
 }
 
 static void	keypress(t_editor *e, char input)
 {
-	printf_fd(3, "input x[%d]xv[%d]y[%d]yv[%d]\n\n", e->cursor->x, e->cursor->xview, e->cursor->y, e->cursor->yview);
 	if (input == CTRL_S) 
 		sc_save(e);
 	else if (input == CTRL_Q)
@@ -102,6 +99,5 @@ static void	keypress(t_editor *e, char input)
 		insert(e, input);
 	else if (input == ESC)
 		update_statbar(e, "Command mode activated", COMMAND);
-	printf_fd(3, "input startcol[%d]x[%d]xv[%d]y[%d]yv[%d]\n\n",e->win->start_col,  e->cursor->x, e->cursor->xview, e->cursor->y, e->cursor->yview);
 	update_win(e);
 }

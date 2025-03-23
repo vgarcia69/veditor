@@ -59,7 +59,7 @@
 # define NOT_FOUND "Error : Command not found"
 # define EMPTY "Error : Empty command"
 # define WRONG_AMONT "Error : Wrong amount of arguments"
-# define WRONG_NUM "Error : Number has to be bitween 2 and 24"
+# define WRONG_NUM "Error : Number has to be either 2, 4 or 8"
 # define TOO_MANY "Error : Too many chars in Command"
 
 typedef	struct s_line
@@ -212,20 +212,10 @@ void	cpy_node(t_line *line, t_editor *e);
 void	paste_single_node(t_line *line, t_editor *e);
 
 /*COMMAND*/
-char	*tablen_cmd(t_editor *e, char *arg);
+char	*tabstop_cmd(t_editor *e, char *arg);
 char	*mouse_cmd(char *arg);
 char	*lenstr_cmd(t_editor *e, char *arg);
-char	*name_cmd(t_editor *e, char *arg);
-
-/*---------------------------EDITOR---------------------------*/
-// void	editor_refresh_win(t_editor *e);
-// char	*fill_line_buffer(char *str, char *buffer, t_window *win);
-// char	*buffer_line(t_editor *e, t_line *line);
-// char	*clear_window(t_editor *e, char *buffer);
-// char	*add_buffer_window(t_editor *e, char *buffer);
-// void	draw_cursor(t_cursor *c);
-// void	draw_bottom(int height, char *stat, char *cmd);
-// char	*add_buffer_selection(t_selection *sel, t_editor *e, char *buffer);
+char	*name_cmd(t_editor *e, char *arg, char **secure);
 
 
 /*---------------------------EDITOR---------------------------*/

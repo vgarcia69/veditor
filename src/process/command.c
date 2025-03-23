@@ -55,6 +55,7 @@ static void	insert_cmd(t_editor *e, char *cmd, char c)
 static void	send_command(t_editor *e, char *cmd)
 {
 	char	**cmd_args;
+	char	*comment;
 	int		i;
 
 	i = 0;
@@ -65,18 +66,17 @@ static void	send_command(t_editor *e, char *cmd)
 		quit_free_msg("Alloc", 1, e);
 	while (cmd_args[i])
 		i++;
-	if (i != 3)
-		return (update_statbar(e, WRONG_AMONT, -1));
-	if (ft_strcmp(cmd_args[0], SET))
-		return (update_statbar(e, NOT_FOUND, -1));
-	if (!ft_strcmp(cmd_args[1], TAB_CMD))
-		update_statbar(e, tablen_cmd(e, cmd_args[2]), -1);
+	comment = NOT_FOUND;
+	if (i != 3 || ft_strcmp(cmd_args[0], SET))
+		(void)0;
+	else if (!ft_strcmp(cmd_args[1], TAB_CMD))
+		comment = tabstop_cmd(e, cmd_args[2]);
 	else if (!ft_strcmp(cmd_args[1], MOUSE_CMD))
-		update_statbar(e, mouse_cmd(cmd_args[2]), -1);
+		comment = mouse_cmd(cmd_args[2]);
 	else if (!ft_strcmp(cmd_args[1], LEN_CMD))
-		update_statbar(e, lenstr_cmd(e, cmd_args[2]), -1);
+		comment = lenstr_cmd(e, cmd_args[2]);
 	else if (!ft_strcmp(cmd_args[1], NAME_CMD))
-		update_statbar(e, name_cmd(e, cmd_args[2]), -1);
-	else
-		update_statbar(e, NOT_FOUND, -1);
+		comment = name_cmd(e, cmd_args[2], cmd_args);
+	free_tab(cmd_args);
+	update_statbar(e, comment, -1);
 }

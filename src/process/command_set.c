@@ -1,13 +1,14 @@
 #include "../../editor.h"
 
-char	*tablen_cmd(t_editor *e, char *arg)
+char	*tabstop_cmd(t_editor *e, char *arg)
 {
 	int	request;
 
 	request = ft_atoi(arg);
-	if (request >= 2 && request <= 24)
+	if (!(request % 2) && request <= 8 && request)
 	{
 		e->win->tabstop = request;
+		update_win(e);
 		return ("Tab length updated !");
 	}
 	return (WRONG_NUM);
@@ -57,7 +58,7 @@ char	*lenstr_cmd(t_editor *e, char *arg)
 	return (comment);
 }
 
-char	*name_cmd(t_editor *e, char *arg)
+char	*name_cmd(t_editor *e, char *arg, char **secure)
 {
 	char	*comment;
 	int		fd;
@@ -72,7 +73,10 @@ char	*name_cmd(t_editor *e, char *arg)
 		close(fd);
 		e->f_name = ft_strdup(arg);
 		if (e->f_name == NULL)
+		{
+			free_tab(secure);
 			quit_free_msg("Alloc", 1, e);
+		}
 		comment = "File successfully created";
 	}
 	return (comment);

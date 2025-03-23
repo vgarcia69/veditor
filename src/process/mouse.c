@@ -15,7 +15,6 @@ void	mouse(t_editor *e, unsigned char input[3])
 		set_cursor(input_pos, input + 1, e);
 		cp_cursor(e->sel->start, input_pos);
 		cp_cursor(e->sel->end, input_pos);
-		printf_fd(3, "mouse click view x[%d]xv[%d]y[%d]yv[%d]\n", input_pos->x, input_pos->xview, input_pos->y, input_pos->yview);
 	}
 	else if (input[0] == 64)
 	{
