@@ -11,17 +11,17 @@ void	update_statbar(t_editor *e, char *str, int mode)
 		e->mode = mode;
 	f_len = ft_strlen(e->f_name);
 	str_len = ft_strlen(str);
-	ft_memset(e->stat, ' ', 256);
+	ft_memset(e->stat, ' ', 255);
 	if (e->mode == INSERT)
 		ft_memcpy(e->stat, INSERT_TEXT, 13);
 	else if (e->mode == COMMAND)
 		ft_memcpy(e->stat, COMMAND_TEXT, 14);
 	if (f_len > 0)
-		ft_memcpy(&e->stat[ft_min(e->win->width, 256) - (f_len + 1)], e->f_name, f_len);
+		ft_memcpy(&e->stat[ft_min(e->win->width, 255) - (f_len + 1)], e->f_name, f_len);
 	else
-		ft_memcpy(&e->stat[ft_min(e->win->width, 256) - 6], "[NEW]", 5);
+		ft_memcpy(&e->stat[ft_min(e->win->width, 255) - 6], "[NEW]", 5);
 	if (str)
-		ft_memcpy(&e->stat[ft_min(e->win->width, 256) / 2 - str_len / 2], str, str_len);
+		ft_memcpy(&e->stat[ft_min(e->win->width, 255) / 2 - str_len / 2], str, str_len);
 }
 
 void update_win(t_editor *e)
@@ -82,6 +82,7 @@ void	update_width(t_window *win, t_cursor *cursor, t_editor *e)
 		win->start_col = 0;
 }
 
+
 void	update_vars(t_cursor *cursor, t_window *win, t_editor *e)
 {
 	t_line	*line;
@@ -89,5 +90,5 @@ void	update_vars(t_cursor *cursor, t_window *win, t_editor *e)
 	line = get_line(e, e->cursor->y);
 	e->win->margin_left = get_margin(e);
 	cursor->xview = get_xview_from_x(line, cursor->x, win);
-	cursor->yview = cursor->y - win->start_row;
+	cursor->yview = cursor->y - win->start_row + 1;
 }

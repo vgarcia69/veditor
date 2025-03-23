@@ -15,6 +15,7 @@ void	mouse(t_editor *e, unsigned char input[3])
 		set_cursor(input_pos, input + 1, e);
 		cp_cursor(e->sel->start, input_pos);
 		cp_cursor(e->sel->end, input_pos);
+		printf_fd(3, "mouse click view x[%d]xv[%d]y[%d]yv[%d]\n", input_pos->x, input_pos->xview, input_pos->y, input_pos->yview);
 	}
 	else if (input[0] == 64)
 	{
@@ -31,26 +32,22 @@ void	mouse(t_editor *e, unsigned char input[3])
 
 static void	set_cursor(t_cursor *ip, unsigned char *i, t_editor *e)
 {
-	t_line	*line;
-	int		offset;
+	t_line		*line;
+	t_window	*view;
+	int			offset;
+	int			max_y;
+	int			max_x;
 
 	offset = 32;
-	ip->xview = i[0] - offset;
-	ip->yview = i[1] - offset;
-	if (ip->yview > e->nb_line || ip->yview <= 0 \
-		|| ip->yview > e->win->height)
-		ip->yview = ft_min(e->win->height, e->nb_line);
-	ip->y = ip->yview + e->win->start_row - 1;
+	view = e->win;
+	max_y = ft_min(e->nb_line - view->start_row, view->height);
+	ip->yview = ft_min(i[1] - offset, max_y);
+	ip->y = ip->yview + view->start_row - 1;
 	line = get_line(e, ip->y);
-	if (line->len <= 1)
-		ip->xview = 1;
-	else if (ip->xview <= 0 \
-		|| get_xview_from_x(line, line->len, e->win) < ip->xview)
-		ip->xview = get_xview_from_x(line, line->len, e->win) + 1;
-	ip->x = get_x_from_xview(line, ip->xview, e->win) - 1;
-	if (ip->x < 0)
-		ip->x = 0;
+	max_x = get_xview_from_x(line, line->len, view);
+	ip->xview = ft_min(i[0] - offset, max_x);
+	ip->x = get_x_from_xview(line, ip->xview, view);
 	if (line->str[ip->x] == '\t')
-		ip->xview -= get_tabwidth(ip->xview, e->win->tabstop);
+		ip->xview -= get_tabwidth(ip->xview, view->tabstop);
 	cp_cursor(e->cursor, ip);
 }

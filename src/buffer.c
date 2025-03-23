@@ -30,7 +30,7 @@ void	realloc_line(t_editor *data, t_line *line)
 {
 	char	*new_string;
 
-	new_string = ft_calloc(sizeof(char), line->capacity * 2);
+	new_string = ft_calloc(sizeof(char), line->capacity * 2 + 1);
 	if (!new_string)
 		quit_free_msg("Alloc", 1, data);
 	line->capacity *= 2;

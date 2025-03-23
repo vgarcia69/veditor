@@ -19,6 +19,7 @@
 # define BLUE	"\033[36m"
 # define RESET	"\033[0m"
 # define INVERT	"\033[7m"
+# define BOLD "\033[1m"
 
 # define INSERT 0                // Write in file
 # define COMMAND 1               // Write a command
@@ -233,6 +234,8 @@ void	editor_refresh_win(t_editor *e);
 
 void	fill_window(t_display *buffer, t_editor *e);
 void	fill_cursor(t_display *buffer, t_editor *e);
+void	fill_bottom(t_display *buffer, t_editor *e);
+void	update_hl(int *on_off, int coords[2], t_display *buffer, t_editor *e);
 int		wait_fps(void);
 void	append_string(t_display *buffer, t_editor *e, char *string, ...);
 #endif

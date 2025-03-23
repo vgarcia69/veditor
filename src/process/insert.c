@@ -16,7 +16,7 @@ void	insert(t_editor *e, char c)
 		return ;
 	}
 	to_cat[0] = c;
-	to_cat[1] = 0;
+	to_cat[1] = '\0';
 	while (!check_capacity(line, to_cat))
 		realloc_line(e, line);
 	cur_x = get_x_from_xview(line, e->cursor->xview, e->win);

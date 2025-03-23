@@ -3,7 +3,6 @@
 static void	fill_index(t_window *view, int index, t_display *buf, t_editor *e);
 static void	fill_strlen(int nbr, t_display *buf, t_editor *e);
 static void	fill_text(int y, char *str, t_display *buf, t_editor *e);
-static void	update_hl(int *on_off, int coords[2], t_display *buf, t_editor *e);
 
 void	fill_window(t_display *buffer, t_editor *e)
 {
@@ -61,50 +60,25 @@ static void	fill_text(int y, char *str, t_display *buf, t_editor *e)
 	int			tab;
 	int			on_off;
 	int			view_x;
-	t_window	*view;
 
 	on_off = 0;
-	view = e->win;
-	view_x = view->margin_left + view->start_col;
-	x = view->start_col;
-	while (str[x] && view_x < view->width)
+	view_x = e->win->margin_left;
+	x = ft_min(e->win->start_col, ft_strlen(str));
+	while (str[x] && view_x < e->win->width)
 	{
 		update_hl(&on_off, (int[]){x, y}, buf, e);
 		if (str[x] == '\t')
 		{
-			tab = get_tabwidth(view_x, view->tabstop);
-			while (tab-- && view_x++ < view->width)
+			tab = get_tabwidth(view_x, e->win->tabstop);
+			while (tab-- && ++view_x-1 < e->win->width)
 				append_string(buf, e, " ");
-			++x;
-			continue ;
 		}
-		append_string(buf, e, "%c", str[x]);
-		++view_x;
+		else
+		{
+			append_string(buf, e, "%c", str[x]);
+			++view_x;
+		}
 		++x;
 	}
-}
-
-static void	update_hl(int *on_off, int coords[2], t_display *buf, t_editor *e)
-{
-	t_cursor	*start;
-	t_cursor	*end;
-
-	if (!e->sel->is_active)
-		return ;
-	start = e->sel->start;
-	end = e->sel->end;
-	if (coords[1] >= start->y && coords[1] <= end->y
-		&& coords[0] >= start->x && coords[0] <= end->x)
-	{
-		if (*on_off == 0)
-		{
-			append_string(buf, e, INVERT);
-			*on_off = 1;
-		}
-	}
-	else if (*on_off == 1)
-	{
-		append_string(buf, e, RESET);	
-		*on_off = 0;
-	}
+	append_string(buf, e, RESET);
 }

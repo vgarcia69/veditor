@@ -1,0 +1,309 @@
+mouse click view x[0]xv[4]y[0]yv[1]
+mouse x[0]xv[4]y[0]yv[1]
+
+mouse x[0]xv[4]y[1]yv[2]
+
+mouse x[0]xv[4]y[1]yv[2]
+
+mouse x[1]xv[5]y[2]yv[3]
+
+mouse x[2]xv[6]y[2]yv[3]
+
+mouse x[1]xv[5]y[3]yv[4]
+
+mouse x[1]xv[8]y[4]yv[5]
+
+mouse x[1]xv[8]y[5]yv[6]
+
+mouse x[1]xv[8]y[5]yv[6]
+
+mouse x[1]xv[8]y[6]yv[7]
+
+mouse x[2]xv[16]y[6]yv[7]
+
+mouse x[5]xv[12]y[10]yv[11]
+
+mouse x[1]xv[5]y[11]yv[12]
+
+mouse x[0]xv[4]y[12]yv[13]
+
+mouse x[0]xv[4]y[12]yv[13]
+
+mouse x[11]xv[15]y[13]yv[14]
+
+mouse x[1]xv[5]y[14]yv[15]
+
+mouse x[10]xv[17]y[15]yv[16]
+
+mouse x[2]xv[9]y[16]yv[17]
+
+mouse x[5]xv[19]y[17]yv[18]
+
+mouse x[3]xv[24]y[18]yv[19]
+
+mouse x[8]xv[22]y[19]yv[20]
+
+mouse x[3]xv[24]y[20]yv[21]
+
+mouse x[3]xv[24]y[20]yv[21]
+
+mouse x[10]xv[24]y[21]yv[22]
+
+mouse x[2]xv[9]y[22]yv[23]
+
+mouse x[2]xv[9]y[22]yv[23]
+
+mouse x[12]xv[19]y[23]yv[24]
+
+mouse x[12]xv[19]y[23]yv[24]
+
+mouse x[2]xv[9]y[24]yv[25]
+
+mouse x[2]xv[9]y[24]yv[25]
+
+mouse x[14]xv[28]y[25]yv[26]
+
+mouse x[8]xv[29]y[26]yv[27]
+
+mouse x[9]xv[30]y[26]yv[27]
+
+mouse x[15]xv[29]y[27]yv[28]
+
+mouse x[15]xv[29]y[27]yv[28]
+
+mouse x[2]xv[9]y[28]yv[29]
+
+mouse x[15]xv[22]y[29]yv[30]
+
+mouse x[15]xv[22]y[29]yv[30]
+
+mouse x[2]xv[9]y[30]yv[31]
+
+mouse x[2]xv[9]y[30]yv[31]
+
+mouse x[21]xv[35]y[31]yv[32]
+
+mouse x[2]xv[9]y[34]yv[35]
+
+mouse x[1]xv[5]y[35]yv[36]
+
+mouse x[1]xv[5]y[35]yv[36]
+
+mouse x[0]xv[4]y[36]yv[37]
+
+mouse x[33]xv[44]y[37]yv[38]
+
+mouse x[34]xv[45]y[37]yv[38]
+
+mouse x[1]xv[5]y[38]yv[39]
+
+mouse x[1]xv[5]y[38]yv[39]
+
+mouse x[15]xv[22]y[39]yv[40]
+
+mouse x[15]xv[22]y[39]yv[40]
+
+mouse x[15]xv[22]y[39]yv[40]
+
+mouse x[18]xv[32]y[40]yv[41]
+
+mouse x[18]xv[32]y[40]yv[41]
+
+mouse x[13]xv[20]y[41]yv[42]
+
+mouse x[21]xv[35]y[42]yv[43]
+
+mouse x[18]xv[32]y[44]yv[45]
+
+mouse x[18]xv[32]y[44]yv[45]
+
+mouse x[18]xv[32]y[44]yv[45]
+
+mouse x[12]xv[19]y[45]yv[46]
+
+mouse x[12]xv[19]y[45]yv[46]
+
+mouse x[15]xv[29]y[46]yv[47]
+
+mouse x[15]xv[29]y[46]yv[47]
+
+mouse x[12]xv[19]y[47]yv[48]
+
+mouse x[12]xv[19]y[47]yv[48]
+
+mouse x[15]xv[29]y[48]yv[49]
+
+mouse x[15]xv[29]y[48]yv[49]
+
+mouse x[16]xv[30]y[50]yv[51]
+
+mouse x[16]xv[23]y[51]yv[52]
+
+mouse x[29]xv[36]y[52]yv[53]
+
+mouse x[27]xv[34]y[53]yv[54]
+
+mouse x[27]xv[34]y[53]yv[54]
+
+mouse x[27]xv[34]y[53]yv[54]
+
+mouse x[27]xv[34]y[53]yv[54]
+
+input x[27]xv[34]y[53]yv[54]
+
+input startcol[0]x[27]xv[34]y[53]yv[54]
+
+mouse click view x[3]xv[23]y[32]yv[30]
+mouse x[3]xv[24]y[32]yv[30]
+
+mouse x[3]xv[24]y[32]yv[30]
+
+input x[3]xv[24]y[32]yv[30]
+
+input startcol[0]x[27]xv[24]y[85]yv[30]
+
+mouse x[27]xv[34]y[85]yv[49]
+
+mouse x[27]xv[34]y[85]yv[49]
+
+mouse x[27]xv[34]y[85]yv[49]
+
+mouse x[27]xv[34]y[85]yv[49]
+
+mouse x[27]xv[34]y[85]yv[49]
+
+mouse x[27]xv[34]y[85]yv[49]
+
+mouse x[27]xv[34]y[85]yv[49]
+
+mouse x[27]xv[34]y[85]yv[49]
+
+move x[27]xv[34]y[85]yv[49]
+move x[27]xv[32]y[86]yv[49]
+
+move x[27]xv[32]y[86]yv[49]
+move x[27]xv[9]y[87]yv[49]
+
+move x[27]xv[9]y[87]yv[49]
+move x[27]xv[6]y[88]yv[49]
+
+move x[27]xv[6]y[88]yv[49]
+move x[27]xv[5]y[89]yv[49]
+
+move x[27]xv[5]y[89]yv[49]
+move x[27]xv[38]y[90]yv[49]
+
+move x[27]xv[38]y[90]yv[49]
+move x[27]xv[6]y[91]yv[49]
+
+move x[27]xv[6]y[91]yv[49]
+move x[27]xv[22]y[92]yv[49]
+
+move x[27]xv[22]y[92]yv[49]
+move x[27]xv[32]y[93]yv[49]
+
+move x[27]xv[32]y[93]yv[49]
+move x[27]xv[20]y[94]yv[49]
+
+move x[27]xv[20]y[94]yv[49]
+move x[27]xv[35]y[95]yv[49]
+
+move x[27]xv[35]y[95]yv[49]
+move x[27]xv[22]y[96]yv[49]
+
+move x[27]xv[22]y[96]yv[49]
+move x[27]xv[32]y[97]yv[49]
+
+move x[27]xv[32]y[97]yv[49]
+move x[27]xv[19]y[98]yv[49]
+
+move x[27]xv[19]y[98]yv[49]
+move x[27]xv[29]y[99]yv[49]
+
+move x[27]xv[29]y[99]yv[49]
+move x[27]xv[19]y[100]yv[49]
+
+move x[27]xv[19]y[100]yv[49]
+move x[27]xv[29]y[101]yv[49]
+
+move x[27]xv[29]y[101]yv[49]
+move x[27]xv[20]y[102]yv[49]
+
+move x[27]xv[20]y[102]yv[49]
+move x[27]xv[30]y[103]yv[49]
+
+move x[27]xv[30]y[103]yv[49]
+move x[27]xv[23]y[104]yv[49]
+
+move x[27]xv[23]y[104]yv[49]
+move x[27]xv[34]y[105]yv[50]
+
+move x[27]xv[34]y[105]yv[50]
+move x[27]xv[34]y[106]yv[51]
+
+move x[27]xv[34]y[106]yv[51]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+move x[27]xv[6]y[107]yv[52]
+move x[27]xv[6]y[107]yv[52]
+
+input x[27]xv[6]y[107]yv[52]
+
+input startcol[0]x[27]xv[6]y[107]yv[52]
+
+input x[27]xv[6]y[107]yv[52]
+
