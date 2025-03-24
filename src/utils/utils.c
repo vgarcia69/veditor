@@ -23,8 +23,9 @@ int	get_x_from_xview(t_line *line, int xview, t_window *win)
 	int x;
 	int	i_xview;
 
-	x = 0;
-	i_xview = win->margin_left;
+	xview -= win->margin_left;
+	x = win->start_col;
+	i_xview = 0;
 	while (i_xview < xview && x < line->len)
 	{
 		if (line->str[x] == '\t')
@@ -33,7 +34,7 @@ int	get_x_from_xview(t_line *line, int xview, t_window *win)
 			++i_xview;
 		++x;
 	}
-	return (x + win->start_col);
+	return (x);
 }
 
 int get_tabwidth(int xview, int tabstop)

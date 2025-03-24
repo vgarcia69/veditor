@@ -5,7 +5,6 @@ static void	width_arrows(char c, t_editor *e);
 
 void	arrow(t_editor *e, char c)
 {
-	printf_fd(3, "move x[%d]xv[%d]y[%d]yv[%d]\n", e->cursor->x, e->cursor->xview, e->cursor->y, e->cursor->yview);
 	e->sel->is_active = 0;
 	if (c == ARROW_UP || c == ARROW_DOWN)
 		height_arrows(c, e);

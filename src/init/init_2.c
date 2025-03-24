@@ -80,7 +80,7 @@ void	init_struct_1 \
 	window->width = ws.ws_col;
 	window->start_col = 0;
 	window->start_row = 0;
-	window->tabstop = 8;
+	window->tabstop = 3;
 	window->margin_left = 0;
 	copy->head = NULL;
 	copy->nb_line = 0;

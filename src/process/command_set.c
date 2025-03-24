@@ -5,7 +5,7 @@ char	*tabstop_cmd(t_editor *e, char *arg)
 	int	request;
 
 	request = ft_atoi(arg);
-	if (!(request % 2) && request <= 8 && request)
+	if (request >= 2 && request <= 24)
 	{
 		e->win->tabstop = request;
 		update_win(e);

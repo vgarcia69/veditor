@@ -59,7 +59,7 @@
 # define NOT_FOUND "Error : Command not found"
 # define EMPTY "Error : Empty command"
 # define WRONG_AMONT "Error : Wrong amount of arguments"
-# define WRONG_NUM "Error : Number has to be either 2, 4 or 8"
+# define WRONG_NUM "Error : Number has to be between 2 and 24"
 # define TOO_MANY "Error : Too many chars in Command"
 
 typedef	struct s_line
