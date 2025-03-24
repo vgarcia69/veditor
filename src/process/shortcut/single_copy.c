@@ -1,4 +1,4 @@
-#include "../../editor.h"
+#include "../../../editor.h"
 
 void	cpy_node(t_line *line, t_editor *e)
 {

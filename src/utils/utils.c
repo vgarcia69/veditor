@@ -22,12 +22,10 @@ int	get_x_from_xview(t_line *line, int xview, t_window *win)
 {
 	int x;
 	int	i_xview;
-	int	xview_scol;
 
 	x = 0;
-	xview_scol = get_xview_from_x(line, win->start_col, win);
-	i_xview = win->margin_left + xview_scol; 
-	while (i_xview < xview + xview_scol && x < line->len)
+	i_xview = win->margin_left;
+	while (i_xview < xview && x < line->len)
 	{
 		if (line->str[x] == '\t')
 			i_xview += get_tabwidth(i_xview, win->tabstop);	
@@ -41,11 +39,6 @@ int	get_x_from_xview(t_line *line, int xview, t_window *win)
 int get_tabwidth(int xview, int tabstop)
 {
 	return (tabstop - (xview % tabstop));
-}
-
-int	tab_align_pos(int tabstop, int current_x)
-{
-	return ((current_x / tabstop + 1) * tabstop);
 }
 
 t_line	*get_line(t_editor *e, int index)
@@ -62,3 +55,18 @@ t_line	*get_line(t_editor *e, int index)
 	}
 	return (line);
 }
+
+int	get_margin(t_editor *e)
+{
+	int		size_len;
+	int		size_nb;
+
+	size_nb = len_int(e->nb_line);
+	size_len = len_int(get_max_len(e->head) - 1) + 2;
+	if (size_nb == -1 || size_len == -1)
+		quit_free_msg("Alloc", 1, e);
+	if (e->len_visu)
+		return (size_nb + size_len + 3);
+	return (size_nb + 2);
+}
+

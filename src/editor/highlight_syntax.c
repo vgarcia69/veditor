@@ -44,8 +44,3 @@ static void	turn_off(int *on_off, t_display *buffer, t_editor *e)
 		*on_off = 0;
 	}
 }
-/*
-Si c est entre starty et endy full color.
-Si c est starty -> si >= startx
-Si c est endy -> si < endx
-*/

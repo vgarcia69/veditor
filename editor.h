@@ -138,7 +138,6 @@ int		is_same_pos(t_cursor *p1, t_cursor *p2);
 void	cp_cursor(t_cursor *dst, t_cursor *src);
 int		is_ordered(t_cursor *first, t_cursor *last);
 t_line	*get_line(t_editor *e, int index);
-char	get_char_at(t_editor *e, int xview, int yview);
 int		get_margin(t_editor *e);
 int		len_int(int nb);
 int		get_max_len(t_line *line);

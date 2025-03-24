@@ -52,7 +52,7 @@ static void	read_signal(t_editor *e)
 		e->win->height = ws.ws_row - 2;
 		e->win->width = ws.ws_col;
 	}
-	update_statbar(e, NULL, INSERT);
+	update_statbar(e, NULL, -1);
 }
 
 static void	sequence(t_editor *e, unsigned char *input)

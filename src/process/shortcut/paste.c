@@ -1,4 +1,4 @@
-#include "../../editor.h"
+#include "../../../editor.h"
 
 void	paste_single(t_line *line, int x, t_editor *e)
 {

@@ -1,4 +1,4 @@
-#include "../../editor.h"
+#include "../../../editor.h"
 
 
 void	cpy_first(t_cursor *start, t_editor *e)

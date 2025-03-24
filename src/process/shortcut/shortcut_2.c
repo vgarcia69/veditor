@@ -49,7 +49,7 @@ void	sc_select_word(t_editor *e)
 		++end->x;
 	end->xview = get_xview_from_x(line, end->x, e->win);
 	end->y = e->cursor->y;
-	end->yview = e->cursor->y + 1;
+	end->yview = e->cursor->yview + 1;
 	start->x = e->cursor->x;
 	while (start->x > 0 && ft_isualnum(line->str[start->x - 1]))
 		--start->x;
