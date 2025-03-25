@@ -23,9 +23,9 @@ FILES=$(addprefix $(SRCDIR)/, $(SRCFILES))\
 OBJDIR=.obj
 OBJ=$(addprefix $(OBJDIR)/, $(FILES:.c=.o))
 CC=cc
-FLAGS= -Wextra -Wall -g3 #-Werror
+FLAGS= -Wextra -Wall -Werror -g3
 INC=editor.h
-NAME=editor
+NAME=veditor
 PATHLIB=libft/
 LIBFT = $(PATHLIB)libft.a
 
