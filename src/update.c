@@ -17,11 +17,13 @@ void	update_statbar(t_editor *e, char *str, int mode)
 	else if (e->mode == COMMAND)
 		ft_memcpy(e->stat, COMMAND_TEXT, 14);
 	if (f_len > 0)
-		ft_memcpy(&e->stat[ft_min(e->win->width, 255) - (f_len + 1)], e->f_name, f_len);
+		ft_memcpy(&e->stat[ft_min(e->win->width, 255) - (f_len + 1)], \
+					 e->f_name, f_len);
 	else
 		ft_memcpy(&e->stat[ft_min(e->win->width, 255) - 6], "[NEW]", 5);
 	if (str)
-		ft_memcpy(&e->stat[ft_min(e->win->width, 255) / 2 - str_len / 2], str, str_len);
+		ft_memcpy(&e->stat[ft_min(e->win->width, 255) / 2 - str_len / 2], \
+					str, str_len);
 }
 
 void update_win(t_editor *e)
